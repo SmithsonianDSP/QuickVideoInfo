@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="customtheme_background">@android:color/transparent</color><color name="theme_custom_background">#05030303</color><color name="theme_devicedefault_background">#3cffffff</color>
+  <style name="Theme.Custom" parent="@android:style/Theme.DeviceDefault">
+    <item name="android:colorBackground">@color/theme_custom_background</item>
+    <item name="android:windowBackground">?android:attr/colorBackground</item>
+  </style>
+  <style name="CustomTheme" parent="@android:style/Theme.Holo.Light">
+    <item name="android:actionMenuTextColor">?android:attr/actionMenuTextColor</item>
+    <item name="android:windowIsTranslucent">true</item>
+  <item name="android:colorPrimary">?android:attr/actionMenuTextColor</item>
+  <item name="android:colorBackground">@color/customtheme_background</item>
+  <item name="android:windowBackground">?android:attr/colorBackground</item>
+  </style>
+
+
+
+  <style name="BaseTheme" parent="android:Theme.Holo.Light.DarkActionBar" />
+
+  <style name="BaseTheme.NoActionBar" parent="android:Theme.Holo.Light.NoActionBar" />
+
+  <style name="MainTheme" parent="BaseTheme" />
+
+  <style name="TranslucentActivity" parent="BaseTheme.NoActionBar">
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowAnimationStyle">@android:style/Animation</item>
+  </style>
+  
+</resources>

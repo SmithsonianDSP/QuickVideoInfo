@@ -3,5 +3,62 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:background="@color/window_background">
+<!--     android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"  -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space1" />
+    <TextView
+        android:text="Loading Video Information...."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:textAlignment="center"
+        android:layout_gravity="center_horizontal"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:layout_margin="15px"
+        android:textColor="@color/bright_foreground_material_dark" />
+<!--         android:textColor="@color/abc_input_method_navigation_guard"  -->
+    <ImageView
+        android:src="@android:drawable/ic_menu_gallery"
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:baselineAlignBottom="true"
+        android:cropToPadding="true"
+        android:adjustViewBounds="true"
+        android:minHeight="500px" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gridLayout1"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:alignmentMode="alignBounds"
+        android:columnOrderPreserved="true"
+        android:layout_gravity="fill_horizontal">
+        <Button
+            android:text="Close Window"
+            android:id="@+id/closeButton"
+            android:layout_column="0"
+            android:layout_gravity="fill_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1" />
+        <Button
+            android:text="Open in YouTube"
+            android:id="@+id/button1"
+            android:textStyle="normal"
+            android:typeface="sans"
+            android:textAllCaps="false"
+            android:enabled="false"
+            android:layout_gravity="fill_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1" />
+    </GridLayout>
 </LinearLayout>
