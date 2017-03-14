@@ -11,10 +11,11 @@ using System.Net;
 using Android.Content;
 using Android.Util;
 using Java.Lang;
+using Android.Views;
 
 namespace YTII.Android.App
 {
-    [Activity(Label = "YouTube Intent Interceptor", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "YouTube Intent Interceptor", MainLauncher = false, Icon = "@drawable/icon")]
     [IntentFilter(new[] { Intent.ActionView },
         DataScheme = "http", DataHost = "*.youtube.com", DataPathPrefix = "/watch",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
@@ -47,11 +48,8 @@ namespace YTII.Android.App
             var da = Intent.DataString;
             if (da != null)
             {
-
                 var idIndex = da.LastIndexOf("=") + 1;
                 videoId = da.Substring(idIndex, (da.Length - idIndex));
-                var url = Toast.MakeText(ApplicationContext, videoId, ToastLength.Long);
-                url.Show();
             }
 
 
@@ -68,14 +66,22 @@ namespace YTII.Android.App
                 var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
                 Koush.UrlImageViewHelper.SetUrlDrawable(imgHost, vid.MaxResThumbnailUrl);
 
+
+                var spinner = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
+                spinner.Visibility = ViewStates.Gone;
+                imgHost.Visibility = ViewStates.Visible;
+
+
                 var openButton = FindViewById<Button>(Resource.Id.button1);
                 openButton.Click += OpenButton_Click;
                 openButton.Enabled = true;
             }
             catch
             {
-                var t = Toast.MakeText(ApplicationContext, "No Video Returned", ToastLength.Long);
-                t.Show();
+                var textBlock = FindViewById<TextView>(Resource.Id.textView1);
+                textBlock.Text = "Unable to Load Video Information";
+                var spinner = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
+                spinner.Visibility = ViewStates.Invisible;
             }
 
 
