@@ -14,12 +14,12 @@ using Java.Lang;
 
 namespace YTII.Android.App
 {
-    [Activity(Label = "YTII.Android.App", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "YouTube Intent Interceptor", MainLauncher = true, Icon = "@drawable/icon")]
     [IntentFilter(new[] { Intent.ActionView },
-        DataScheme = "http", DataHost = "youtube.com",
+        DataScheme = "http", DataHost = "*.youtube.com", DataPathPrefix = "/watch",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView },
-        DataScheme = "https", DataHost = "youtube.com",
+        DataScheme = "https", DataHost = "*.youtube.com", DataPathPrefix = "/watch",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView },
         DataScheme = "http", DataHost = "youtu.be",
@@ -42,24 +42,44 @@ namespace YTII.Android.App
             var closeButton = FindViewById<Button>(Resource.Id.closeButton);
             closeButton.Click += CloseButton_Click;
 
-            //var da = Intent.GetStringExtra(Intent.ExtraText);
-            //Toast.MakeText(ApplicationContext, da, ToastLength.Long);
+            string videoId = null;
+
+            var da = Intent.DataString;
+            if (da != null)
+            {
+
+                var idIndex = da.LastIndexOf("=") + 1;
+                videoId = da.Substring(idIndex, (da.Length - idIndex));
+                var url = Toast.MakeText(ApplicationContext, videoId, ToastLength.Long);
+                url.Show();
+            }
+
+
 
             var vm = new XamarinForms.ViewModels.YoutubeViewModel();
-            var res = await vm.GetVideosDetailsAsync(new List<string>() { "TqwnP42cKZg" });
+            var res = await vm.GetVideosDetailsAsync(new List<string>() { videoId ?? "TqwnP42cKZg" });
 
-            vid = res[0];
+            try
+            {
+                vid = res[0];
+                var textBlock = FindViewById<TextView>(Resource.Id.textView1);
+                textBlock.Text = vid.Title;
 
-            var textBlock = FindViewById<TextView>(Resource.Id.textView1);
-            textBlock.Text = vid.Title;
-
-            var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
-            Koush.UrlImageViewHelper.SetUrlDrawable(imgHost, vid.StandardThumbnailUrl);
+                var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
+                Koush.UrlImageViewHelper.SetUrlDrawable(imgHost, vid.HighThumbnailUrl);
 
 
-            var openButton = FindViewById<Button>(Resource.Id.button1);
-            openButton.Click += OpenButton_Click;
-            openButton.Enabled = true;
+                var openButton = FindViewById<Button>(Resource.Id.button1);
+                openButton.Click += OpenButton_Click;
+                openButton.Enabled = true;
+            }
+            catch
+            {
+                var t = Toast.MakeText(ApplicationContext, "No Video Returned", ToastLength.Long);
+                t.Show();
+            }
+
+
         }
 
         private void CloseButton_Click(object sender, System.EventArgs e)

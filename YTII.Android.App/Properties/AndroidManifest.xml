@@ -4,22 +4,26 @@
   <uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="YouTube Intent Interceptor" android:theme="@android:style/Theme.Translucent" android:excludeFromRecents="true">
     <activity
-      android:name=".ui.MainActivity"
+      android:name="MainActivity"
       android:excludeFromRecents="true"
       android:autoRemoveFromRecents="true"
       android:configChanges="orientation|screenSize"
       android:theme="@style/TranslucentActivity">
       <intent-filter>
-        <action android:name="android.intent.action.SEND" />
+        <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
-        <data android:mimeType="text/plain" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="http"  android:host="*.youtube.com" android:pathPrefix="/watch" />
+        <data android:scheme="https" android:host="*.youtube.com" android:pathPrefix="/watch" />
+        <data android:scheme="http"  android:host="youtube.com" android:pathPrefix="/watch" />
+        <data android:scheme="https" android:host="youtube.com" android:pathPrefix="/watch" />
       </intent-filter>
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="http" android:host="*.youtube.com"/>
-        <data android:scheme="https" android:host="*.youtube.com" />
+        <data android:scheme="http"  android:host="youtu.be" />
+        <data android:scheme="https" android:host="youtu.be" />
       </intent-filter>
     </activity>
 
