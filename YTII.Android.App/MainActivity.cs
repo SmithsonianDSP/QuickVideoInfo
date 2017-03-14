@@ -66,8 +66,7 @@ namespace YTII.Android.App
                 textBlock.Text = vid.Title;
 
                 var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
-                Koush.UrlImageViewHelper.SetUrlDrawable(imgHost, vid.HighThumbnailUrl);
-
+                Koush.UrlImageViewHelper.SetUrlDrawable(imgHost, vid.MaxResThumbnailUrl);
 
                 var openButton = FindViewById<Button>(Resource.Id.button1);
                 openButton.Click += OpenButton_Click;
