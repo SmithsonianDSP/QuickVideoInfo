@@ -12,19 +12,19 @@
         android:maxHeight="650px"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:minHeight="650px">
+        android:minHeight="450px">
         <ImageView xmlns:tools="http://schemas.android.com/tools"
             android:src="@android:drawable/gallery_thumb"
             android:id="@+id/imageView1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:cropToPadding="true"
             android:adjustViewBounds="false"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             android:maxHeight="650px"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:minHeight="650px"
+            android:minHeight="450px"
             android:visibility="invisible" />
         <ProgressBar
             android:id="@+id/progressSpinner"
@@ -78,7 +78,7 @@
             android:textStyle="normal"
             android:typeface="sans"
             android:textAllCaps="false"
-            android:enabled="false"
+            android:enabled="true"
             android:layout_width="wrap_content"
             android:layout_marginRight="15px"
             style="@android:style/Widget.Material.Button"

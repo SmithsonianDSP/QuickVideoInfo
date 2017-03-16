@@ -1,25 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jws.intentinterceptor.youtube" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gmail.smithsoniandsp.video.previews" android:versionName="1.4.1" android:installLocation="auto" android:versionCode="20170316">
 	<uses-sdk android:minSdkVersion="16" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<application android:label="YouTube Intent Interceptor" android:theme="@android:style/Theme.Translucent" android:excludeFromRecents="true">
-		<activity android:name="MainActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity">
-			<!--<intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="http"  android:host="*.youtube.com" android:pathPrefix="/watch" />
-        <data android:scheme="https" android:host="*.youtube.com" android:pathPrefix="/watch" />
-        <data android:scheme="http"  android:host="youtube.com" android:pathPrefix="/watch" />
-        <data android:scheme="https" android:host="youtube.com" android:pathPrefix="/watch" />
-      </intent-filter>
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="http"  android:host="youtu.be" />
-        <data android:scheme="https" android:host="youtu.be" />
-      </intent-filter>-->
-		</activity>
+	<application android:label="Video Preview for YouTube" android:theme="@android:style/Theme.Translucent" android:excludeFromRecents="true" android:icon="@drawable/Icon">
+		<activity android:name="MainActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity"></activity>
 	</application>
 </manifest>

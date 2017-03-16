@@ -8,12 +8,14 @@
     <item name="android:colorBackground">@color/theme_custom_background</item>
     <item name="android:windowBackground">?android:attr/colorBackground</item>
   </style>
+  
   <style name="CustomTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">
+    <item name="android:windowNoTitle">true</item>
     <item name="android:actionMenuTextColor">?android:attr/actionMenuTextColor</item>
     <item name="android:windowIsTranslucent">true</item>
-  <item name="android:colorPrimary">?android:attr/actionMenuTextColor</item>
-  <item name="android:colorBackground">@color/customtheme_background</item>
-  <item name="android:windowBackground">?android:attr/colorBackground</item>
+    <item name="android:colorPrimary">?android:attr/actionMenuTextColor</item>
+    <item name="android:colorBackground">@color/customtheme_background</item>
+    <item name="android:windowBackground">?android:attr/colorBackground</item>
   </style>
 
 
@@ -28,7 +30,7 @@
     <item name="android:windowBackground">@android:color/transparent</item>
     <item name="android:colorBackgroundCacheHint">@null</item>
     <item name="android:windowIsTranslucent">true</item>
-    <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    <!--<item name="android:windowAnimationStyle">@anim/abc_popup_enter</item>-->
   </style>
   
 </resources>

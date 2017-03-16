@@ -15,7 +15,7 @@ using Android.Views;
 
 namespace YTII.Android.App
 {
-    [Activity(Label = "YouTube Intent Interceptor", MainLauncher = false, Icon = "@drawable/icon")]
+    [Activity(Label = "Video Preview for YouTube", Theme = "@style/CustomTheme", MainLauncher = false, Icon = "@drawable/icon")]
     [IntentFilter(new[] { Intent.ActionView },
         DataScheme = "http", DataHost = "*.youtube.com", DataPathPrefix = "/watch",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
@@ -35,6 +35,7 @@ namespace YTII.Android.App
     {
 
         protected XamarinForms.Models.YoutubeItem vid;
+        protected string videoId = null;
         protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -43,48 +44,57 @@ namespace YTII.Android.App
             var closeButton = FindViewById<Button>(Resource.Id.closeButton);
             closeButton.Click += CloseButton_Click;
 
-            string videoId = null;
-
-            var da = Intent.DataString;
-            if (da != null)
-            {
-                var idIndex = da.LastIndexOf("=") + 1;
-                videoId = da.Substring(idIndex, (da.Length - idIndex));
-            }
-
-
-
-            var vm = new XamarinForms.ViewModels.YoutubeViewModel();
-            var res = await vm.GetVideosDetailsAsync(new List<string>() { videoId ?? "TqwnP42cKZg" });
+            var openButton = FindViewById<Button>(Resource.Id.button1);
+            openButton.Click += OpenButton_Click;
 
             try
             {
+                var da = Intent.DataString;
+                if (da != null)
+                {
+                    if (da.Contains(@"watch"))
+                    {
+                        var idIndex = da.LastIndexOf("v=") + 2;
+                        videoId = da.Substring(idIndex, 11);
+                    }
+                    else
+                    {
+                        var idIndex = da.LastIndexOf(@"/") + 1;
+                        videoId = da.Substring(idIndex, 11);
+                    }
+
+                }
+
+
+
+                var vm = new XamarinForms.ViewModels.YoutubeViewModel();
+                var res = await vm.GetVideosDetailsAsync(new List<string>() { videoId });
+
                 vid = res[0];
                 var textBlock = FindViewById<TextView>(Resource.Id.textView1);
                 textBlock.Text = vid.Title;
 
                 var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
-                Koush.UrlImageViewHelper.SetUrlDrawable(imgHost, vid.MaxResThumbnailUrl);
+
+                Koush.UrlImageViewHelper.SetUrlDrawable(imgHost, vid.MaxResThumbnailUrl ??
+                                                                 vid.StandardThumbnailUrl ??
+                                                                 vid.HighThumbnailUrl ??
+                                                                 vid.MediumThumbnailUrl ??
+                                                                 vid.DefaultThumbnailUrl);
 
 
                 var spinner = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
                 spinner.Visibility = ViewStates.Gone;
                 imgHost.Visibility = ViewStates.Visible;
 
-
-                var openButton = FindViewById<Button>(Resource.Id.button1);
-                openButton.Click += OpenButton_Click;
-                openButton.Enabled = true;
             }
-            catch
+            catch (Exception ex)
             {
                 var textBlock = FindViewById<TextView>(Resource.Id.textView1);
                 textBlock.Text = "Unable to Load Video Information";
                 var spinner = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
                 spinner.Visibility = ViewStates.Invisible;
             }
-
-
         }
 
         private void CloseButton_Click(object sender, System.EventArgs e)
@@ -96,7 +106,7 @@ namespace YTII.Android.App
         {
             try
             {
-                Intent i = new Intent(Intent.ActionView, Uri.Parse("vnd.youtube:" + vid.VideoId));
+                Intent i = new Intent(Intent.ActionView, Uri.Parse("vnd.youtube:" + videoId));
                 i.AddFlags(ActivityFlags.NewTask);
                 this.ApplicationContext.StartActivity(i);
                 FinishAfterTransition();
