@@ -4,7 +4,26 @@
     android:minHeight="25px"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/mainLayout"
     android:background="@color/window_background">
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_alignParentTop="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:src="@android:drawable/ic_dialog_info"
+        android:cropToPadding="true"
+        android:adjustViewBounds="true"
+        android:padding="5px"
+        android:scaleType="fitCenter"
+        android:alpha="0.5"
+        android:visibility="visible"
+        android:fadingEdge="none"
+        android:outlineProvider="background"
+        android:clickable="true"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent" />
     <FrameLayout
         android:id="@+id/mediaFrame"
         android:layout_width="match_parent"
@@ -44,13 +63,14 @@
         android:textAlignment="center"
         android:ellipsize="end"
         android:gravity="center"
-        android:textColor="@color/bright_foreground_material_dark"
         android:hyphenationFrequency="normal"
         android:breakStrategy="simple"
         android:layout_above="@id/mediaFrame"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:textColor="@android:color/white"
+        style="@android:style/TextAppearance.Material.DialogWindowTitle" />
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

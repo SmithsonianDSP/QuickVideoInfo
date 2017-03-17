@@ -28,9 +28,9 @@ namespace YTII.Android.App
     [IntentFilter(new[] { Intent.ActionView },
         DataScheme = "https", DataHost = "youtu.be",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    [IntentFilter(new[] { Intent.ActionView },
-        DataScheme = "vnd.youtube",
-        Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
+    //[IntentFilter(new[] { Intent.ActionView },
+    //    DataScheme = "vnd.youtube",
+    //    Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     public class MainActivity : Activity
     {
 
@@ -46,6 +46,9 @@ namespace YTII.Android.App
 
             var openButton = FindViewById<Button>(Resource.Id.button1);
             openButton.Click += OpenButton_Click;
+
+            var aboutButton = FindViewById<ImageButton>(Resource.Id.imageButton);
+            aboutButton.Click += AboutButton_Click;
 
             try
             {
@@ -95,6 +98,11 @@ namespace YTII.Android.App
                 var spinner = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
                 spinner.Visibility = ViewStates.Invisible;
             }
+        }
+
+        private void AboutButton_Click(object sender, System.EventArgs e)
+        {
+            StartActivity(typeof(AboutActivity));
         }
 
         private void CloseButton_Click(object sender, System.EventArgs e)

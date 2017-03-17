@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">YTII.Android.App</string>
+    <string name="Instructions">
+      In order to use this app, you will need to set it as the default app for YouTube links.\n\n
+
+      After first installing this, the next time you open a YouTube link, Android should prompt you to ask which application you want to open the link with.\n\n
+
+      Select this app ("Video Previews for YouTube") from that list, then choose the "Always" option.\n\n
+
+      If this setting ever needs to be reset, you can go into the Android Settings, under Applications, find the YouTube app, and reset the default Open With preferences.\n\n
+    </string>
+
+  <string name="LauncherToggleSwitch">Show Icon for App in Launcher?</string>
+  <string name="SwitchNote">Note: After changing this setting, the effects may not appear until after rebooting or restarting the device\'s Launcher.</string>
+
+  <string name="ReEnableLauncherInstructions">To re-enable the launcher icon, you can return to this screen by pressing the info circle button in the upper right corner of the preview window.</string>
+  
 </resources>
