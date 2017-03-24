@@ -28,9 +28,6 @@ namespace YTII.Android.App
     [IntentFilter(new[] { Intent.ActionView },
         DataScheme = "https", DataHost = "youtu.be",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    //[IntentFilter(new[] { Intent.ActionView },
-    //    DataScheme = "vnd.youtube",
-    //    Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     public class MainActivity : Activity
     {
 

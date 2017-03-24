@@ -19,24 +19,25 @@
         android:text="@string/Instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp" />
+        android:layout_margin="8dp"
+        android:layout_marginBottom="10dp" />
     <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toggleLauncherIcon"
         android:text="@string/LauncherToggleSwitch"
         android:checked="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp" />
     <TextView
         android:text="@string/SwitchNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp" />
+        android:layout_margin="10dp" />
     <TextView
         android:text="@string/ReEnableLauncherInstructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp" />
+        android:layout_margin="10dp" />
 </LinearLayout>
