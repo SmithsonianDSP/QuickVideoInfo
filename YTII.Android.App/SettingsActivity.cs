@@ -5,44 +5,27 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
-using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Content.PM;
 
 namespace YTII.Android.App
 {
-    internal static class Constants
+    [Activity(Label = "Quick Video Info", MainLauncher = false, Icon = "@drawable/icon", Theme = "@style/BaseTheme")]
+    public class SettingsActivity : Activity
     {
-        internal const string PackageName = "com.gmail.smithsoniandsp.quickvideoinfo";
-        internal const string AppTitle = "Quick Video Info";
-    }
-
-
-    [Activity(Label = Constants.AppTitle, MainLauncher = false, Icon = "@drawable/icon", Theme = "@style/BaseTheme")]
-    public class AboutActivity : Activity
-    {
-        internal const string FullActivityName = Constants.PackageName + ".AboutActivity";
+        internal const string ActivityLabel = Constants.AppTitle + " " + "Settings";
+        internal const string FullActivityName = Constants.PackageName + "." + nameof(AboutActivity);
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.About);
-            LoadUserSettings();
+            SetContentView(Resource.Layout.Settings);
+
             var iconToggle = FindViewById<Switch>(Resource.Id.toggleLauncherIcon);
             iconToggle.CheckedChange += IconToggle_CheckedChange;
-        }
-
-        protected override void OnStop()
-        {
-            base.OnStop();
-            FinishAndRemoveTask();
-        }
-        protected override void OnPause()
-        {
-            base.OnPause();
-            FinishAndRemoveTask();
         }
 
         private void IconToggle_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
@@ -72,14 +55,13 @@ namespace YTII.Android.App
         protected void LoadUserSettings()
         {
             var prefs = Application.Context.GetSharedPreferences(Constants.PackageName, FileCreationMode.Private);
+
             var isLauncherIconEnabled = prefs.GetBoolean("IsLaunchIconEnabled", true);
 
             var iconToggle = FindViewById<Switch>(Resource.Id.toggleLauncherIcon);
             iconToggle.Checked = isLauncherIconEnabled;
 
         }
-
-
 
     }
 }

@@ -6,7 +6,7 @@
     android:isScrollContainer="true"
     android:scrollbars="vertical">
     <TextView
-        android:text="Instructions:"
+        android:text="Settings:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10px"
@@ -15,19 +15,6 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textSize="24dp" />
-    <TextView
-        android:text="@string/Instructions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="10dp" />
-<!--<Button
-        android:id="@+id/settingsButton"
-        android:text="Settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="10dp" />-->
     <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
