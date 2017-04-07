@@ -274,3 +274,6 @@ __pycache__/
 /AlternateIcon2.png
 /Release Versions
 /YTII.Android.App/Resources/drawable/IconXL.png
+/YTII.APIs/API.Keys/Keys.Private.cs
+/YTII.Android.App/.misc
+/.misc

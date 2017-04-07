@@ -1,50 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:isScrollContainer="true"
-    android:scrollbars="vertical">
-    <TextView
-        android:text="Instructions:"
+    android:fillViewport="true"
+    android:measureAllChildren="true"
+    android:isScrollContainer="true">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10px"
-        android:textStyle="normal"
-        android:textAlignment="center"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="24dp" />
-    <TextView
-        android:text="@string/Instructions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="10dp" />
-<!--<Button
+        android:layout_height="match_parent">
+        <TextView
+            android:text="Instructions:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10px"
+            android:textStyle="normal"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="24dp" />
+        <TextView
+            android:text="@string/Instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="10dp" />
+    <!--<Button
         android:id="@+id/settingsButton"
         android:text="Settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_marginBottom="10dp" />-->
-    <Switch
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toggleLauncherIcon"
-        android:text="@string/LauncherToggleSwitch"
-        android:checked="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
-    <TextView
-        android:text="@string/SwitchNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
-    <TextView
-        android:text="@string/ReEnableLauncherInstructions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
-</LinearLayout>
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleLauncherIcon"
+            android:text="@string/LauncherToggleSwitch"
+            android:checked="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+        <TextView
+            android:text="@string/SwitchNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp" />
+        <TextView
+            android:text="@string/ReEnableLauncherInstructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp" />
+    </LinearLayout>
+</ScrollView>

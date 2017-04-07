@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:minHeight="450px">
-      <!--android:maxHeight="650px"-->
+        android:minHeight="550px">
+    <!--android:maxHeight="650px"-->
         <ImageView xmlns:tools="http://schemas.android.com/tools"
             android:src="@android:drawable/gallery_thumb"
             android:id="@+id/imageView1"
@@ -42,7 +42,8 @@
             android:scaleType="fitCenter"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:drawingCacheQuality="high" />
         <ProgressBar
             android:id="@+id/progressSpinner"
             android:layout_width="match_parent"
@@ -69,6 +70,28 @@
         android:layout_centerVertical="true"
         android:textColor="@android:color/white"
         style="@android:style/TextAppearance.Material.DialogWindowTitle" />
+    <TextView xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/videoDuration"
+        android:layout_alignBottom="@id/mediaFrame"
+        android:textColor="@android:color/white"
+        android:layout_alignRight="@id/mediaFrame"
+        android:paddingBottom="5dp"
+        android:paddingRight="10dp"
+        style="@style/Base.TextAppearance.AppCompat.Caption"
+        android:shadowColor="#ff000000"
+        android:shadowRadius="10"
+        android:textSize="17sp"
+        android:alpha="0.85"
+        android:elegantTextHeight="true"
+        android:ellipsize="none"
+        tools:text="0:00"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:shadowDx="10"
+        android:shadowDy="10"
+        android:textStyle="bold" />
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,12 +102,13 @@
         android:columnOrderPreserved="true"
         android:layout_below="@id/mediaFrame"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0.0dp">
         <Button
             android:text="Close Window"
             android:id="@+id/closeButton"
             android:layout_width="wrap_content"
-            android:layout_marginBottom="25px"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="15px"
             style="@android:style/Widget.Material.Button"
             android:layout_gravity="fill_horizontal"
@@ -103,5 +127,90 @@
             android:layout_gravity="fill_horizontal"
             android:layout_column="1"
             android:layout_columnWeight="0.5" />
+    </GridLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridDetails"
+        android:columnCount="6"
+        android:orientation="horizontal"
+        android:alignmentMode="alignBounds"
+        android:columnOrderPreserved="true"
+        android:layout_below="@id/gridLayout1"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:alpha="1"
+        android:background="#ff000000">
+        <TextView
+            android:text="Views:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLabel"
+            android:layout_column="0"
+            android:layout_columnWeight="0.5"
+            android:gravity="right"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textColor="#ccffffff"
+            android:alpha="1" />
+        <TextView
+            android:text=" ..."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewCount"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:gravity="left"
+            android:layout_marginLeft="5dp"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textColor="#ccffffff"
+            android:textStyle="bold" />
+        <TextView
+            android:text="Likes:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/likesLabel"
+            android:layout_column="2"
+            android:layout_columnWeight="0.5"
+            android:gravity="right"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:alpha="1"
+            android:textColor="#aaffffff" />
+        <TextView
+            android:text="..."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/likeCount"
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:gravity="left"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textColor="#ccffffff"
+            android:textStyle="bold" />
+        <TextView
+            android:text="Dislikes:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dislikeLabel"
+            android:layout_column="4"
+            android:layout_columnWeight="0.5"
+            android:gravity="right"
+            android:alpha="1"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textColor="#aaffffff" />
+        <TextView
+            android:text="..."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dislikeCount"
+            android:layout_column="5"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:gravity="left"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textColor="#ccffffff"
+            android:textStyle="bold" />
     </GridLayout>
 </RelativeLayout>
