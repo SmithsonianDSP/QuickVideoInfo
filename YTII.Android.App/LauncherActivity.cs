@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Java.Lang;
 
 namespace YTII.Android.App
 {
@@ -39,6 +40,17 @@ namespace YTII.Android.App
 
             if (IsPaused)
                 FinishAndRemoveTask();
+        }
+        public override void FinishAndRemoveTask()
+        {
+            try
+            {
+                base.FinishAndRemoveTask();
+            }
+            catch (NoSuchMethodError ex)
+            {
+                base.Finish();
+            }
         }
     }
 }

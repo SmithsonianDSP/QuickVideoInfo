@@ -70,15 +70,41 @@ namespace YTII.Android.App
         protected void InitializeCache()
         {
             retainedFragment = RetainFragment.FindOrCreateRetainFragment(FragmentManager);
+
+#if DEBUG
+            var s = retainedFragment.MRetainedCache.Size();
+            var ms = retainedFragment.MRetainedCache.MaxSize();
+
+            var h = retainedFragment.MRetainedCache.HitCount();
+            var m = retainedFragment.MRetainedCache.MissCount();
+
+            var p = retainedFragment.MRetainedCache.PutCount();
+            var c = retainedFragment.MRetainedCache.CreateCount();
+            var d = retainedFragment.MRetainedCache.EvictionCount();
+
+            Log.Debug("YTII.Cache", $"Cache Size: {s} (of {ms})");
+            Log.Debug("YTII.Cache", $"Hits: {h}  |  Misses: {m}");
+            Log.Debug("YTII.Cache", $"Put: {p} | Create: {c} | Evict: {d}");
+#endif 
             mMemoryCache = retainedFragment.MRetainedCache;
             staticVid = retainedFragment.retainedVideo;
-            Log.Debug($"YTII.{nameof(InitializeCache)}", $"staticVid found? = {staticVid != null}");
+            //Log.Verbose($"YTII.{nameof(InitializeCache)}", $"staticVid found? = {staticVid != null}");
         }
 
         protected override void OnRestoreInstanceState(Bundle savedInstanceState)
         {
             base.OnRestoreInstanceState(savedInstanceState);
+            //Log.Verbose($"YTII.{nameof(OnRestoreInstanceState)}", "Saved Instance Restored");
         }
+        protected override void OnPostCreate(Bundle bundle)
+        {
+            base.OnPostCreate(bundle);
+            if (bundle?.GetBoolean("VideoLoaded") == true)
+            {
+                LoadSavedStateFromBundle(bundle);
+            }
+        }
+
 
         protected override async void OnCreate(Bundle bundle)
         {
@@ -91,13 +117,13 @@ namespace YTII.Android.App
 
             if (bundle?.GetBoolean("VideoLoaded") == true)
             {
-                LoadSavedStateFromBundle(bundle);
+                //LoadSavedStateFromBundle(bundle);
             }
             else
             {
                 try
                 {
-                    Log.Info($"YTII.{nameof(OnCreate)}.ExtractIntent", "Loading Data From Intent");
+                    //Log.Verbose($"YTII.{nameof(OnCreate)}.ExtractIntent", "Loading Data From Intent");
                     int idIndex;
                     var da = Intent.DataString;
                     if (da != null)
@@ -133,11 +159,13 @@ namespace YTII.Android.App
             await Task.Run(() => System.Threading.Thread.Sleep(10));
         }
 
-
+        protected Bundle loadedSavedState;
         protected void LoadSavedStateFromBundle(Bundle bundle)
         {
             try
             {
+                loadedSavedState = bundle;
+
                 videoId = bundle.GetString("VideoId");
 
                 var videoTitle = FindViewById<TextView>(Resource.Id.textView1);
@@ -155,23 +183,28 @@ namespace YTII.Android.App
                 var dislikeCount = FindViewById<TextView>(Resource.Id.dislikeCount);
                 dislikeCount.Text = bundle.GetString("Dislikes");
 
-                if (TryGetCache(videoId) != null)
-                {
-                    var thumbGet = TryGetCache(videoId);
-                    if (thumbGet != null)
-                    {
-                        var thumb = thumbGet as Bitmap;
-                        var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
-                        imgHost.SetImageBitmap(thumb);
+                var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
 
-                        if (imgHost.Visibility != ViewStates.Visible)
-                            imgHost.Visibility = ViewStates.Visible;
-                    }
-                }
-                else
+                var thumbGet = bundle.GetParcelable("thumbnail") as Bitmap;
+                if (thumbGet != null)
                 {
-                    Log.Info($"YTII.{nameof(LoadSavedStateFromBundle)}.VideoLoaded", "Cache Thumbnail null");
+                    var newBit = Bitmap.CreateBitmap(thumbGet);
+                    imgHost.SetImageBitmap(newBit);
+
+                    var prog = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
+
+                    prog.Visibility = ViewStates.Invisible;
+                    imgHost.Visibility = ViewStates.Visible;
                 }
+                var thumbUrl = bundle.GetString("ThumbUrl");
+
+                Square.Picasso.Picasso.With(BaseContext)
+                                      .Load(thumbUrl)
+                                      .Placeholder(imgHost.Drawable)
+                                      .Resize(ImgWidth, ImgHeight)
+                                      .CenterCrop()
+                                      .Into(imgHost, PicassoOnSuccess, PicassoOnError);
+
                 Log.Info($"YTII.{nameof(LoadSavedStateFromBundle)}", "Restored Saved State");
             }
             catch (Exception ex)
@@ -247,16 +280,30 @@ namespace YTII.Android.App
         protected void LoadVideoThumbnail(ref YouTubeVideoModel video)
         {
             var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
-            Bitmap thumb;
 
             try
             {
-                thumb = TryGetCache(video.VideoId) as Bitmap;
+                var thumb = TryGetCache(video.VideoId) as Bitmap;
 
                 if (thumb != null)
                 {
+                    //Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", $"newThumb = {thumb.Width}x{thumb.Height}");
+
+                    SetScreenSizeValues();
+
+                    var prog = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
+                    prog.Visibility = ViewStates.Invisible;
+                    imgHost.Visibility = ViewStates.Visible;
+
                     imgHost.SetImageBitmap(thumb);
-                    PicassoOnSuccess();
+
+                    Square.Picasso.Picasso.With(BaseContext)
+                                          .Load(GetThumbnailUrl(ref video))
+                                          .Placeholder(imgHost.Drawable)
+                                          .Resize(ImgWidth, ImgHeight)
+                                          .CenterCrop()
+                                          .Into(imgHost, PicassoOnSuccess, PicassoOnError);
+
                     Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", "Thumbail Loaded From Cache");
                 }
                 else
@@ -264,6 +311,7 @@ namespace YTII.Android.App
                     try
                     {
                         var thumbnailUrl = GetThumbnailUrl(ref video);
+                        imgHost.SetWillNotCacheDrawing(true);
 
                         Square.Picasso.Picasso.With(BaseContext)
                                                   .Load(thumbnailUrl)
@@ -271,9 +319,12 @@ namespace YTII.Android.App
                                                   .CenterCrop()
                                                   .Into(imgHost, PicassoOnSuccess, PicassoOnError);
 
+                        Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", "Loaded Thumbnail into ImageView");
 
-                        imgHost.BuildDrawingCache(true);
-                        mMemoryCache.Put(video.VideoId, imgHost.GetDrawingCache(true));
+                        imgHost.SetWillNotCacheDrawing(false);
+                        imgHost.BuildDrawingCache(false);
+                        var bmc = imgHost.GetDrawingCache(false);
+                        retainedFragment.MRetainedCache.Put(video.VideoId, Bitmap.CreateBitmap(bmc));
                     }
                     catch (Exception ex)
                     {
@@ -302,14 +353,6 @@ namespace YTII.Android.App
             }
         }
 
-
-
-        protected void DownloadVideoThumbnail(ref YouTubeVideoModel video)
-        {
-
-        }
-
-
         /// <summary>
         /// Returns the most appropriate video Thumbnail URL
         /// </summary>
@@ -326,28 +369,51 @@ namespace YTII.Android.App
                                 ?? vid.DefaultThumbnailUrl;
         }
 
-
+        protected override void OnDestroy()
+        {
+            //var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
+            base.OnDestroy();
+        }
 
         protected override void OnSaveInstanceState(Bundle outState)
         {
+            try
+            {
+                if (loadedSavedState != null)
+                {
+                    outState.PutAll(loadedSavedState);
+                }
+                else
+                {
+                    outState.PutBoolean("VideoLoaded", true);
+                    outState.PutString("VideoId", staticVid?.VideoId);
+                    outState.PutString("Title", staticVid?.Title);
+                    outState.PutString("Duration", staticVid?.VideoDurationString);
+                    outState.PutString("Views", staticVid?.ViewCount?.ToString());
+                    outState.PutString("Likes", staticVid?.LikeCount?.ToString());
+                    outState.PutString("Dislikes", staticVid?.DislikeCount?.ToString());
 
+                    outState.PutString("ThumbUrl", GetThumbnailUrl(ref staticVid));
 
-            outState.PutBoolean("VideoLoaded", true);
-            outState.PutString("VideoId", staticVid.VideoId);
-            outState.PutString("Title", staticVid.Title);
-            outState.PutString("Duration", staticVid.VideoDurationString);
-            outState.PutString("Views", staticVid.ViewCount?.ToString());
-            outState.PutString("Likes", staticVid.LikeCount?.ToString());
-            outState.PutString("Dislikes", staticVid.DislikeCount?.ToString());
-            retainedFragment.retainedVideo = staticVid;
+                    var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
+                    if (!imgHost.DrawingCacheEnabled && imgHost.DrawingCache == null)
+                    {
+                        if (imgHost.WillNotCacheDrawing())
+                            imgHost.SetWillNotCacheDrawing(false);
 
-            var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
-            imgHost.BuildDrawingCache(true);
-            mMemoryCache.Put(videoId, imgHost.GetDrawingCache(true));
-
+                        imgHost.BuildDrawingCache(false);
+                    }
+                    var bmc = imgHost.GetDrawingCache(false);
+                    outState.PutParcelable("thumbnail", Bitmap.CreateBitmap(bmc));
+                }
+                Log.Verbose($"YTII.{nameof(OnSaveInstanceState)}", "Stated Saved");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"YTII.{nameof(OnSaveInstanceState)}", ex.Message);
+            }
 
             base.OnSaveInstanceState(outState);
-            Log.Info($"YTII.{nameof(OnSaveInstanceState)}", "Stated Saved");
         }
 
 
@@ -426,6 +492,17 @@ namespace YTII.Android.App
             }
         }
 
+        public override void FinishAndRemoveTask()
+        {
+            try
+            {
+                base.FinishAndRemoveTask();
+            }
+            catch (NoSuchMethodError ex)
+            {
+                base.Finish();
+            }
+        }
 
 
         //private Bitmap GetImageBitmapFromUrl(string url)
