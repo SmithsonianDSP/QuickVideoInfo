@@ -23,7 +23,23 @@ namespace YTII.APIs.Models
 
         public string VideoDurationString
         {
-            get => VideoDuration?.ToString().TrimStart(new char[] { '0', ':' }) ?? string.Empty;
+            get
+            {
+                var videoDurationString = VideoDuration.ToString().TrimStart(new char[] { '0', ':' });
+                switch (videoDurationString.Length)
+                {
+                    case 1:
+                        videoDurationString = "0:0" + videoDurationString;
+                        break;
+                    case 2:
+                        videoDurationString = "0:" + videoDurationString;
+                        break;
+                    case 3:
+                        videoDurationString = "0" + videoDurationString;
+                        break;
+                }
+                return videoDurationString;
+            }
         }
 
         public string DefaultThumbnailUrl { get; internal set; }
@@ -35,12 +51,34 @@ namespace YTII.APIs.Models
         public DateTime PublishedAt { get; internal set; }
 
         public int? ViewCount { get; internal set; }
+        public string ViewCountString { get => ViewCount.PrettyNumberString(); }
+
         public int? LikeCount { get; internal set; }
+        public string LikeCountString { get => LikeCount.PrettyNumberString(); }
+
         public int? DislikeCount { get; internal set; }
+        public string DislikeCountString { get => DislikeCount.PrettyNumberString(); }
+
         public int? FavoriteCount { get; internal set; }
+
         public int? CommentCount { get; internal set; }
 
         public IEnumerable<string> Tags { get; internal set; } = new List<string>();
 
+    }
+
+    static class YouTubeVideoModelExtensions
+    {
+        internal static string PrettyNumberString(this int? num)
+        {
+            var number = num ?? 0;
+
+            if (number > 1000000)
+                return Math.Floor(number / 1000000D).ToString() + "M";
+            else if (number > 1000)
+                return Math.Floor(number / 1000D).ToString() + "K";
+            else
+                return number.ToString();
+        }
     }
 }

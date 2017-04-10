@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gmail.smithsoniandsp.quickvideoinfo" android:versionName="1.1.1a" android:installLocation="auto" android:versionCode="201704071">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gmail.smithsoniandsp.quickvideoinfo" android:versionName="1.1.2a" android:installLocation="auto" android:versionCode="201704100">
 	<uses-sdk android:minSdkVersion="16" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="Quick Video Info" android:theme="@android:style/Theme.Translucent" android:excludeFromRecents="true" android:icon="@drawable/Icon">

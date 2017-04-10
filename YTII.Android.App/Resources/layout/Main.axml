@@ -5,32 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mainLayout"
-    android:background="@color/window_background">
+    android:background="@color/window_background"
+    android:animateLayoutChanges="false">
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_alignParentTop="true"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35sp"
+        android:layout_height="35sp"
         android:layout_alignParentRight="true"
         android:src="@android:drawable/ic_dialog_info"
         android:cropToPadding="true"
         android:adjustViewBounds="true"
-        android:padding="5px"
+        android:padding="5sp"
         android:scaleType="fitCenter"
-        android:alpha="0.5"
+        android:alpha="0.55"
         android:visibility="visible"
         android:fadingEdge="none"
         android:outlineProvider="background"
         android:clickable="true"
-        android:layout_margin="10dp"
-        android:background="@android:color/transparent" />
+        android:layout_margin="5sp"
+        android:background="@android:color/transparent"
+        android:forceHasOverlappingRendering="true" />
     <FrameLayout
         android:id="@+id/mediaFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:minHeight="550px">
+        android:minHeight="350px">
     <!--android:maxHeight="650px"-->
         <ImageView xmlns:tools="http://schemas.android.com/tools"
             android:src="@android:drawable/gallery_thumb"
@@ -46,17 +48,18 @@
             android:drawingCacheQuality="high" />
         <ProgressBar
             android:id="@+id/progressSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:indeterminate="true"
             android:layout_gravity="center"
-            android:layout_margin="150px"
-            android:indeterminateOnly="true" />
+            android:indeterminateOnly="true"
+            android:minWidth="100sp"
+            android:minHeight="100sp" />
     </FrameLayout>
     <TextView
         android:text="Loading Video Information..."
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView1"
         android:textAlignment="center"
@@ -64,12 +67,21 @@
         android:gravity="center"
         android:hyphenationFrequency="normal"
         android:breakStrategy="simple"
-        android:layout_above="@id/mediaFrame"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:textColor="@android:color/white"
-        style="@android:style/TextAppearance.Material.DialogWindowTitle" />
+        style="@android:style/TextAppearance.Material.DialogWindowTitle"
+        android:alpha="1"
+        android:background="#88000000"
+        android:paddingTop="5sp"
+        android:paddingBottom="5sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:maxLines="2"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:layout_above="@id/mediaFrame"
+        android:layout_marginBottom="-20px" />
     <TextView xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,7 +120,6 @@
             android:text="Close Window"
             android:id="@+id/closeButton"
             android:layout_width="wrap_content"
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="15px"
             style="@android:style/Widget.Material.Button"
             android:layout_gravity="fill_horizontal"
@@ -132,26 +143,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gridDetails"
-        android:columnCount="6"
+        android:columnCount="10"
         android:orientation="horizontal"
         android:alignmentMode="alignBounds"
         android:columnOrderPreserved="true"
         android:layout_below="@id/gridLayout1"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
         android:alpha="1"
-        android:background="#ff000000">
+        android:background="#88000000"
+        android:paddingTop="5sp"
+        android:paddingBottom="5sp"
+        android:layout_marginTop="-10px">
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_column="0"
+            android:layout_columnWeight="1" />
         <TextView
             android:text="Views:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/viewLabel"
-            android:layout_column="0"
-            android:layout_columnWeight="0.5"
+            android:layout_column="1"
             android:gravity="right"
             style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textSize="12sp"
             android:textColor="#ccffffff"
             android:alpha="1" />
         <TextView
@@ -159,22 +178,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/viewCount"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
+            android:layout_column="2"
             android:gravity="left"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="5sp"
             style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textSize="12sp"
             android:textColor="#ccffffff"
             android:textStyle="bold" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_column="3"
+            android:layout_columnWeight="1" />
         <TextView
             android:text="Likes:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/likesLabel"
-            android:layout_column="2"
-            android:layout_columnWeight="0.5"
+            android:layout_column="4"
             android:gravity="right"
             style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textSize="12sp"
             android:alpha="1"
             android:textColor="#aaffffff" />
         <TextView
@@ -182,35 +206,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/likeCount"
-            android:layout_column="3"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
+            android:layout_column="5"
+            android:layout_marginLeft="5sp"
             android:gravity="left"
             style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textSize="12sp"
             android:textColor="#ccffffff"
             android:textStyle="bold" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_column="6"
+            android:layout_columnWeight="1" />
         <TextView
             android:text="Dislikes:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dislikeLabel"
-            android:layout_column="4"
-            android:layout_columnWeight="0.5"
+            android:layout_column="7"
             android:gravity="right"
             android:alpha="1"
             style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textSize="12sp"
             android:textColor="#aaffffff" />
         <TextView
             android:text="..."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dislikeCount"
-            android:layout_column="5"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
+            android:layout_column="8"
+            android:layout_marginLeft="5sp"
             android:gravity="left"
             style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:textSize="12sp"
             android:textColor="#ccffffff"
             android:textStyle="bold" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_column="9"
+            android:layout_columnWeight="1" />
     </GridLayout>
 </RelativeLayout>

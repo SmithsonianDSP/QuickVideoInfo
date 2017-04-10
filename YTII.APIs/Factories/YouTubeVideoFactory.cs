@@ -14,16 +14,32 @@ namespace YTII.APIs.Factories
         private static string ApiKey { get => Keys.YouTubeApiKey; }
 
         static readonly private string baseApiUrl = "https://www.googleapis.com/youtube/v3/";
-
         static readonly private string apiUrlForChannel = baseApiUrl + "search?part=id&maxResults=20&channelId={0}&key=" + ApiKey;
         static readonly private string apiUrlForPlaylist = baseApiUrl + "playlistItems?part=contentDetails&maxResults=20&playlistId={0}&key=" + ApiKey;
         static readonly private string apiUrlForVideosDetails = baseApiUrl + @"videos?part=snippet,statistics,contentDetails&id={0}&key=" + ApiKey;
         static readonly private string apiUrl2ForVideosDetails = baseApiUrl + @"videos?fields=items(id,snippet(title,description,publishedAt,thumbnails),statistics,contentDetails/duration)&part=snippet,statistics,contentDetails&id={0}&key=" + ApiKey;
 
+        static public bool AddApiAuthHeaders = false;
+        static public string ApiAuthPackageName { internal get; set; }
+        static public string ApiAuthSHA1 { internal get; set; }
+
+
+        private static void AddAuthHeaders(ref HttpClient httpClient)
+        {
+            var packageAsReferer = new Uri("http://youtube.com/" + ApiAuthSHA1, UriKind.RelativeOrAbsolute);
+            httpClient.DefaultRequestHeaders.Referrer = packageAsReferer;
+
+            //httpClient.DefaultRequestHeaders.Add("X-Android-Package", ApiAuthPackageName);
+            //httpClient.DefaultRequestHeaders.Add("X-Android-Cert", ApiAuthSHA1);
+        }
+
         //&fields=items(id,snippet(title,description,publishedAt,thumbnails),statistics)&part=snippet,statistics
         public static async Task<YouTubeVideoModel> GetVideoDetailsAsync(string videoId)
         {
             var httpClient = new HttpClient();
+
+            if (AddApiAuthHeaders)
+                AddAuthHeaders(ref httpClient);
 
             JToken result;
             JObject snippet;
