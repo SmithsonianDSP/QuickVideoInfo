@@ -28,6 +28,9 @@ namespace YTII.APIs.Models
                 var videoDurationString = VideoDuration.ToString().TrimStart(new char[] { '0', ':' });
                 switch (videoDurationString.Length)
                 {
+                    case 0:
+                        videoDurationString = "0:00";
+                        break;
                     case 1:
                         videoDurationString = "0:0" + videoDurationString;
                         break;

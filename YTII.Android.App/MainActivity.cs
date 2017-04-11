@@ -14,6 +14,7 @@ using Java.Lang;
 using Android.Views;
 using System.Threading.Tasks;
 using AndroidAnimations = Android.Animation;
+using AndroidPM = Android.Content.PM;
 
 namespace YTII.Android.App
 {
@@ -36,42 +37,10 @@ namespace YTII.Android.App
         protected string videoId;
         LruCache mMemoryCache;
 
-        private Size GetScreenDimensions()
-        {
-            var rect = new Rect();
-            WindowManager.DefaultDisplay.GetRectSize(rect);
-            return new Size(rect.Width(), rect.Height());
-        }
-
-        private double GetScreenAspectRatio()
-        {
-            var dims = GetScreenDimensions();
-            return (double)dims.Width / (double)dims.Height;
-        }
-
-        int ScreenWidth { get; set; } = 480;
-        int ScreenHeight { get; set; } = 850;
-
-        int ImgWidth
-        {
-            get => (int)Math.Max(Math.Rint(ScreenWidth * 0.965), 480);
-        }
-        int ImgHeight
-        {
-            get => (int)Math.Rint(Math.Min(ImgWidth * ScreenAspect, ScreenHeight * 0.55));
-        }
-        double ScreenAspect
-        {
-            get => GetScreenAspectRatio();
-        }
-
-
-
         RetainFragment retainedFragment;
         protected void InitializeCache()
         {
             retainedFragment = RetainFragment.FindOrCreateRetainFragment(FragmentManager);
-
 #if DEBUG
             var s = retainedFragment.MRetainedCache.Size();
             var ms = retainedFragment.MRetainedCache.MaxSize();
@@ -86,6 +55,13 @@ namespace YTII.Android.App
             Log.Debug("YTII.ModelCache", $"Cache Hits: {ModelCache.CacheHits} | Cache Misses: {ModelCache.CacheMisses}");
 #endif 
             mMemoryCache = retainedFragment.MRetainedCache;
+
+            if (retainedFragment.HavePreferencesBeenChecked)
+            {
+                VerifyLauncherEnabledSettings();
+                retainedFragment.HavePreferencesBeenChecked = true;
+            }
+
         }
 
         YouTubeModelCache ModelCache { get => retainedFragment.VideoModelCache; }
@@ -112,14 +88,12 @@ namespace YTII.Android.App
             return vidId;
         }
 
-
         protected void SetYouTubeAuthItems()
         {
             YouTubeVideoFactory.AddApiAuthHeaders = true;
             YouTubeVideoFactory.ApiAuthPackageName = PackageName;
             YouTubeVideoFactory.ApiAuthSHA1 = SignatureVerification.GetSignature(PackageManager, PackageName);
         }
-
 
         protected override async void OnCreate(Bundle bundle)
         {
@@ -179,26 +153,22 @@ namespace YTII.Android.App
             aboutButton.Click += AboutButton_Click;
         }
 
-
-        /// <summary>
-        /// Sets dimensions for the ImageHost frame based on the current screen dimensions
-        /// </summary>
-        protected void SetScreenSizeValues()
+        protected void VerifyLauncherEnabledSettings()
         {
-            var size = GetScreenDimensions();
-            ScreenWidth = size.Width;
-            ScreenHeight = size.Height;
+            var componentToEnable = new ComponentName(Constants.PackageName, LauncherActivity.FullActivityName);
+            var componentStatus = PackageManager.GetComponentEnabledSetting(componentToEnable);
 
-            var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
-            imgHost.SetMaxHeight(ImgHeight);
-
-            var minHeight = (int)Math.Rint(ImgHeight * 0.67);
-            //imgHost.SetMinimumHeight(minHeight);
-            var imgFrame = FindViewById<FrameLayout>(Resource.Id.mediaFrame);
-            imgFrame.SetMinimumHeight(minHeight);
-
-            Log.Debug("YTII", $"Max Height: {ImgHeight} / Min Height: {minHeight}");
+            if (componentStatus != AndroidPM.ComponentEnabledState.Enabled || componentStatus != AndroidPM.ComponentEnabledState.Default)
+            {
+                // If the Launcher activity is disabled, verify that user settings supposed to be disabled 
+                var prefs = Application.Context.GetSharedPreferences(Constants.PackageName, FileCreationMode.Private);
+                var isLauncherIconEnabled = prefs.GetBoolean("IsLaunchIconEnabled", true);
+                if (isLauncherIconEnabled)
+                    PackageManager.SetComponentEnabledSetting(componentToEnable, AndroidPM.ComponentEnabledState.Enabled, AndroidPM.ComponentEnableOption.DontKillApp);
+            }
         }
+
+
 
         /// <summary>
         /// Populates the activity controls with the details from the supplied YouTubeVideo model
@@ -238,6 +208,7 @@ namespace YTII.Android.App
         protected void LoadVideoThumbnail(ref YouTubeVideoModel video)
         {
             var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
+            var cantLoadThumbnail = GetDrawable(Resource.Drawable.CantLoadVideo);
 
             try
             {
@@ -255,9 +226,11 @@ namespace YTII.Android.App
 
                     Square.Picasso.Picasso.With(BaseContext)
                                           .Load(GetThumbnailUrl(ref video))
+                                          .NoFade()
                                           .Placeholder(imgHost.Drawable)
+                                          .Error(cantLoadThumbnail)
                                           .Resize(ImgWidth, ImgHeight)
-                                          .CenterCrop()
+                                          .CenterInside()
                                           .Into(imgHost, PicassoOnSuccess, PicassoOnError);
 
                     Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", "Thumbail Loaded From Cache");
@@ -267,13 +240,18 @@ namespace YTII.Android.App
                     try
                     {
                         var thumbnailUrl = GetThumbnailUrl(ref video);
+
+                        Log.Debug("YTII.ThumbnailURL", thumbnailUrl);
+
                         imgHost.SetWillNotCacheDrawing(true);
 
                         Square.Picasso.Picasso.With(BaseContext)
-                                                  .Load(thumbnailUrl)
-                                                  .Resize(ImgWidth, ImgHeight)
-                                                  .CenterCrop()
-                                                  .Into(imgHost, PicassoOnSuccess, PicassoOnError);
+                                              .Load(thumbnailUrl)
+                                              .Error(cantLoadThumbnail)
+                                              .NoFade()
+                                              .Resize(ImgWidth, ImgHeight)
+                                              .CenterInside()
+                                              .Into(imgHost, PicassoOnSuccess, PicassoOnError);
 
                         Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", "Loaded Thumbnail into ImageView");
 
@@ -345,6 +323,7 @@ namespace YTII.Android.App
             try
             {
                 var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
+                imgHost.SetMaxHeight(ImgHeight);
                 imgHost.Visibility = ViewStates.Visible;
             }
             catch (Exception ex)
@@ -414,6 +393,60 @@ namespace YTII.Android.App
 
 
 
+        #region ScreenSizeBehavior
+
+
+        /// <summary>
+        /// Sets dimensions for the ImageHost frame based on the current screen dimensions
+        /// </summary>
+        protected void SetScreenSizeValues()
+        {
+            var size = GetScreenDimensions();
+            ScreenWidth = size.Width;
+            ScreenHeight = size.Height;
+
+            var imgHost = FindViewById<ImageView>(Resource.Id.imageView1);
+            imgHost.SetMaxHeight(ImgHeight);
+
+            var minHeight = (int)Math.Rint(ImgHeight * 0.67);
+            imgHost.SetMinimumHeight(minHeight);
+
+            var imgFrame = FindViewById<FrameLayout>(Resource.Id.mediaFrame);
+            imgFrame.SetMinimumHeight(ImgHeight);
+
+            Log.Debug("YTII", $"Max Height: {ImgHeight} / Min Height: {minHeight}");
+        }
+
+
+        private Size GetScreenDimensions()
+        {
+            var rect = new Rect();
+            WindowManager.DefaultDisplay.GetRectSize(rect);
+            return new Size(rect.Width(), rect.Height());
+        }
+
+        private double GetScreenAspectRatio()
+        {
+            var dims = GetScreenDimensions();
+            return (double)dims.Width / (double)dims.Height;
+        }
+
+        int ScreenWidth { get; set; } = 480;
+        int ScreenHeight { get; set; } = 850;
+
+        int ImgWidth
+        {
+            get => (int)Math.Max(Math.Rint(ScreenWidth * 0.965), 480);
+        }
+        int ImgHeight
+        {
+            get => (int)Math.Rint(Math.Min(ImgWidth * ScreenAspect, ScreenHeight * 0.55));
+        }
+        double ScreenAspect
+        {
+            get => GetScreenAspectRatio();
+        }
+        #endregion
     }
 
 
@@ -425,6 +458,9 @@ namespace YTII.Android.App
         {
             get => _mRetainedCache ?? (_mRetainedCache = new LruCache(5));
         }
+
+        private static bool _havePreferencesBeenChecked = false;
+        public bool HavePreferencesBeenChecked { get => _havePreferencesBeenChecked; set => _havePreferencesBeenChecked = value; }
 
 
         private static YouTubeModelCache _videoModelCache;

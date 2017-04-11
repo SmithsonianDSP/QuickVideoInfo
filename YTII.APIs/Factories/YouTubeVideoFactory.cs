@@ -28,9 +28,6 @@ namespace YTII.APIs.Factories
         {
             var packageAsReferer = new Uri("http://youtube.com/" + ApiAuthSHA1, UriKind.RelativeOrAbsolute);
             httpClient.DefaultRequestHeaders.Referrer = packageAsReferer;
-
-            //httpClient.DefaultRequestHeaders.Add("X-Android-Package", ApiAuthPackageName);
-            //httpClient.DefaultRequestHeaders.Add("X-Android-Cert", ApiAuthSHA1);
         }
 
         //&fields=items(id,snippet(title,description,publishedAt,thumbnails),statistics)&part=snippet,statistics
@@ -52,6 +49,12 @@ namespace YTII.APIs.Factories
                 JObject response = JsonConvert.DeserializeObject<dynamic>(json);
 
                 result = response.Value<JArray>("items").First;
+
+                if (result == null)
+                {
+                    return GetCannotLoadVideoModel(videoId);
+                }
+
                 snippet = result.Value<JObject>("snippet");
                 statistics = result.Value<JObject>("statistics");
                 videoDetails = result.Value<JObject>("contentDetails");
@@ -68,7 +71,6 @@ namespace YTII.APIs.Factories
 
                     Title = snippet?.Value<string>("title"),
                     Description = snippet?.Value<string>("description"),
-                    //ChannelTitle = snippet?.Value<string>("channelTitle"),
                     PublishedAt = snippet?.Value<DateTime>("publishedAt") ?? DateTime.MinValue,
 
                     MaxResThumbnailUrl = thumbnails?.Value<JObject>("maxres")?.Value<string>("url"),
@@ -93,59 +95,32 @@ namespace YTII.APIs.Factories
         }
 
 
+
+        private static string CantLoadThumbnailBaseUrl = "Jn2grYW";
+        internal static YouTubeVideoModel GetCannotLoadVideoModel(string videoId = "-1")
+        {
+            return new YouTubeVideoModel
+            {
+                VideoId = videoId,
+                Title = "This video is no longer available",
+                Description = "This video is no longer available",
+                PublishedAt = DateTime.Today,
+
+                MaxResThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
+                StandardThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
+                HighThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
+                MediumThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
+                DefaultThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
+
+                ViewCount = 0,
+                LikeCount = 0,
+                DislikeCount = 0,
+                FavoriteCount = 0,
+                CommentCount = 0,
+
+                VideoDurationISO8601 = "PT0M0S"
+            };
+        }
+
     }
 }
-//public static async Task<IEnumerable<Models.YouTubeVideoModel>> GetAllVideoDetailsAsync(IEnumerable<string> videoIds)
-//{
-
-//}
-
-//public static async Task<IEnumerable<string>> GetVideoIdsFromChannelAsync()
-//{
-//    var httpClient = new HttpClient();
-//    var videoIds = new List<string>();
-
-//    var json = await httpClient.GetStringAsync(apiUrlForChannel).ConfigureAwait(false);
-
-//    try
-//    {
-//        JObject response = JsonConvert.DeserializeObject<dynamic>(json);
-
-//        //foreach (var item in response.Value<JArray>("items"))
-//        //    videoIds.Add(item.Value<JObject>("id")?.Value<string>("videoId"));
-
-//        return response.Value<JArray>("items")
-//                       .Select(i => i.Value<JObject>("id")?.Value<string>("videoId"));
-//    }
-//    catch (Exception ex)
-//    {
-//        Debug.WriteLine(ex.Message);
-//        return new string[] { };
-//    }
-//}
-
-//public static async Task<List<string>> GetVideoIdsFromPlaylistAsync()
-//{
-//    var httpClient = new HttpClient();
-//    var json = await httpClient.GetStringAsync(apiUrlForPlaylist);
-//    var videoIds = new List<string>();
-
-//    try
-//    {
-//        JObject response = JsonConvert.DeserializeObject<dynamic>(json);
-
-//        var items = response.Value<JArray>("items");
-
-//        foreach (var item in items)
-//        {
-//            videoIds.Add(item.Value<JObject>("contentDetails")?.Value<string>("videoId"));
-//        };
-
-//        YoutubeItems = await GetVideosDetailsAsync(videoIds);
-//    }
-//    catch (Exception exception)
-//    {
-//    }
-
-//    return videoIds;
-//}
