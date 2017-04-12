@@ -77,9 +77,11 @@ namespace YTII.APIs.Models
             var number = num ?? 0;
 
             if (number > 1000000)
-                return Math.Floor(number / 1000000D).ToString() + "M";
+                return Math.Floor(number / 1000000D).ToString() + "." + Math.Floor((number % 1000000D) / 100000D) + "M";
+
             else if (number > 1000)
-                return Math.Floor(number / 1000D).ToString() + "K";
+                return Math.Floor(number / 1000D).ToString() + "." + Math.Floor((number % 1000D) / 100D) + "K";
+
             else
                 return number.ToString();
         }

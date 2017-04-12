@@ -28,12 +28,14 @@ namespace YTII.Android.App
                 StartActivity(typeof(AboutActivity));
             }
         }
+
         bool IsPaused = false;
         protected override void OnPause()
         {
             base.OnPause();
             IsPaused = true;
         }
+
         protected override void OnResume()
         {
             base.OnResume();
@@ -41,6 +43,7 @@ namespace YTII.Android.App
             if (IsPaused)
                 FinishAndRemoveTask();
         }
+
         public override void FinishAndRemoveTask()
         {
             try

@@ -73,7 +73,7 @@
         android:textColor="@android:color/white"
         style="@android:style/TextAppearance.Material.DialogWindowTitle"
         android:alpha="1"
-        android:background="#88000000"
+        android:background="#77000000"
         android:paddingTop="5sp"
         android:paddingBottom="5sp"
         android:layout_marginLeft="10sp"
@@ -81,7 +81,7 @@
         android:maxLines="2"
         android:marqueeRepeatLimit="marquee_forever"
         android:layout_above="@id/mediaFrame"
-        android:layout_marginBottom="-20px" />
+        android:layout_marginBottom="0px" />
     <TextView xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
         android:layout_marginLeft="10sp"
         android:layout_marginRight="10sp"
         android:alpha="1"
-        android:background="#88000000"
+        android:background="#77000000"
         android:paddingTop="5sp"
         android:paddingBottom="5sp"
         android:layout_marginTop="-10px">
