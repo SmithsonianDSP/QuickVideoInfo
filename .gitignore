@@ -277,3 +277,6 @@ __pycache__/
 /YTII.APIs/API.Keys/Keys.Private.cs
 /.misc
 *.pdn
+/Components
+/YTII.Android.App/VideoInfoRequestor.ProxyDebug.cs
+/YTII.Android.App/VideoInfo/VideoInfoRequestor.ProxyDebug.cs

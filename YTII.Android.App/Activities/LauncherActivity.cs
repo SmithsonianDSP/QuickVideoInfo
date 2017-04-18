@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Java.Lang;
 
-namespace YTII.Android.App
+namespace YTII.Droid.App
 {
     [Activity(Name = FullActivityName, Label = Constants.AppTitle, MainLauncher = true, Icon = "@drawable/icon")]
     public class LauncherActivity : Activity
@@ -20,10 +20,7 @@ namespace YTII.Android.App
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            var prefs = Application.Context.GetSharedPreferences(Constants.PackageName, FileCreationMode.Private);
-            var isLauncherIconEnabled = prefs.GetBoolean("IsLaunchIconEnabled", true);
-
-            if (isLauncherIconEnabled)
+            if (UserSettings.IsLauncherIconShown)
             {
                 StartActivity(typeof(AboutActivity));
             }

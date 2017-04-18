@@ -1,37 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/SettingsTheme"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:isScrollContainer="true"
-    android:scrollbars="vertical">
+    android:scrollbars="vertical"
+    android:paddingLeft="50px"
+    android:paddingRight="50px"
+    android:clipToPadding="false"
+    android:clipChildren="false">
     <TextView
-        android:text="Settings:"
+        android:text="User Preferences"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10px"
         android:textStyle="normal"
         android:textAlignment="center"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="24dp" />
+        android:textSize="24sp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/divider4"
+        android:height="1dp"
+        android:background="#77777777"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="-15dp"
+        android:layout_marginRight="-15dp" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <TextView
+        android:text="Preferred Thumbnail Quality:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:layout_marginBottom="5px" />
+    <Button
+        android:id="@+id/thumbnailQualityButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="High (default)"
+        android:theme="@style/Base.Widget.AppCompat.Button" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/divider1"
+        android:height="1dp"
+        android:background="#77777777"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="-15dp"
+        android:layout_marginRight="-15dp" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
     <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toggleLauncherIcon"
         android:text="@string/LauncherToggleSwitch"
         android:checked="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
-    <TextView
-        android:text="@string/SwitchNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
+        android:layout_marginBottom="10dp" />
     <TextView
         android:text="@string/ReEnableLauncherInstructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
+        android:layout_marginBottom="15px"
+        android:layout_marginLeft="7px" />
+    <TextView
+        android:text="@string/SwitchNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:layout_marginBottom="15px" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/divider3"
+        android:height="1dp"
+        android:background="#77777777"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="-15dp"
+        android:layout_marginRight="-15dp" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>

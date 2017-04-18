@@ -12,7 +12,7 @@ using Android.Widget;
 using ACM = Android.Content.PM;
 using Java.Security;
 
-namespace YTII.Android.App
+namespace YTII.Droid.App
 {
     internal static class SignatureVerification
     {

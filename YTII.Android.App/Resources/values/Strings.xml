@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Instructions">In order to use this app, you will need to set it as the default app for supported links.\n\n
-After first installing this, the next time you open a supported link, Android should prompt you to ask which application you want to open the link with.\n\n
-Select this app (\"Quick Video Info\") from the list, then choose the \"Always\" option.\n\n
-If this setting ever needs to be reset, you can go into the Android Settings, under Applications, find this app, and choose the \"Open in this app\" option under the \"Open supported links\" setting.\n
-</string>
+    <string name="Instructions">In order to use this app, you will need to set it as the default app for supported links.\n\nAfter first installing this, the next time you open a supported link, Android should prompt you to ask which application you want to open the link with.\n\nSelect this app (\"Quick Video Info\") from the list, then choose the \"Always\" option.\n\nIf this setting ever needs to be reset, you can go into the Android Settings, under Applications, find this app, and choose the \"Open in this app\" option under the \"Open supported links\" setting.\n</string>
 
   <string name="LauncherToggleSwitch">Show Icon for App in Launcher?</string>
   

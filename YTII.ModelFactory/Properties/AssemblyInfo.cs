@@ -1,29 +1,29 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Android.App;
 
-// General Information about an assembly is controlled through the following 
+// General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("YTII.Droid.App")]
-[assembly: AssemblyDescription("Quick Video Info Android Application")]
+[assembly: AssemblyTitle("YTII.ModelFactory")]
+[assembly: AssemblyDescription("Parses Data Payloads and Returns VideoInfo Object Models")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SmithsonianDSP")]
-[assembly: AssemblyProduct("Quick Video Info")]
-[assembly: AssemblyCopyright("Copyright © 2017")]
+[assembly: AssemblyProduct("YTII.ModelFactory")]
+[assembly: AssemblyCopyright("Copyright SmithsonianDSP ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: ComVisible(false)]
+[assembly: NeutralResourcesLanguage("en")]
 
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version
-//      Minor Version 
+//      Minor Version
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
+// You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]

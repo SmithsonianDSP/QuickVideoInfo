@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gmail.smithsoniandsp.quickvideoinfo" android:versionName="1.1.3" android:installLocation="auto" android:versionCode="201704110">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gmail.smithsoniandsp.quickvideoinfo" android:versionName="1.3.0" android:installLocation="auto" android:versionCode="201704180">
 	<uses-sdk android:minSdkVersion="16" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="Quick Video Info" android:theme="@android:style/Theme.Translucent" android:excludeFromRecents="true" android:icon="@drawable/Icon">
 		<activity android:name="MainActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity"></activity>
+		<activity android:name="UserPreferencesActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:theme="@style/SettingsTheme">
+			<action android:name="android.intent.action.MAIN" />
+			<category android:name="android.intent.category.PREFERENCE" />
+		</activity>
 	</application>
 </manifest>

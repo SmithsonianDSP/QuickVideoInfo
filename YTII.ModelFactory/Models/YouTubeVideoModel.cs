@@ -1,26 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace YTII.APIs.Models
+namespace YTII.ModelFactory.Models
 {
-    public class YouTubeVideoModel
+    public class YouTubeVideoModel : IVideoModel
     {
+
+        #region Interface Implementations
+
         public string VideoId { get; set; }
+
+        public string VideoFullUrl { get; set; }
+
         public string Title { get; set; }
         public string Description { get; set; }
-        public string ChannelTitle { get; set; }
-
-        public string VideoDurationISO8601
-        {
-            set
-            {
-                try { VideoDuration = System.Xml.XmlConvert.ToTimeSpan(value); }
-                catch { }
-            }
-        }
-
         public TimeSpan? VideoDuration { get; set; }
-
         public string VideoDurationString
         {
             get
@@ -44,8 +38,22 @@ namespace YTII.APIs.Models
                 return videoDurationString;
             }
         }
-
         public string DefaultThumbnailUrl { get; set; }
+
+        #endregion
+
+        public string ChannelTitle { get; set; }
+
+        public string VideoDurationISO8601
+        {
+            set
+            {
+                try { VideoDuration = System.Xml.XmlConvert.ToTimeSpan(value); }
+                catch { }
+            }
+        }
+
+
         public string MediumThumbnailUrl { get; set; }
         public string HighThumbnailUrl { get; set; }
         public string StandardThumbnailUrl { get; set; }
@@ -67,6 +75,7 @@ namespace YTII.APIs.Models
         public int? CommentCount { get; set; }
 
         public IEnumerable<string> Tags { get; internal set; } = new List<string>();
+
 
     }
 

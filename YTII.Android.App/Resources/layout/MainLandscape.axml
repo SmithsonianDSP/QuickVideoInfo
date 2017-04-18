@@ -4,20 +4,24 @@
     android:minHeight="25px"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/mainLayout1"
+    android:id="@+id/mainLayout2"
     android:background="@color/window_background"
     android:animateLayoutChanges="false"
     android:columnCount="1"
-    android:rowCount="7">
+    android:rowCount="7"
+    android:theme="@style/TranslucentActivityLandscape">
+    <Space
+        android:id="@+id/space1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_row="1"
+        android:layout_rowWeight="0.015" />
     <RelativeLayout
         android:id="@+id/topSpacer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_row="0"
-        android:layout_rowWeight="0.4">
+        android:layout_row="1">
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_alignParentTop="true"
             android:layout_width="35sp"
             android:layout_height="35sp"
             android:src="@android:drawable/ic_dialog_info"
@@ -30,70 +34,66 @@
             android:fadingEdge="none"
             android:outlineProvider="background"
             android:clickable="true"
-            android:layout_margin="5sp"
             android:background="@android:color/transparent"
             android:forceHasOverlappingRendering="true"
             android:layout_gravity="right"
             android:layout_alignWithParentIfMissing="true"
-            android:layout_alignParentRight="true"
-            android:elevation="100px" />
-        <Space
-            android:id="@+id/space1"
+            android:layout_alignTop="@id/imageView"
+            android:layout_alignRight="@id/imageView"
+            android:layout_marginEnd="5sp"
+            android:layout_marginBottom="5sp"
+            android:layout_marginLeft="1sp"
+            android:layout_marginRight="1sp"
+            android:layout_marginTop="-4sp"
+            android:elevation="25dp" />
+        <TextView
+            android:text="Loading Video Information..."
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_row="2"
+            android:id="@+id/textView1"
+            android:textAlignment="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:hyphenationFrequency="normal"
+            android:breakStrategy="simple"
+            android:textColor="@android:color/white"
+            style="@android:style/TextAppearance.Material.DialogWindowTitle"
+            android:alpha="1"
+            android:background="#77000000"
+            android:paddingTop="1sp"
+            android:paddingBottom="1sp"
+            android:layout_marginLeft="40sp"
+            android:layout_marginRight="40sp"
+            android:maxLines="2"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:layout_marginBottom="0sp" />
     </RelativeLayout>
-    <TextView
-        android:text="Loading Video Information..."
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_row="2"
-        android:id="@+id/textView1"
-        android:textAlignment="center"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:hyphenationFrequency="normal"
-        android:breakStrategy="simple"
-        android:textColor="@android:color/white"
-        style="@android:style/TextAppearance.Material.DialogWindowTitle"
-        android:alpha="1"
-        android:background="#99000000"
-        android:paddingTop="5sp"
-        android:paddingBottom="5sp"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:maxLines="2"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:layout_marginBottom="0px"
-        android:elevation="75px" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_row="3"
-        android:layout_rowWeight="1"
-        android:id="@+id/mediaFrame1"
-        android:padding="0px"
-        android:clipChildren="false">
+        android:layout_rowWeight="0.75"
+        android:id="@+id/mediaFrame1">
         <ImageView xmlns:tools="http://schemas.android.com/tools"
+            android:src="@android:drawable/gallery_thumb"
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:cropToPadding="false"
+            android:cropToPadding="true"
             android:adjustViewBounds="false"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:visibility="invisible"
             android:drawingCacheQuality="high"
+            android:layout_marginLeft="75sp"
+            android:layout_marginRight="75sp"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:layout_margin="1px"
-            android:elevation="10dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:background="#00000000" />
+            android:layout_marginTop="1px"
+            android:layout_marginBottom="1px" />
         <ProgressBar
             android:id="@+id/progressSpinner"
             android:layout_width="wrap_content"
@@ -104,8 +104,7 @@
             android:layout_gravity="center"
             android:indeterminateOnly="true"
             android:minWidth="100sp"
-            android:minHeight="100sp"
-            android:elevation="20px" />
+            android:minHeight="100sp" />
         <TextView xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -127,8 +126,7 @@
             android:paddingTop="5dp"
             android:shadowDx="10"
             android:shadowDy="10"
-            android:textStyle="bold"
-            android:elevation="75dp" />
+            android:textStyle="bold" />
     </RelativeLayout>
     <GridLayout
         android:layout_width="match_parent"
@@ -142,8 +140,7 @@
         android:layout_below="@id/mediaFrame1"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0.0dp"
-        android:elevation="50px">
+        android:layout_marginBottom="0.0dp">
         <Button
             android:text="Close Window"
             android:id="@+id/closeButton"
@@ -182,11 +179,10 @@
         android:layout_marginLeft="10sp"
         android:layout_marginRight="10sp"
         android:alpha="1"
-        android:background="#99000000"
+        android:background="#77000000"
         android:paddingTop="5sp"
         android:paddingBottom="5sp"
-        android:layout_marginTop="-5px"
-        android:elevation="40px">
+        android:layout_marginTop="-5px">
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -282,5 +278,5 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_row="1"
-        android:layout_rowWeight="0.4" />
+        android:layout_rowWeight="0.015" />
 </GridLayout>
