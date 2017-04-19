@@ -1090,32 +1090,32 @@ namespace YTII.Droid.App
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0b004d
-			public const int abc_background_cache_hint_selector_material_dark = 2131427405;
+			// aapt resource value: 0x7f0b0066
+			public const int abc_background_cache_hint_selector_material_dark = 2131427430;
 			
-			// aapt resource value: 0x7f0b004e
-			public const int abc_background_cache_hint_selector_material_light = 2131427406;
+			// aapt resource value: 0x7f0b0067
+			public const int abc_background_cache_hint_selector_material_light = 2131427431;
 			
-			// aapt resource value: 0x7f0b004f
-			public const int abc_color_highlight_material = 2131427407;
+			// aapt resource value: 0x7f0b0068
+			public const int abc_color_highlight_material = 2131427432;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int abc_input_method_navigation_guard = 2131427332;
 			
-			// aapt resource value: 0x7f0b0050
-			public const int abc_primary_text_disable_only_material_dark = 2131427408;
+			// aapt resource value: 0x7f0b0069
+			public const int abc_primary_text_disable_only_material_dark = 2131427433;
 			
-			// aapt resource value: 0x7f0b0051
-			public const int abc_primary_text_disable_only_material_light = 2131427409;
+			// aapt resource value: 0x7f0b006a
+			public const int abc_primary_text_disable_only_material_light = 2131427434;
 			
-			// aapt resource value: 0x7f0b0052
-			public const int abc_primary_text_material_dark = 2131427410;
+			// aapt resource value: 0x7f0b006b
+			public const int abc_primary_text_material_dark = 2131427435;
 			
-			// aapt resource value: 0x7f0b0053
-			public const int abc_primary_text_material_light = 2131427411;
+			// aapt resource value: 0x7f0b006c
+			public const int abc_primary_text_material_light = 2131427436;
 			
-			// aapt resource value: 0x7f0b0054
-			public const int abc_search_url_text = 2131427412;
+			// aapt resource value: 0x7f0b006d
+			public const int abc_search_url_text = 2131427437;
 			
 			// aapt resource value: 0x7f0b0005
 			public const int abc_search_url_text_normal = 2131427333;
@@ -1126,11 +1126,11 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0b0007
 			public const int abc_search_url_text_selected = 2131427335;
 			
-			// aapt resource value: 0x7f0b0055
-			public const int abc_secondary_text_material_dark = 2131427413;
+			// aapt resource value: 0x7f0b006e
+			public const int abc_secondary_text_material_dark = 2131427438;
 			
-			// aapt resource value: 0x7f0b0056
-			public const int abc_secondary_text_material_light = 2131427414;
+			// aapt resource value: 0x7f0b006f
+			public const int abc_secondary_text_material_light = 2131427439;
 			
 			// aapt resource value: 0x7f0b0008
 			public const int accent_material_dark = 2131427336;
@@ -1150,6 +1150,24 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0b000d
 			public const int background_material_light = 2131427341;
 			
+			// aapt resource value: 0x7f0b004e
+			public const int black = 2131427406;
+			
+			// aapt resource value: 0x7f0b005e
+			public const int blue_grey_200 = 2131427422;
+			
+			// aapt resource value: 0x7f0b005f
+			public const int blue_grey_700 = 2131427423;
+			
+			// aapt resource value: 0x7f0b0060
+			public const int blue_grey_800 = 2131427424;
+			
+			// aapt resource value: 0x7f0b0061
+			public const int blue_grey_900 = 2131427425;
+			
+			// aapt resource value: 0x7f0b0062
+			public const int blue_grey_950 = 2131427426;
+			
 			// aapt resource value: 0x7f0b000e
 			public const int bright_foreground_disabled_material_dark = 2131427342;
 			
@@ -1167,6 +1185,9 @@ namespace YTII.Droid.App
 			
 			// aapt resource value: 0x7f0b0013
 			public const int bright_foreground_material_light = 2131427347;
+			
+			// aapt resource value: 0x7f0b0063
+			public const int button_dark = 2131427427;
 			
 			// aapt resource value: 0x7f0b0014
 			public const int button_material_dark = 2131427348;
@@ -1186,8 +1207,32 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0b0003
 			public const int cardview_shadow_start_color = 2131427331;
 			
+			// aapt resource value: 0x7f0b004c
+			public const int colorAccent = 2131427404;
+			
 			// aapt resource value: 0x7f0b004a
-			public const int customtheme_background = 2131427402;
+			public const int colorPrimary = 2131427402;
+			
+			// aapt resource value: 0x7f0b004b
+			public const int colorPrimaryDark = 2131427403;
+			
+			// aapt resource value: 0x7f0b0059
+			public const int deep_teal_100 = 2131427417;
+			
+			// aapt resource value: 0x7f0b005a
+			public const int deep_teal_200 = 2131427418;
+			
+			// aapt resource value: 0x7f0b005b
+			public const int deep_teal_300 = 2131427419;
+			
+			// aapt resource value: 0x7f0b0058
+			public const int deep_teal_50 = 2131427416;
+			
+			// aapt resource value: 0x7f0b005c
+			public const int deep_teal_500 = 2131427420;
+			
+			// aapt resource value: 0x7f0b005d
+			public const int deep_teal_700 = 2131427421;
 			
 			// aapt resource value: 0x7f0b003e
 			public const int design_fab_shadow_end_color = 2131427390;
@@ -1237,8 +1282,26 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0b001b
 			public const int foreground_material_light = 2131427355;
 			
-			// aapt resource value: 0x7f0b0049
-			public const int gfycat_green = 2131427401;
+			// aapt resource value: 0x7f0b0056
+			public const int grey_100 = 2131427414;
+			
+			// aapt resource value: 0x7f0b0055
+			public const int grey_300 = 2131427413;
+			
+			// aapt resource value: 0x7f0b0057
+			public const int grey_501 = 2131427415;
+			
+			// aapt resource value: 0x7f0b0054
+			public const int grey_600 = 2131427412;
+			
+			// aapt resource value: 0x7f0b0053
+			public const int grey_800 = 2131427411;
+			
+			// aapt resource value: 0x7f0b0052
+			public const int grey_850 = 2131427410;
+			
+			// aapt resource value: 0x7f0b0051
+			public const int grey_900 = 2131427409;
 			
 			// aapt resource value: 0x7f0b001c
 			public const int highlighted_text_material_dark = 2131427356;
@@ -1252,6 +1315,9 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0b001f
 			public const int hint_foreground_material_light = 2131427359;
 			
+			// aapt resource value: 0x7f0b0050
+			public const int material_background = 2131427408;
+			
 			// aapt resource value: 0x7f0b0020
 			public const int material_blue_grey_800 = 2131427360;
 			
@@ -1260,6 +1326,9 @@ namespace YTII.Droid.App
 			
 			// aapt resource value: 0x7f0b0022
 			public const int material_blue_grey_950 = 2131427362;
+			
+			// aapt resource value: 0x7f0b004f
+			public const int material_button_dark = 2131427407;
 			
 			// aapt resource value: 0x7f0b0023
 			public const int material_deep_teal_200 = 2131427363;
@@ -1336,11 +1405,11 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0b003b
 			public const int switch_thumb_disabled_material_light = 2131427387;
 			
-			// aapt resource value: 0x7f0b0057
-			public const int switch_thumb_material_dark = 2131427415;
+			// aapt resource value: 0x7f0b0070
+			public const int switch_thumb_material_dark = 2131427440;
 			
-			// aapt resource value: 0x7f0b0058
-			public const int switch_thumb_material_light = 2131427416;
+			// aapt resource value: 0x7f0b0071
+			public const int switch_thumb_material_light = 2131427441;
 			
 			// aapt resource value: 0x7f0b003c
 			public const int switch_thumb_normal_material_dark = 2131427388;
@@ -1348,11 +1417,17 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0b003d
 			public const int switch_thumb_normal_material_light = 2131427389;
 			
-			// aapt resource value: 0x7f0b004b
-			public const int theme_custom_background = 2131427403;
+			// aapt resource value: 0x7f0b0064
+			public const int theme_custom_background = 2131427428;
 			
-			// aapt resource value: 0x7f0b004c
-			public const int theme_devicedefault_background = 2131427404;
+			// aapt resource value: 0x7f0b0065
+			public const int theme_devicedefault_background = 2131427429;
+			
+			// aapt resource value: 0x7f0b004d
+			public const int white = 2131427405;
+			
+			// aapt resource value: 0x7f0b0049
+			public const int windowBackground = 2131427401;
 			
 			// aapt resource value: 0x7f0b0048
 			public const int window_background = 2131427400;
@@ -2217,8 +2292,11 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0200a1
 			public const int mr_ic_play_light = 2130837665;
 			
+			// aapt resource value: 0x7f0200a3
+			public const int notification_template_icon_bg = 2130837667;
+			
 			// aapt resource value: 0x7f0200a2
-			public const int notification_template_icon_bg = 2130837666;
+			public const int popup_background = 2130837666;
 			
 			static Drawable()
 			{
@@ -3208,9 +3286,6 @@ namespace YTII.Droid.App
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f0a0174
-			public const int AboutTheme = 2131362164;
-			
 			// aapt resource value: 0x7f0a00a1
 			public const int AlertDialog_AppCompat = 2131361953;
 			
@@ -3658,11 +3733,14 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0a015b
 			public const int Base_Widget_Design_TabLayout = 2131362139;
 			
+			// aapt resource value: 0x7f0a0175
+			public const int BaseTheme = 2131362165;
+			
 			// aapt resource value: 0x7f0a0176
-			public const int BaseTheme = 2131362166;
+			public const int BaseTheme_NoActionBar = 2131362166;
 			
 			// aapt resource value: 0x7f0a0177
-			public const int BaseTheme_NoActionBar = 2131362167;
+			public const int BaseTheme_NoActionBar_FullScreen = 2131362167;
 			
 			// aapt resource value: 0x7f0a0017
 			public const int CardView = 2131361815;
@@ -3673,8 +3751,8 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0a001a
 			public const int CardView_Light = 2131361818;
 			
-			// aapt resource value: 0x7f0a0173
-			public const int CustomTheme = 2131362163;
+			// aapt resource value: 0x7f0a0174
+			public const int CustomTheme = 2131362164;
 			
 			// aapt resource value: 0x7f0a0178
 			public const int MainTheme = 2131362168;
@@ -3751,8 +3829,11 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0a0050
 			public const int RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = 2131361872;
 			
-			// aapt resource value: 0x7f0a0175
-			public const int SettingsTheme = 2131362165;
+			// aapt resource value: 0x7f0a0173
+			public const int SettingsButton = 2131362163;
+			
+			// aapt resource value: 0x7f0a0172
+			public const int SettingsTheme = 2131362162;
 			
 			// aapt resource value: 0x7f0a00d1
 			public const int TextAppearance_AppCompat = 2131362001;
@@ -3993,9 +4074,6 @@ namespace YTII.Droid.App
 			
 			// aapt resource value: 0x7f0a010d
 			public const int Theme_AppCompat_NoActionBar = 2131362061;
-			
-			// aapt resource value: 0x7f0a0172
-			public const int Theme_Custom = 2131362162;
 			
 			// aapt resource value: 0x7f0a0163
 			public const int Theme_Design = 2131362147;

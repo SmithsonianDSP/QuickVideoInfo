@@ -38,8 +38,8 @@ namespace YTII.Droid.App
             var prefsButton = FindViewById<Button>(Resource.Id.SettingsButton);
             prefsButton.Click += PrefsButton_Click;
 
-            //var creditsButton = FindViewById<Button>(Resource.Id.CreditsButton);
-            //creditsButton.Click += CreditsButton_Click;
+            var creditsButton = FindViewById<Button>(Resource.Id.CreditsButton);
+            creditsButton.Click += CreditsButton_Click;
         }
 
         private void CreditsButton_Click(object sender, EventArgs e)
@@ -49,22 +49,14 @@ namespace YTII.Droid.App
 
         private void PrefsButton_Click(object sender, EventArgs e)
         {
-            StartActivity(new Intent(this, typeof(Activities.UserPreferencesActivity)));
+            StartActivityForResult(new Intent(this, typeof(Activities.UserPreferencesActivity)), 0);
         }
 
-        protected override void OnStop()
+        protected override void OnDestroy()
         {
-            base.OnStop();
             FinishAndRemoveTask();
+            base.OnDestroy();
         }
-
-        protected override void OnPause()
-        {
-            base.OnPause();
-            FinishAndRemoveTask();
-        }
-
-
 
         public override void FinishAndRemoveTask()
         {

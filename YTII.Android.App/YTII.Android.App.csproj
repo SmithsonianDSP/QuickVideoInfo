@@ -181,13 +181,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\AboutActivity.cs" />
-    <Compile Include="Activities\BaseVideoInfoActivity.cs" />
+    <Compile Include="Activities\VideoInfoActivities\BaseVideoInfoActivity.cs" />
     <Compile Include="Activities\LauncherActivity.cs" />
-    <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Activities\StreamableVideoInfoActivity.cs" />
+    <Compile Include="Activities\VideoInfoActivities\StreamableVideoInfoActivity.cs" />
     <Compile Include="Activities\UserPreferencesActivity.cs" />
+    <Compile Include="Activities\VideoInfoActivities\YouTubeVideoInfoActivity.cs" />
     <Compile Include="Caches\IVideoModelCache.cs" />
-    <Compile Include="Caches\StreamableVideoModelClass.cs" />
     <Compile Include="Caches\VideoModelCache.cs" />
     <Compile Include="Transforms\TrimBitmapHeightTransform.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -197,7 +196,6 @@
     <Compile Include="VideoInfo\SignatureVerification.cs" />
     <Compile Include="VideoInfo\VideoInfoRequestor.cs" />
     <Compile Include="VideoInfo\VideoInfoRequestor.ProxyDebug.cs" />
-    <Compile Include="Caches\YouTubeModelCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
@@ -213,7 +211,6 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <ProguardConfiguration Include="proguard.cfg" />
-    <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\About.axml">
       <SubType>Designer</SubType>
@@ -249,6 +246,14 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\thumbnail_quality_popup_menu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\popup_background.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values-v21\theme.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

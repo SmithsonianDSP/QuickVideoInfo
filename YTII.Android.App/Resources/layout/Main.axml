@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mainLayout1"
-    android:background="@color/window_background"
+    android:background="@color/theme_custom_background"
     android:animateLayoutChanges="false"
     android:columnCount="1"
+    android:theme="@style/TranslucentActivity"
     android:rowCount="7">
     <RelativeLayout
         android:id="@+id/topSpacer"
@@ -28,7 +29,6 @@
             android:alpha="0.7"
             android:visibility="visible"
             android:fadingEdge="none"
-            android:outlineProvider="background"
             android:clickable="true"
             android:layout_margin="5sp"
             android:background="@android:color/transparent"
@@ -36,7 +36,7 @@
             android:layout_gravity="right"
             android:layout_alignWithParentIfMissing="true"
             android:layout_alignParentRight="true"
-            android:elevation="100px" />
+            android:elevation="100dp" />
         <Space
             android:id="@+id/space1"
             android:layout_width="match_parent"
@@ -147,9 +147,12 @@
         <Button
             android:text="Close Window"
             android:id="@+id/closeButton"
+            android:textStyle="normal"
+            android:typeface="sans"
+            android:textAllCaps="false"
             android:layout_width="0dp"
             android:layout_marginLeft="15px"
-            style="@android:style/Widget.Material.Button"
+            style="@style/SettingsButton"
             android:layout_gravity="fill_horizontal"
             android:layout_column="0"
             android:layout_columnWeight="0.5" />
@@ -162,7 +165,7 @@
             android:enabled="true"
             android:layout_width="0dp"
             android:layout_marginRight="15px"
-            style="@android:style/Widget.Material.Button"
+            style="@style/SettingsButton"
             android:layout_gravity="fill_horizontal"
             android:layout_column="1"
             android:layout_columnWeight="0.5" />

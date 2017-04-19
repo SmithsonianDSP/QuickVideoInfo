@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.Content.PM;
 
@@ -18,7 +12,6 @@ namespace YTII.Droid.App.Activities
     {
         const string ActivityName = "Quick Video Info Settings";
 
-        ISharedPreferences userPrefs;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -28,8 +21,7 @@ namespace YTII.Droid.App.Activities
             LoadUserSettings();
         }
 
-
-        static readonly string[] thumbnailOptionText = new string[] { "Max. Res.", "High (default)", "Standard", "Medium", "Lowest" };
+        static readonly string[] thumbnailOptionText = new[] { "Max. Res.", "High (default)", "Standard", "Medium", "Lowest" };
 
         protected void LoadUserSettings()
         {
@@ -37,7 +29,7 @@ namespace YTII.Droid.App.Activities
             iconToggle.Checked = UserSettings.IsLauncherIconShown;
 
             var thumbnailButton = FindViewById<Button>(Resource.Id.thumbnailQualityButton);
-            thumbnailButton.Hint = thumbnailOptionText[UserSettings.ThumbnailQuality];
+            thumbnailButton.Text = thumbnailOptionText[UserSettings.ThumbnailQuality];
         }
 
         private void SetEventHandlers()
@@ -53,6 +45,7 @@ namespace YTII.Droid.App.Activities
         {
             var thumbnailQualityButton = FindViewById<Button>(Resource.Id.thumbnailQualityButton);
             var menu = new PopupMenu(this, thumbnailQualityButton);
+
             menu.Inflate(Resource.Menu.thumbnail_quality_popup_menu);
 
             menu.MenuItemClick += Menu_MenuItemClick;
@@ -85,7 +78,7 @@ namespace YTII.Droid.App.Activities
 
             UserSettings.SetThumbnailQuality(i);
             var thumbnailButton = FindViewById<Button>(Resource.Id.thumbnailQualityButton);
-            thumbnailButton.Hint = thumbnailOptionText[i];
+            thumbnailButton.Text = thumbnailOptionText[i];
         }
 
         private void IconToggle_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)

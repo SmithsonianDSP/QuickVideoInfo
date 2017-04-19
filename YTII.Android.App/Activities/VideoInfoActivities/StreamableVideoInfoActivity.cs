@@ -11,30 +11,51 @@ using YTII.ModelFactory.Models;
 
 namespace YTII.Droid.App.Activities
 {
-    [Activity(Label = "Quick Video Info", Theme = "@style/CustomTheme", MainLauncher = false, Icon = "@drawable/icon")]
+    [Activity(Label = "Quick Video Info", Theme = "@style/TranslucentActivity", MainLauncher = false, Icon = "@drawable/icon")]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "*.streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "*.streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     public class StreamableVideoInfoActivity : BaseVideoInfoActivity<StreamableVideoModel>
     {
+        /// <summary>
+        /// The name of the activity. Used for identifying it in log messages
+        /// </summary>
         protected override string ActivityName => nameof(StreamableVideoInfoActivity);
-
+        /// <summary>
+        /// This is a prefix used to distinguish the origin source of thumbnails (e.g., YT[videoID] for YouTube, ST[videoID] for Streamable.com)
+        /// </summary>
+        protected override string TypePrefix => "ST";
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            // FIRST NEED TO CONFIRM THIS IS A STREAMABLE.COM VIDEO URL; ALL OTHERS REDIRECT TO BROWSER
-
-
             base.OnCreate(savedInstanceState);
+
+            // FIRST NEED TO CONFIRM THIS IS A STREAMABLE.COM VIDEO URL; ALL OTHERS REDIRECT TO BROWSER
+            if (GetVideoIdFromIntentDataString(Intent.DataString).Length > 5)
+            {
+                SendUrlToBrowser(Intent.DataString);
+                FinishAfterTransition();
+                FinishAndRemoveTask();
+                return;
+            }
+
+
             var extraDetailsRow = FindViewById<GridLayout>(Resource.Id.gridDetails);
             extraDetailsRow.Visibility = ViewStates.Gone;
         }
 
+        /// <summary>
+        /// The <see cref="Caches.VideoModelCache{T}" /> where the results of recently previewed video models are stored
+        /// </summary>
         protected override Caches.VideoModelCache<StreamableVideoModel> ModelCache { get => retainedFragment.StreamableVideoCache; }
 
         StreamableVideoModel vid;
 
+        /// <summary>
+        /// This method is where the actual work of requesting/loading the video info from the API
+        /// </summary>
+        /// <returns>N/A</returns>
         protected override async Task LoadVideo()
         {
             try
@@ -62,6 +83,10 @@ namespace YTII.Droid.App.Activities
             }
         }
 
+        /// <summary>
+        /// Populates the activity controls with the details from the supplied <see cref="IVideoModel" />
+        /// </summary>
+        /// <param name="video">The <see cref="IVideoModel" /> to load the details into the layout for</param>
         protected override void LoadVideoDetails(StreamableVideoModel video)
         {
             try
@@ -86,47 +111,39 @@ namespace YTII.Droid.App.Activities
             }
         }
 
+        /// <summary>
+        /// Processes the intent data string (URL) and returns the video ID
+        /// </summary>
+        /// <param name="intentDataString">The <see cref="P:Android.Content.Intent.DataString" /> passed to the activity.</param>
+        /// <returns>The Video ID used to identify the item to request information from the API for</returns>
         protected override string GetVideoIdFromIntentDataString(string intentDataString)
         {
-            return intentDataString.Substring(intentDataString.LastIndexOf(".com/") + 5);
+            return intentDataString.Substring(intentDataString.LastIndexOf(".com/") + 5).TrimEnd('/');
         }
 
+        /// <summary>
+        /// Returns the most appropriate video Thumbnail URL
+        /// </summary>
+        /// <remarks>
+        /// This was refactored out into its own function to accomodate allowing the user to define a preferred thumbnail quality
+        /// </remarks>
+        /// <param name="vid">The <see cref="IVideoModel" /> whose thumbnail URL is desired</param>
+        /// <returns>A URL of the thumbnail to load</returns>
         protected override string GetThumbnailUrl(ref StreamableVideoModel vid)
         {
             return vid.DefaultThumbnailUrl;
         }
 
-
-
-
-
+        /// <summary>
+        /// The method to execute when the user wants to open the currently previewed video. Implementation will vary depending on the explicit <see cref="IVideoModel" /> type
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected override void OpenButton_Click(object sender, System.EventArgs e)
         {
             SendUrlToBrowser(vid.VideoFullUrl);
+            FinishAfterTransition();
+            FinishAndRemoveTask();
         }
-
-        private void SendUrlToBrowser(string url)
-        {
-            try
-            {
-                var i = new Intent(Intent.ActionDefault, Uri.Parse("https://"));
-                var c = i.ResolveActivity(PackageManager);
-                var m = new Intent(Intent.ActionView, Uri.Parse(url));
-                m.SetComponent(c);
-                m.AddFlags(ActivityFlags.NewTask);
-
-                ApplicationContext.StartActivity(m);
-                FinishAfterTransition();
-                FinishAndRemoveTask();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("YTII", ex.Message);
-                var toast = Toast.MakeText(this.ApplicationContext, "Failed to send intent!", ToastLength.Long);
-                toast.Show();
-            }
-        }
-
-
     }
 }

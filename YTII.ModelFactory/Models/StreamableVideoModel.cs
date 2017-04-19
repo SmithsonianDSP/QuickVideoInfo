@@ -16,7 +16,29 @@ namespace YTII.ModelFactory.Models
         public float? VideoDurationSeconds { get; set; }
         public TimeSpan? VideoDuration { get; set; }
 
-        public string VideoDurationString { get; }
+        public string VideoDurationString
+        {
+            get
+            {
+                var videoDurationString = VideoDuration.ToString().TrimStart(new char[] { '0', ':' });
+                switch (videoDurationString.Length)
+                {
+                    case 0:
+                        videoDurationString = "0:00";
+                        break;
+                    case 1:
+                        videoDurationString = "0:0" + videoDurationString;
+                        break;
+                    case 2:
+                        videoDurationString = "0:" + videoDurationString;
+                        break;
+                    case 3:
+                        videoDurationString = "0" + videoDurationString;
+                        break;
+                }
+                return videoDurationString;
+            }
+        }
 
 
 

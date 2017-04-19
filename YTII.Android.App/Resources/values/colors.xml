@@ -1,7 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
+  <color name="window_background">#3a3a3a</color>
+  <!--<color name="customtheme_background">@android:color/transparent</color>
+  <color name="theme_custom_background">#3c030303</color>
+  <color name="theme_devicedefault_background">#3cffffff</color>-->
+  <color name="windowBackground">#3a3a3a</color>
+   
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>
+  <color name="white">#FFFFFFFF</color>
+  <color name="black">#00000000</color>
+  <color name="material_button_dark">#ff5a595b</color>
+  <color name="material_background">#ff303030</color>
 
-  <color name="window_background">#A000</color>
-  <color name="gfycat_green">#A7DE00</color>
 
+  <color name="grey_900">#ff212121</color>
+  <color name="grey_850">#ff303030</color>
+  <color name="grey_800">#ff424242</color>
+  <color name="grey_600">#ff757575</color>
+  <color name="grey_300">#ffe0e0e0</color>
+  <color name="grey_100">#fff5f5f5</color>
+  <color name="grey_501">#fffafafa</color>
+  <color name="deep_teal_50">#ffe0f2f1</color>
+  <color name="deep_teal_100">#ffb2dfdb</color>
+  <color name="deep_teal_200">#ff80cbc4</color>
+  <color name="deep_teal_300">#ff4db6ac</color>
+  <color name="deep_teal_500">#ff009688</color>
+  <color name="deep_teal_700">#ff00796b</color>
+  <color name="blue_grey_200">#ffb0bec5</color>
+  <color name="blue_grey_700">#ff455a64</color>
+  <color name="blue_grey_800">#ff37474f</color>
+  <color name="blue_grey_900">#ff263238</color>
+  <color name="blue_grey_950">#ff21272b</color>
 </resources>

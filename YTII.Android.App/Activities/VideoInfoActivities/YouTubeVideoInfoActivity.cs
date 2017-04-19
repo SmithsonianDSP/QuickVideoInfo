@@ -6,34 +6,46 @@ using Android.Content;
 using Android.Util;
 using Java.Lang;
 using System.Threading.Tasks;
+using Android.OS;
 
 namespace YTII.Droid.App
 {
-    [Activity(Label = "Quick Video Info", Theme = "@style/CustomTheme", MainLauncher = false, Icon = "@drawable/icon")]
-    [IntentFilter(new[] { Intent.ActionView },
-        DataScheme = "http", DataHost = "*.youtube.com", DataPathPrefix = "/watch",
+    [Activity(Label = "Quick Video Info", Theme = "@style/TranslucentActivity", MainLauncher = false, Icon = "@drawable/icon")]
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "youtu.be", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "youtu.be", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "*.youtube.com", DataPathPrefix = "/watch",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    [IntentFilter(new[] { Intent.ActionView },
-        DataScheme = "https", DataHost = "*.youtube.com", DataPathPrefix = "/watch",
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "*.youtube.com", DataPathPrefix = "/watch",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    [IntentFilter(new[] { Intent.ActionView },
-        DataScheme = "http", DataHost = "youtube.com", DataPathPrefix = "/watch",
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "youtube.com", DataPathPrefix = "/watch",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    [IntentFilter(new[] { Intent.ActionView },
-        DataScheme = "https", DataHost = "youtube.com", DataPathPrefix = "/watch",
-        Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    [IntentFilter(new[] { Intent.ActionView },
-        DataScheme = "http", DataHost = "youtu.be",
-        Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    [IntentFilter(new[] { Intent.ActionView },
-        DataScheme = "https", DataHost = "youtu.be",
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "youtube.com", DataPathPrefix = "/watch",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     public class YouTubeVideoInfoActivity : BaseVideoInfoActivity<YouTubeVideoModel>
     {
+
+        protected override void OnCreate(Bundle savedInstanceState) => base.OnCreate(savedInstanceState);
+
+
+        /// <summary>
+        /// The name of the activity. Used for identifying it in log messages
+        /// </summary>
         protected override string ActivityName { get => nameof(YouTubeVideoInfoActivity); }
 
+        /// <summary>
+        /// This is a prefix used to distinguish the origin source of thumbnails (e.g., YT[videoID] for YouTube, ST[videoID] for Streamable.com)
+        /// </summary>
+        protected override string TypePrefix => "YT";
+
+        /// <summary>
+        /// The <see cref="Caches.VideoModelCache{T}" /> where the results of recently previewed video models are stored
+        /// </summary>
         protected override Caches.VideoModelCache<YouTubeVideoModel> ModelCache { get => retainedFragment.YouTubeVideoModelCache; }
 
+        /// <summary>
+        /// This method is where the actual work of requesting/loading the video info from the API
+        /// </summary>
+        /// <returns>N/A</returns>
         protected override async Task LoadVideo()
         {
             try
@@ -43,7 +55,7 @@ namespace YTII.Droid.App
                 YouTubeVideoModel vid;
 
                 if (ModelCache.IsCached(videoId))
-                    vid = ModelCache.GetItem(videoId) as YouTubeVideoModel;
+                    vid = ModelCache.GetItem(videoId);
 
                 else
                 {
@@ -67,6 +79,11 @@ namespace YTII.Droid.App
             }
         }
 
+        /// <summary>
+        /// Processes the intent data string (URL) and returns the video ID
+        /// </summary>
+        /// <param name="intentDataString">The <see cref="P:Android.Content.Intent.DataString" /> passed to the activity.</param>
+        /// <returns>The Video ID used to identify the item to request information from the API for</returns>
         protected override string GetVideoIdFromIntentDataString(string intentDataString)
         {
             int idIndex;
@@ -89,6 +106,9 @@ namespace YTII.Droid.App
             return vidId;
         }
 
+        /// <summary>
+        /// Attaches the App's thumbprint/signature for API authorization purposes
+        /// </summary>
         protected void SetYouTubeAuthItems()
         {
             if (VideoInfoRequestor.Thumbprint == null || VideoInfoRequestor.Thumbprint == string.Empty)
@@ -98,9 +118,9 @@ namespace YTII.Droid.App
         }
 
         /// <summary>
-        /// Populates the activity controls with the details from the supplied YouTubeVideo model
+        /// Populates the activity controls with the details from the supplied <see cref="IVideoModel" />
         /// </summary>
-        /// <param name="video"></param>
+        /// <param name="video">The <see cref="IVideoModel" /> to load the details into the layout for</param>
         protected override void LoadVideoDetails(YouTubeVideoModel video)
         {
             try
@@ -134,14 +154,12 @@ namespace YTII.Droid.App
         /// Returns the most appropriate video Thumbnail URL
         /// </summary>
         /// <remarks>
-        /// Refactored this out into its own function, for now, in anticipation of eventually allowing users to set a preferred thumbnail size
+        /// This was refactored out into its own function to accomodate allowing the user to define a preferred thumbnail quality
         /// </remarks>
-        /// <param name="vid">The YouTubeVideoModel whose thumbnail URL is desired</param>
-        /// <returns>a URL of the thumbnail to load</returns>
+        /// <param name="vid">The <see cref="IVideoModel" /> whose thumbnail URL is desired</param>
+        /// <returns>A URL of the thumbnail to load</returns>
         protected override string GetThumbnailUrl(ref YouTubeVideoModel vid)
         {
-            var vid = video as YouTubeVideoModel;
-
             string thumbnailUrl = null;
 
             if (UserSettings.ThumbnailQuality == 0)
@@ -162,6 +180,11 @@ namespace YTII.Droid.App
             return thumbnailUrl;
         }
 
+        /// <summary>
+        /// The method to execute when the user wants to open the currently previewed video. Implementation will vary depending on the explicit <see cref="IVideoModel" /> type
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected override void OpenButton_Click(object sender, System.EventArgs e)
         {
             try
