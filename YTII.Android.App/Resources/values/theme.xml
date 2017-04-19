@@ -27,7 +27,7 @@
   </style>
   
   <style name="SettingsTheme"
-         parent="@android:style/Theme.Holo.Light.DarkActionBar">
+         parent="@android:style/Theme.Material.Settings">
     <item name="colorPrimary">#00bcd4</item>
     <item name="colorPrimaryDark">#005f6b</item>
     <item name="colorAccent">#005f6b</item>

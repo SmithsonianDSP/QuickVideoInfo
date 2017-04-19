@@ -21,7 +21,7 @@ namespace YTII.Droid.App
     }
 
 
-    [Activity(Label = Constants.AppTitle, MainLauncher = false, Icon = "@drawable/icon", Theme = "@style/AboutTheme")]
+    [Activity(Label = Constants.AppTitle, MainLauncher = false, Icon = "@drawable/icon", Theme = "@style/SettingsTheme")]
     public class AboutActivity : Activity
     {
         internal const string FullActivityName = Constants.PackageName + ".AboutActivity";
@@ -38,8 +38,8 @@ namespace YTII.Droid.App
             var prefsButton = FindViewById<Button>(Resource.Id.SettingsButton);
             prefsButton.Click += PrefsButton_Click;
 
-            var creditsButton = FindViewById<Button>(Resource.Id.CreditsButton);
-            creditsButton.Click += CreditsButton_Click;
+            //var creditsButton = FindViewById<Button>(Resource.Id.CreditsButton);
+            //creditsButton.Click += CreditsButton_Click;
         }
 
         private void CreditsButton_Click(object sender, EventArgs e)

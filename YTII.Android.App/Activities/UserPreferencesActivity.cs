@@ -13,7 +13,7 @@ using Android.Content.PM;
 
 namespace YTII.Droid.App.Activities
 {
-    [Activity(Label = ActivityName, Theme = "@android:style/Theme.Material.Settings", MainLauncher = false)]
+    [Activity(Label = ActivityName, Theme = "@style/SettingsTheme", MainLauncher = false)]
     public class UserPreferencesActivity : Activity
     {
         const string ActivityName = "Quick Video Info Settings";
