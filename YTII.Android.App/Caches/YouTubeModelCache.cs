@@ -1,24 +1,13 @@
-﻿using Android.App;
-using Android.Widget;
-using Android.OS;
-using Android.Graphics;
-using YTII.Droid.App;
-using YTII.ModelFactory.Models;
+﻿using YTII.ModelFactory.Models;
 using System.Linq;
-using Android.Net;
 using System.Collections.Generic;
-using Android.Content;
 using Android.Util;
 using Java.Lang;
-using Android.Views;
-using System.Threading.Tasks;
-using AndroidAnimations = Android.Animation;
-using AndroidPM = Android.Content.PM;
 
 namespace YTII.Droid.App
 {
 
-    class YouTubeModelCache : IVideoModelCache<YouTubeVideoModel>
+    public class YouTubeModelCache : IVideoModelCache<YouTubeVideoModel>
     {
 
         static private Dictionary<string, YouTubeVideoModel> _list = new Dictionary<string, YouTubeVideoModel>();

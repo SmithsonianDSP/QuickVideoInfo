@@ -2,7 +2,7 @@
 
 namespace YTII.Droid.App
 {
-    interface IVideoModelCache<T>
+    public interface IVideoModelCache<T>
         where T : IVideoModel
     {
         void Add(T item);

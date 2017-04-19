@@ -181,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\AboutActivity.cs" />
+    <Compile Include="Activities\BaseVideoInfoActivity.cs" />
     <Compile Include="Activities\LauncherActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\StreamableVideoInfoActivity.cs" />

@@ -23,10 +23,10 @@ namespace YTII.Droid.App
 
 
 
-        private static YouTubeModelCache _youTubeVideoModelCache;
-        internal YouTubeModelCache YouTubeVideoModelCache
+        private static Caches.VideoModelCache<YouTubeVideoModel> _youTubeVideoModelCache;
+        internal Caches.VideoModelCache<YouTubeVideoModel> YouTubeVideoModelCache
         {
-            get => _youTubeVideoModelCache ?? (_youTubeVideoModelCache = new YouTubeModelCache());
+            get => _youTubeVideoModelCache ?? (_youTubeVideoModelCache = new Caches.VideoModelCache<YouTubeVideoModel>());
         }
 
 

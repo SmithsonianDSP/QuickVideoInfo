@@ -1,19 +1,11 @@
 ﻿using Android.App;
 using Android.Widget;
-using Android.OS;
-using Android.Graphics;
-using YTII.Droid.App;
 using YTII.ModelFactory.Models;
-using System.Linq;
 using Android.Net;
-using System.Collections.Generic;
 using Android.Content;
 using Android.Util;
 using Java.Lang;
-using Android.Views;
 using System.Threading.Tasks;
-using AndroidAnimations = Android.Animation;
-using AndroidPM = Android.Content.PM;
 
 namespace YTII.Droid.App
 {
@@ -36,44 +28,13 @@ namespace YTII.Droid.App
     [IntentFilter(new[] { Intent.ActionView },
         DataScheme = "https", DataHost = "youtu.be",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    public class MainActivity : Activity
+    public class YouTubeVideoInfoActivity : BaseVideoInfoActivity<YouTubeVideoModel>
     {
-        protected string videoId;
-        protected LruCache mMemoryCache { get => retainedFragment.MRetainedCache; }
-        private YouTubeModelCache ModelCache { get => retainedFragment.YouTubeVideoModelCache; }
+        protected override string ActivityName { get => nameof(YouTubeVideoInfoActivity); }
 
-        protected RetainFragment retainedFragment;
+        protected override Caches.VideoModelCache<YouTubeVideoModel> ModelCache { get => retainedFragment.YouTubeVideoModelCache; }
 
-
-
-        protected override async void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-
-            GridLayout main;
-
-            if (GetScreenAspectRatio() > 1)
-            {
-                SetContentView(Resource.Layout.MainLandscape);
-                main = FindViewById<GridLayout>(Resource.Id.mainLayout2);
-            }
-            else
-            {
-                SetContentView(Resource.Layout.Main);
-                main = FindViewById<GridLayout>(Resource.Id.mainLayout1);
-            }
-
-            main.LayoutTransition?.DisableTransitionType(AndroidAnimations.LayoutTransitionType.Appearing);
-            main.LayoutTransition?.SetDuration(AndroidAnimations.LayoutTransitionType.Disappearing, 2500);
-
-            SetScreenSizeValues();
-            SetEventHandlers();
-            InitializeCache();
-
-            await LoadVideo();
-        }
-
-        protected virtual async Task LoadVideo()
+        protected override async Task LoadVideo()
         {
             try
             {
@@ -93,8 +54,8 @@ namespace YTII.Droid.App
                 if (vid != null)
                 {
                     ModelCache.Add(vid);
-                    LoadVideoDetails(ref vid);
-                    LoadVideoThumbnail(ref vid);
+                    LoadVideoDetails(vid);
+                    LoadVideoThumbnail(vid);
                 }
                 else
                     UnableToLoadVideoInfo();
@@ -106,48 +67,7 @@ namespace YTII.Droid.App
             }
         }
 
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            Square.Picasso.Picasso.With(this).CancelTag(this);
-        }
-
-        protected override void OnPause()
-        {
-            base.OnPause();
-            Square.Picasso.Picasso.With(this).PauseTag(this);
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-            Square.Picasso.Picasso.With(this).ResumeTag(this);
-        }
-
-        protected virtual void InitializeCache()
-        {
-            retainedFragment = RetainFragment.FindOrCreateRetainFragment(FragmentManager);
-            if (retainedFragment.HavePreferencesBeenChecked)
-            {
-                VerifyLauncherEnabledSettings();
-                retainedFragment.HavePreferencesBeenChecked = true;
-            }
-
-        }
-
-        protected virtual void SetEventHandlers()
-        {
-            var closeButton = FindViewById<Button>(Resource.Id.closeButton);
-            closeButton.Click += CloseButton_Click;
-
-            var openButton = FindViewById<Button>(Resource.Id.button1);
-            openButton.Click += OpenButton_Click;
-
-            var aboutButton = FindViewById<ImageButton>(Resource.Id.imageButton);
-            aboutButton.Click += AboutButton_Click;
-        }
-
-        protected virtual string GetVideoIdFromIntentDataString(string intentDataString)
+        protected override string GetVideoIdFromIntentDataString(string intentDataString)
         {
             int idIndex;
             string vidId = string.Empty;
@@ -169,20 +89,6 @@ namespace YTII.Droid.App
             return vidId;
         }
 
-
-        protected virtual void VerifyLauncherEnabledSettings()
-        {
-            var componentToEnable = new ComponentName(Constants.PackageName, YTII.Droid.App.LauncherActivity.FullActivityName);
-            var componentStatus = PackageManager.GetComponentEnabledSetting(componentToEnable);
-
-            if (componentStatus != AndroidPM.ComponentEnabledState.Enabled || componentStatus != AndroidPM.ComponentEnabledState.Default)
-            {
-                // If the Launcher activity is disabled, verify that user settings supposed to be disabled 
-                if (UserSettings.IsLauncherIconShown)
-                    PackageManager.SetComponentEnabledSetting(componentToEnable, AndroidPM.ComponentEnabledState.Enabled, AndroidPM.ComponentEnableOption.DontKillApp);
-            }
-        }
-
         protected void SetYouTubeAuthItems()
         {
             if (VideoInfoRequestor.Thumbprint == null || VideoInfoRequestor.Thumbprint == string.Empty)
@@ -195,7 +101,7 @@ namespace YTII.Droid.App
         /// Populates the activity controls with the details from the supplied YouTubeVideo model
         /// </summary>
         /// <param name="video"></param>
-        protected virtual void LoadVideoDetails(ref YouTubeVideoModel video)
+        protected override void LoadVideoDetails(YouTubeVideoModel video)
         {
             try
             {
@@ -215,100 +121,12 @@ namespace YTII.Droid.App
                 var dislikeCount = FindViewById<TextView>(Resource.Id.dislikeCount);
                 dislikeCount.Text = video.DislikeCountString;
 
-                LoadVideoThumbnail(ref video);
+                LoadVideoThumbnail(video);
             }
             catch (Exception ex)
             {
                 Log.Error($"YTII.{nameof(LoadVideoDetails)}", ex.Message);
                 UnableToLoadVideoInfo(ex);
-            }
-        }
-
-        protected virtual void LoadVideoThumbnail(ref YouTubeVideoModel video)
-        {
-            var imgFrame = FindViewById<RelativeLayout>(Resource.Id.mediaFrame1);
-            var imgHost = FindViewById<ImageView>(Resource.Id.imageView);
-            var cantLoadThumbnail = GetDrawable(Resource.Drawable.CantLoadVideo);
-
-            try
-            {
-                Bitmap thumb = TryGetCache(video.VideoId) as Bitmap;
-
-                if (thumb != null)
-                {
-                    SetScreenSizeValues();
-
-                    var prog = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
-
-                    prog.Visibility = ViewStates.Invisible;
-                    imgHost.Visibility = ViewStates.Visible;
-
-                    imgHost.SetImageBitmap(thumb);
-
-                    Square.Picasso.Picasso.With(BaseContext)
-                                          .Load(GetThumbnailUrl(ref video))
-                                          .Tag(nameof(MainActivity))
-                                          .NoFade()
-                                          .Placeholder(imgHost.Drawable)
-                                          .Error(cantLoadThumbnail)
-                                          .Fit()
-                                          .CenterCrop()
-                                          .Into(imgHost, PicassoOnSuccess, PicassoOnError);
-
-
-                    Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", "Thumbail Loaded From Cache");
-                }
-                else
-                {
-                    try
-                    {
-                        var thumbnailUrl = GetThumbnailUrl(ref video);
-
-                        Log.Debug("YTII.ThumbnailURL", thumbnailUrl);
-
-                        imgHost.SetWillNotCacheDrawing(true);
-
-                        Square.Picasso.Picasso.With(BaseContext)
-                                              .Load(thumbnailUrl)
-                                              .Tag(nameof(MainActivity))
-                                              .Error(cantLoadThumbnail)
-                                              .NoFade()
-                                              .Transform(new TrimBitmapHeightTransform())
-                                              .Fit()
-                                              .CenterCrop()
-                                              .Into(imgHost, PicassoOnSuccess, PicassoOnError);
-
-                        Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", "Loaded Thumbnail into ImageView");
-
-                        imgHost.SetWillNotCacheDrawing(false);
-                        imgHost.BuildDrawingCache(false);
-                        var bmc = imgHost.GetDrawingCache(false);
-                        retainedFragment.MRetainedCache.Put(video.VideoId, Bitmap.CreateBitmap(bmc));
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error($"YTII.{nameof(LoadVideoThumbnail)}.Download", ex.Message);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"YTII.{nameof(LoadVideoThumbnail)}.Main", ex.Message);
-            }
-
-
-        }
-
-        protected virtual object TryGetCache(string videoId)
-        {
-
-            try
-            {
-                return mMemoryCache.Get(videoId);
-            }
-            catch
-            {
-                return null;
             }
         }
 
@@ -320,8 +138,10 @@ namespace YTII.Droid.App
         /// </remarks>
         /// <param name="vid">The YouTubeVideoModel whose thumbnail URL is desired</param>
         /// <returns>a URL of the thumbnail to load</returns>
-        protected virtual string GetThumbnailUrl(ref YouTubeVideoModel vid)
+        protected override string GetThumbnailUrl(ref YouTubeVideoModel vid)
         {
+            var vid = video as YouTubeVideoModel;
+
             string thumbnailUrl = null;
 
             if (UserSettings.ThumbnailQuality == 0)
@@ -342,67 +162,7 @@ namespace YTII.Droid.App
             return thumbnailUrl;
         }
 
-
-
-
-        protected virtual void UnableToLoadVideoInfo(Exception ex = null)
-        {
-            var textBlock = FindViewById<TextView>(Resource.Id.textView1);
-            textBlock.Text = "Unable to Load Video Information";
-            var spinner = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
-            spinner.Visibility = ViewStates.Invisible;
-#if DEBUG
-            if (ex != null)
-            {
-                var toast = Toast.MakeText(this.ApplicationContext, ex.Message, ToastLength.Long);
-                toast.Show();
-            }
-#endif
-        }
-
-        protected void PicassoOnSuccess()
-        {
-            try
-            {
-                var imgHost = FindViewById<ImageView>(Resource.Id.imageView);
-                imgHost.SetMaxHeight(ImgHeight);
-                imgHost.Visibility = ViewStates.Visible;
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"YTII.{nameof(PicassoOnSuccess)}.imgHost", ex.Message);
-            }
-            try
-            {
-                var spinner = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
-                spinner.Visibility = ViewStates.Invisible;
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"YTII.{nameof(PicassoOnSuccess)}.progressSpinner", ex.Message);
-            }
-        }
-
-        protected void PicassoOnError()
-        {
-            var spinner = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
-            spinner.Visibility = ViewStates.Gone;
-        }
-
-
-
-        protected virtual void AboutButton_Click(object sender, System.EventArgs e)
-        {
-            StartActivity(typeof(AboutActivity));
-        }
-
-        protected virtual void CloseButton_Click(object sender, System.EventArgs e)
-        {
-            retainedFragment.retainedVideo = null;
-            FinishAndRemoveTask();
-        }
-
-        protected virtual void OpenButton_Click(object sender, System.EventArgs e)
+        protected override void OpenButton_Click(object sender, System.EventArgs e)
         {
             try
             {
@@ -420,63 +180,7 @@ namespace YTII.Droid.App
                 toast.Show();
             }
         }
-
-
-
-
-        /// <summary>
-        /// Provides compatibility for pre-Android 5.0 devices that do not have Activity.FinishAndRemoveTask() 
-        /// </summary>
-        public override void FinishAndRemoveTask()
-        {
-            try
-            {
-                base.FinishAndRemoveTask();
-            }
-            catch (NoSuchMethodError ex)
-            {
-                base.Finish();
-            }
-        }
-
-
-
-        #region ScreenSizeBehavior
-
-        /// <summary>
-        /// Sets dimensions for the ImageHost frame based on the current screen dimensions
-        /// </summary>
-        protected void SetScreenSizeValues()
-        {
-            var size = GetScreenDimensions();
-            ScreenWidth = size.Width;
-            ScreenHeight = size.Height;
-        }
-
-        private Size GetScreenDimensions()
-        {
-            var rect = new Rect();
-            WindowManager.DefaultDisplay.GetRectSize(rect);
-            return new Size(rect.Width(), rect.Height());
-        }
-
-        private double GetScreenAspectRatio()
-        {
-            Size dims = GetScreenDimensions();
-            return (double)dims.Width / (double)dims.Height;
-        }
-
-        int ScreenWidth { get; set; } = 480;
-        int ScreenHeight { get; set; } = 850;
-
-        int ImgWidth { get => (int)Math.Max(Math.Rint(ScreenWidth * 0.965), 480); }
-        int ImgHeight { get => (int)Math.Rint(Math.Min(ImgWidth * ScreenAspect, ScreenHeight * 0.75)); }
-        double ScreenAspect { get => GetScreenAspectRatio(); }
-        #endregion
     }
-
-
-
 
 }
 

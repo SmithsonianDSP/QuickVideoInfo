@@ -26,7 +26,7 @@ namespace YTII.ModelFactory.Models
 
         public StreamableVideoModel(DeserializedStreamableVideoModel baseModel)
         {
-            VideoId = baseModel.url.Substring(baseModel.url.LastIndexOf('/'));
+            VideoId = baseModel.url.Substring(baseModel.url.LastIndexOf(".com/") + 5);
             VideoFullUrl = "https://" + baseModel.url;
             DefaultThumbnailUrl = "https:" + baseModel.thumbnail_url;
             Title = baseModel.title ?? "[No Title]";

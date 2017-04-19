@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Graphics;
 using Android.Net;
 using Android.OS;
 using Android.Util;
@@ -10,7 +9,6 @@ using Java.Lang;
 using System.Threading.Tasks;
 using YTII.ModelFactory.Models;
 
-
 namespace YTII.Droid.App.Activities
 {
     [Activity(Label = "Quick Video Info", Theme = "@style/CustomTheme", MainLauncher = false, Icon = "@drawable/icon")]
@@ -18,19 +16,25 @@ namespace YTII.Droid.App.Activities
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "*.streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    public class StreamableVideoInfoActivity : MainActivity
+    public class StreamableVideoInfoActivity : BaseVideoInfoActivity<StreamableVideoModel>
     {
+        protected override string ActivityName => nameof(StreamableVideoInfoActivity);
+
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            // FIRST NEED TO CONFIRM THIS IS A STREAMABLE.COM VIDEO URL; ALL OTHERS REDIRECT TO BROWSER
+
+
             base.OnCreate(savedInstanceState);
             var extraDetailsRow = FindViewById<GridLayout>(Resource.Id.gridDetails);
             extraDetailsRow.Visibility = ViewStates.Gone;
         }
 
-        private Caches.VideoModelCache<StreamableVideoModel> ModelCache { get => retainedFragment.StreamableVideoCache; }
-
+        protected override Caches.VideoModelCache<StreamableVideoModel> ModelCache { get => retainedFragment.StreamableVideoCache; }
 
         StreamableVideoModel vid;
+
         protected override async Task LoadVideo()
         {
             try
@@ -45,8 +49,8 @@ namespace YTII.Droid.App.Activities
                 if (vid != null)
                 {
                     ModelCache.Add(vid);
-                    LoadVideoDetails(ref vid);
-                    LoadVideoThumbnail(ref vid);
+                    LoadVideoDetails(vid);
+                    LoadVideoThumbnail(vid);
                 }
                 else
                     UnableToLoadVideoInfo();
@@ -58,7 +62,7 @@ namespace YTII.Droid.App.Activities
             }
         }
 
-        protected virtual void LoadVideoDetails(ref StreamableVideoModel video)
+        protected override void LoadVideoDetails(StreamableVideoModel video)
         {
             try
             {
@@ -73,7 +77,7 @@ namespace YTII.Droid.App.Activities
                 videoDuration.Text = video.VideoDurationString;
                 videoDuration.BringToFront();
 
-                LoadVideoThumbnail(ref video);
+                LoadVideoThumbnail(video);
             }
             catch (Exception ex)
             {
@@ -82,94 +86,32 @@ namespace YTII.Droid.App.Activities
             }
         }
 
-        protected virtual void LoadVideoThumbnail(ref StreamableVideoModel video)
-        {
-            var imgFrame = FindViewById<RelativeLayout>(Resource.Id.mediaFrame1);
-            var imgHost = FindViewById<ImageView>(Resource.Id.imageView);
-            var cantLoadThumbnail = GetDrawable(Resource.Drawable.CantLoadVideo);
-
-            try
-            {
-                Bitmap thumb = TryGetCache(video.VideoId) as Bitmap;
-
-                if (thumb != null)
-                {
-                    SetScreenSizeValues();
-
-                    var prog = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
-
-                    prog.Visibility = ViewStates.Invisible;
-                    imgHost.Visibility = ViewStates.Visible;
-
-                    imgHost.SetImageBitmap(thumb);
-
-                    Square.Picasso.Picasso.With(BaseContext)
-                                          .Load(video.DefaultThumbnailUrl)
-                                          .Tag(nameof(MainActivity))
-                                          .NoFade()
-                                          .Placeholder(imgHost.Drawable)
-                                          .Error(cantLoadThumbnail)
-                                          .Fit()
-                                          .CenterCrop()
-                                          .Into(imgHost, PicassoOnSuccess, PicassoOnError);
-
-
-                    Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", "Thumbail Loaded From Cache");
-                }
-                else
-                {
-                    try
-                    {
-                        var thumbnailUrl = video.DefaultThumbnailUrl;
-
-                        imgHost.SetWillNotCacheDrawing(true);
-
-                        Square.Picasso.Picasso.With(BaseContext)
-                                              .Load(thumbnailUrl)
-                                              .Tag(nameof(MainActivity))
-                                              .Error(cantLoadThumbnail)
-                                              .NoFade()
-                                              .Transform(new TrimBitmapHeightTransform())
-                                              .Fit()
-                                              .CenterCrop()
-                                              .Into(imgHost, PicassoOnSuccess, PicassoOnError);
-
-                        Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", "Loaded Thumbnail into ImageView");
-
-                        imgHost.SetWillNotCacheDrawing(false);
-                        imgHost.BuildDrawingCache(false);
-                        var bmc = imgHost.GetDrawingCache(false);
-                        mMemoryCache.Put(video.VideoId, Bitmap.CreateBitmap(bmc));
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error($"YTII.{nameof(LoadVideoThumbnail)}.Download", ex.Message);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"YTII.{nameof(LoadVideoThumbnail)}.Main", ex.Message);
-            }
-
-
-        }
-
-
-
         protected override string GetVideoIdFromIntentDataString(string intentDataString)
         {
-            return intentDataString.Substring(intentDataString.LastIndexOf('/'));
+            return intentDataString.Substring(intentDataString.LastIndexOf(".com/") + 5);
         }
+
+        protected override string GetThumbnailUrl(ref StreamableVideoModel vid)
+        {
+            return vid.DefaultThumbnailUrl;
+        }
+
+
+
 
 
         protected override void OpenButton_Click(object sender, System.EventArgs e)
+        {
+            SendUrlToBrowser(vid.VideoFullUrl);
+        }
+
+        private void SendUrlToBrowser(string url)
         {
             try
             {
                 var i = new Intent(Intent.ActionDefault, Uri.Parse("https://"));
                 var c = i.ResolveActivity(PackageManager);
-                var m = new Intent(Intent.ActionView, Uri.Parse(vid.VideoFullUrl));
+                var m = new Intent(Intent.ActionView, Uri.Parse(url));
                 m.SetComponent(c);
                 m.AddFlags(ActivityFlags.NewTask);
 
@@ -184,6 +126,7 @@ namespace YTII.Droid.App.Activities
                 toast.Show();
             }
         }
+
 
     }
 }
