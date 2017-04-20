@@ -67,7 +67,6 @@ namespace YTII.Droid.App
                 {
                     ModelCache.Add(vid);
                     LoadVideoDetails(vid);
-                    LoadVideoThumbnail(vid);
                 }
                 else
                     UnableToLoadVideoInfo();
@@ -141,7 +140,7 @@ namespace YTII.Droid.App
                 var dislikeCount = FindViewById<TextView>(Resource.Id.dislikeCount);
                 dislikeCount.Text = video.DislikeCountString;
 
-                LoadVideoThumbnail(video);
+                RunOnUiThread(() => base.LoadVideoThumbnail(video));
             }
             catch (Exception ex)
             {
@@ -160,24 +159,37 @@ namespace YTII.Droid.App
         /// <returns>A URL of the thumbnail to load</returns>
         protected override string GetThumbnailUrl(ref YouTubeVideoModel vid)
         {
-            string thumbnailUrl = null;
-
-            if (UserSettings.ThumbnailQuality == 0)
-                thumbnailUrl = vid.MaxResThumbnailUrl;
-
-            if (UserSettings.ThumbnailQuality <= 1)
-                thumbnailUrl = thumbnailUrl ?? vid.StandardThumbnailUrl;
-
-            if (UserSettings.ThumbnailQuality <= 2)
-                thumbnailUrl = thumbnailUrl ?? vid.HighThumbnailUrl;
-
-            if (UserSettings.ThumbnailQuality <= 3)
-                thumbnailUrl = thumbnailUrl ?? vid.MediumThumbnailUrl;
-
-            if (UserSettings.ThumbnailQuality <= 4)
-                thumbnailUrl = thumbnailUrl ?? vid.DefaultThumbnailUrl;
-
-            return thumbnailUrl;
+            switch (UserSettings.ThumbnailQuality)
+            {
+                case 0:
+                    return vid.MaxResThumbnailUrl
+                        ?? vid.StandardThumbnailUrl
+                        ?? vid.HighThumbnailUrl
+                        ?? vid.MediumThumbnailUrl
+                        ?? vid.DefaultThumbnailUrl;
+                case 1:
+                    return vid.StandardThumbnailUrl
+                        ?? vid.HighThumbnailUrl
+                        ?? vid.MediumThumbnailUrl
+                        ?? vid.DefaultThumbnailUrl;
+                case 2:
+                    return vid.HighThumbnailUrl
+                        ?? vid.MediumThumbnailUrl
+                        ?? vid.DefaultThumbnailUrl;
+                case 3:
+                    return vid.MediumThumbnailUrl
+                        ?? vid.DefaultThumbnailUrl
+                        ?? vid.HighThumbnailUrl;
+                case 4:
+                    return vid.DefaultThumbnailUrl
+                        ?? vid.MediumThumbnailUrl
+                        ?? vid.HighThumbnailUrl;
+                default:
+                    return vid.StandardThumbnailUrl
+                        ?? vid.HighThumbnailUrl
+                        ?? vid.MediumThumbnailUrl
+                        ?? vid.DefaultThumbnailUrl;
+            }
         }
 
         /// <summary>

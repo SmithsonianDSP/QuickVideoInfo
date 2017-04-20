@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="25px"
     android:minHeight="25px"
     android:layout_width="match_parent"
@@ -7,49 +7,36 @@
     android:id="@+id/mainLayout1"
     android:background="@color/theme_custom_background"
     android:animateLayoutChanges="false"
-    android:columnCount="1"
     android:theme="@style/TranslucentActivity"
-    android:rowCount="7">
+    android:orientation="vertical">
     <RelativeLayout
         android:id="@+id/topSpacer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_row="0"
-        android:layout_rowWeight="0.4">
+        android:layout_weight="0.4">
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_alignParentTop="true"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@android:drawable/ic_dialog_info"
-            android:cropToPadding="true"
-            android:adjustViewBounds="true"
             android:padding="5sp"
             android:scaleType="fitCenter"
-            android:alpha="0.7"
-            android:visibility="visible"
-            android:fadingEdge="none"
+            android:alpha="0.85"
             android:clickable="true"
             android:layout_margin="5sp"
             android:background="@android:color/transparent"
-            android:forceHasOverlappingRendering="true"
+            android:theme="@style/Base.Theme.AppCompat"
             android:layout_gravity="right"
             android:layout_alignWithParentIfMissing="true"
             android:layout_alignParentRight="true"
             android:elevation="100dp" />
-        <Space
-            android:id="@+id/space1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true" />
     </RelativeLayout>
     <TextView
         android:text="Loading Video Information..."
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_row="2"
         android:id="@+id/textView1"
         android:textAlignment="center"
         android:ellipsize="end"
@@ -71,21 +58,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_row="3"
-        android:layout_rowWeight="1"
+        android:layout_weight="1"
         android:id="@+id/mediaFrame1"
         android:padding="0px"
-        android:clipChildren="false">
+        android:clipChildren="false"
+        android:background="#99000000"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_gravity="fill_vertical">
         <ImageView xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:cropToPadding="false"
+            android:cropToPadding="true"
             android:adjustViewBounds="false"
-            android:scaleType="centerCrop"
+            android:scaleType="center"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:drawingCacheQuality="high"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
@@ -93,7 +83,9 @@
             android:elevation="10dp"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:background="#00000000" />
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:alpha="0.95" />
         <ProgressBar
             android:id="@+id/progressSpinner"
             android:layout_width="wrap_content"
@@ -105,7 +97,7 @@
             android:indeterminateOnly="true"
             android:minWidth="100sp"
             android:minHeight="100sp"
-            android:elevation="20px" />
+            android:background="@android:color/transparent" />
         <TextView xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,14 +120,17 @@
             android:shadowDx="10"
             android:shadowDy="10"
             android:textStyle="bold"
-            android:elevation="75dp" />
+            android:elevation="75dp"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@id/imageView"
+            android:layout_alignWithParentIfMissing="true" />
     </RelativeLayout>
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gridLayout1"
         android:columnCount="2"
-        android:layout_row="4"
         android:orientation="horizontal"
         android:alignmentMode="alignBounds"
         android:columnOrderPreserved="true"
@@ -143,7 +138,10 @@
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="0.0dp"
-        android:elevation="50px">
+        android:elevation="50px"
+        android:layout_marginRight="5sp"
+        android:layout_marginLeft="5sp"
+        android:background="#99000000">
         <Button
             android:text="Close Window"
             android:id="@+id/closeButton"
@@ -155,7 +153,8 @@
             style="@style/SettingsButton"
             android:layout_gravity="fill_horizontal"
             android:layout_column="0"
-            android:layout_columnWeight="0.5" />
+            android:layout_columnWeight="0.5"
+            android:alpha="1" />
         <Button
             android:text="Open Video"
             android:id="@+id/button1"
@@ -168,22 +167,22 @@
             style="@style/SettingsButton"
             android:layout_gravity="fill_horizontal"
             android:layout_column="1"
-            android:layout_columnWeight="0.5" />
+            android:layout_columnWeight="0.5"
+            android:alpha="1" />
     </GridLayout>
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gridDetails"
         android:columnCount="10"
-        android:layout_row="5"
         android:orientation="horizontal"
         android:alignmentMode="alignBounds"
         android:columnOrderPreserved="true"
         android:layout_below="@id/gridLayout1"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="10sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
         android:alpha="1"
         android:background="#99000000"
         android:paddingTop="5sp"
@@ -284,6 +283,5 @@
         android:id="@+id/bottomSpacer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_row="1"
-        android:layout_rowWeight="0.4" />
-</GridLayout>
+        android:layout_weight="0.4" />
+</LinearLayout>

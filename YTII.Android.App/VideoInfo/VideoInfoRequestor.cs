@@ -49,12 +49,18 @@ namespace YTII.Droid.App
                 var json = await webResponse.Content.ReadAsStringAsync();
 
                 if (!json.StartsWith("{"))
-                    return StreamableVideoFactory.GetCannotLoadVideoModel(videoID);
+                {
+                    var errorVideo = StreamableVideoFactory.GetCannotLoadVideoModel(videoID);
+                    errorVideo.Description = json;
+                    errorVideo.Title = json;
+                    return errorVideo;
+                }
 
                 return StreamableVideoFactory.GetModelFromJson(json);
             }
-            catch
+            catch (Java.Lang.Exception ex)
             {
+                Android.Util.Log.Error("YTII." + nameof(GetStreamableVideoModel), ex.Message);
                 return StreamableVideoFactory.GetCannotLoadVideoModel(videoID);
             }
         }

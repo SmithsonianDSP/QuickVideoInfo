@@ -25,6 +25,8 @@ namespace YTII.ModelFactory.Factories
                     return GetCannotLoadVideoModel();
                 }
 
+                System.Diagnostics.Debug.WriteLine(result.ToString());
+
                 snippet = result.Value<JObject>("snippet");
                 statistics = result.Value<JObject>("statistics");
                 videoDetails = result.Value<JObject>("contentDetails");

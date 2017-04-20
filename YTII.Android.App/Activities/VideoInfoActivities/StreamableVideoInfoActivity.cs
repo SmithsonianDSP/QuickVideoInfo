@@ -31,6 +31,8 @@ namespace YTII.Droid.App.Activities
         {
             base.OnCreate(savedInstanceState);
 
+            Log.Debug("YTII.StreamableIntentUrl", Intent.DataString);
+            Log.Debug("YTII.StreamableIntentUrl", GetVideoIdFromIntentDataString(Intent.DataString));
             // FIRST NEED TO CONFIRM THIS IS A STREAMABLE.COM VIDEO URL; ALL OTHERS REDIRECT TO BROWSER
             if (GetVideoIdFromIntentDataString(Intent.DataString).Length > 5)
             {
@@ -69,9 +71,11 @@ namespace YTII.Droid.App.Activities
 
                 if (vid != null)
                 {
-                    ModelCache.Add(vid);
+                    vid.VideoFullUrl = Intent.DataString;
                     LoadVideoDetails(vid);
-                    LoadVideoThumbnail(vid);
+
+                    if (!vid.IsErrorModel)
+                        ModelCache.Add(vid);
                 }
                 else
                     UnableToLoadVideoInfo();
@@ -93,16 +97,15 @@ namespace YTII.Droid.App.Activities
             {
                 var videoTitle = FindViewById<TextView>(Resource.Id.textView1);
 
-                if (video.Title.Length > 0)
+                if (video.Title != string.Empty)
                     videoTitle.Text = video.Title;
                 else
                     videoTitle.Text = "[ No Title ]";
 
                 var videoDuration = FindViewById<TextView>(Resource.Id.videoDuration);
                 videoDuration.Text = video.VideoDurationString;
-                videoDuration.BringToFront();
 
-                LoadVideoThumbnail(video);
+                base.LoadVideoThumbnail(video);
             }
             catch (Exception ex)
             {

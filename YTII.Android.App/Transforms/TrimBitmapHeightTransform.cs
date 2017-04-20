@@ -19,7 +19,7 @@ namespace YTII.Droid.App
             try
             {
                 int newWidth = p0.Width;
-                int newHeight = (int)(p0.Height * 0.90);
+                int newHeight = (int)(p0.Height * 0.95);
 
                 int x = (p0.Width - newWidth) / 2;
                 int y = (p0.Height - newHeight) / 2;

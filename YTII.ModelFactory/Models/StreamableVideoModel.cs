@@ -7,6 +7,8 @@ namespace YTII.ModelFactory.Models
 {
     public class StreamableVideoModel : IVideoModel
     {
+        public bool IsErrorModel { get; internal set; } = false;
+
         public string VideoId { get; set; }
         public string VideoFullUrl { get; set; }
         public string Title { get; set; }
@@ -14,13 +16,13 @@ namespace YTII.ModelFactory.Models
         public string DefaultThumbnailUrl { get; set; }
 
         public float? VideoDurationSeconds { get; set; }
-        public TimeSpan? VideoDuration { get; set; }
+        public TimeSpan? VideoDuration { get => TimeSpan.FromSeconds((int)(VideoDurationSeconds ?? 0)); set => VideoDurationSeconds = (float?)(value ?? TimeSpan.FromSeconds(0)).TotalSeconds; }
 
         public string VideoDurationString
         {
             get
             {
-                var videoDurationString = VideoDuration.ToString().TrimStart(new char[] { '0', ':' });
+                var videoDurationString = (VideoDuration ?? TimeSpan.FromMinutes(0)).ToString().TrimStart(new char[] { '0', ':' });
                 switch (videoDurationString.Length)
                 {
                     case 0:
@@ -36,7 +38,7 @@ namespace YTII.ModelFactory.Models
                         videoDurationString = "0" + videoDurationString;
                         break;
                 }
-                return videoDurationString;
+                return videoDurationString ?? string.Empty;
             }
         }
 
@@ -53,7 +55,7 @@ namespace YTII.ModelFactory.Models
             DefaultThumbnailUrl = "https:" + baseModel.thumbnail_url;
             Title = baseModel.title ?? "[No Title]";
             VideoDurationSeconds = baseModel.files.mp4.duration;
-            VideoDuration = TimeSpan.FromSeconds(VideoDurationSeconds ?? 0);
+            //VideoDuration = TimeSpan.FromSeconds((int)(baseModel.files.mp4?.duration ?? 0));
         }
 
 

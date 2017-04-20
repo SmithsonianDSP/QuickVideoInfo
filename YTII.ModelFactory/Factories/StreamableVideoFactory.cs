@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,19 @@ namespace YTII.ModelFactory.Factories
         {
             try
             {
-                var result = JsonConvert.DeserializeObject<DeserializedStreamableVideoModel>(payload);
-                return new StreamableVideoModel(result);
+                JToken result = JsonConvert.DeserializeObject<dynamic>(payload);
+                JToken fileInfo = result.Value<JObject>("files")?.First?.First;
+
+                string videoFullUrl = "https://" + result.Value<string>("url");
+
+                return new StreamableVideoModel()
+                {
+                    VideoId = videoFullUrl.Substring(videoFullUrl.LastIndexOf(".com") + 5),
+                    DefaultThumbnailUrl = "http:" + result.Value<string>("thumbnail_url"),
+                    Title = result.Value<string>("title"),
+                    VideoFullUrl = videoFullUrl,
+                    VideoDurationSeconds = fileInfo?.Value<float?>("duration")
+                };
             }
             catch
             {
@@ -30,6 +42,7 @@ namespace YTII.ModelFactory.Factories
         {
             return new StreamableVideoModel()
             {
+                IsErrorModel = true,
                 Title = "Unable to Load Video",
                 DefaultThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
                 VideoFullUrl = $"http://www.streamable.com/videos/{videoId}"

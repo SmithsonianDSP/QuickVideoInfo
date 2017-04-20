@@ -2377,11 +2377,11 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f07002a
 			public const int bottom = 2131165226;
 			
-			// aapt resource value: 0x7f070087
-			public const int bottomSpacer = 2131165319;
+			// aapt resource value: 0x7f070086
+			public const int bottomSpacer = 2131165318;
 			
-			// aapt resource value: 0x7f07007f
-			public const int button1 = 2131165311;
+			// aapt resource value: 0x7f07007e
+			public const int button1 = 2131165310;
 			
 			// aapt resource value: 0x7f070044
 			public const int buttonPanel = 2131165252;
@@ -2410,8 +2410,8 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070034
 			public const int clip_vertical = 2131165236;
 			
-			// aapt resource value: 0x7f07007e
-			public const int closeButton = 2131165310;
+			// aapt resource value: 0x7f07007d
+			public const int closeButton = 2131165309;
 			
 			// aapt resource value: 0x7f07001f
 			public const int collapseActionView = 2131165215;
@@ -2449,11 +2449,11 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f07000e
 			public const int disableHome = 2131165198;
 			
-			// aapt resource value: 0x7f070086
-			public const int dislikeCount = 2131165318;
-			
 			// aapt resource value: 0x7f070085
-			public const int dislikeLabel = 2131165317;
+			public const int dislikeCount = 2131165317;
+			
+			// aapt resource value: 0x7f070084
+			public const int dislikeLabel = 2131165316;
 			
 			// aapt resource value: 0x7f0700b1
 			public const int divider1 = 2131165361;
@@ -2500,8 +2500,8 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070038
 			public const int @fixed = 2131165240;
 			
-			// aapt resource value: 0x7f070080
-			public const int gridDetails = 2131165312;
+			// aapt resource value: 0x7f07007f
+			public const int gridDetails = 2131165311;
 			
 			// aapt resource value: 0x7f070069
 			public const int gridLayout1 = 2131165289;
@@ -2524,8 +2524,8 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070077
 			public const int imageButton = 2131165303;
 			
-			// aapt resource value: 0x7f07007b
-			public const int imageView = 2131165307;
+			// aapt resource value: 0x7f07007a
+			public const int imageView = 2131165306;
 			
 			// aapt resource value: 0x7f0700ad
 			public const int info = 2131165357;
@@ -2536,11 +2536,11 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f07002f
 			public const int left = 2131165231;
 			
-			// aapt resource value: 0x7f070084
-			public const int likeCount = 2131165316;
-			
 			// aapt resource value: 0x7f070083
-			public const int likesLabel = 2131165315;
+			public const int likeCount = 2131165315;
+			
+			// aapt resource value: 0x7f070082
+			public const int likesLabel = 2131165314;
 			
 			// aapt resource value: 0x7f0700a7
 			public const int line1 = 2131165351;
@@ -2557,11 +2557,11 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070075
 			public const int mainLayout1 = 2131165301;
 			
-			// aapt resource value: 0x7f070088
-			public const int mainLayout2 = 2131165320;
+			// aapt resource value: 0x7f070087
+			public const int mainLayout2 = 2131165319;
 			
-			// aapt resource value: 0x7f07007a
-			public const int mediaFrame1 = 2131165306;
+			// aapt resource value: 0x7f070079
+			public const int mediaFrame1 = 2131165305;
 			
 			// aapt resource value: 0x7f0700a5
 			public const int media_actions = 2131165349;
@@ -2668,8 +2668,8 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070029
 			public const int pin = 2131165225;
 			
-			// aapt resource value: 0x7f07007c
-			public const int progressSpinner = 2131165308;
+			// aapt resource value: 0x7f07007b
+			public const int progressSpinner = 2131165307;
 			
 			// aapt resource value: 0x7f070006
 			public const int progress_circular = 2131165190;
@@ -2755,8 +2755,8 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070027
 			public const int snap = 2131165223;
 			
-			// aapt resource value: 0x7f070078
-			public const int space1 = 2131165304;
+			// aapt resource value: 0x7f070088
+			public const int space1 = 2131165320;
 			
 			// aapt resource value: 0x7f070045
 			public const int spacer = 2131165253;
@@ -2794,8 +2794,8 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f07004d
 			public const int textSpacerNoButtons = 2131165261;
 			
-			// aapt resource value: 0x7f070079
-			public const int textView1 = 2131165305;
+			// aapt resource value: 0x7f070078
+			public const int textView1 = 2131165304;
 			
 			// aapt resource value: 0x7f0700b0
 			public const int thumbnailQualityButton = 2131165360;
@@ -2845,14 +2845,14 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070014
 			public const int useLogo = 2131165204;
 			
-			// aapt resource value: 0x7f07007d
-			public const int videoDuration = 2131165309;
-			
-			// aapt resource value: 0x7f070082
-			public const int viewCount = 2131165314;
+			// aapt resource value: 0x7f07007c
+			public const int videoDuration = 2131165308;
 			
 			// aapt resource value: 0x7f070081
-			public const int viewLabel = 2131165313;
+			public const int viewCount = 2131165313;
+			
+			// aapt resource value: 0x7f070080
+			public const int viewLabel = 2131165312;
 			
 			// aapt resource value: 0x7f07000a
 			public const int view_offset_helper = 2131165194;

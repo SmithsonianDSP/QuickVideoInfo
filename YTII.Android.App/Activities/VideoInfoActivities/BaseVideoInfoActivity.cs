@@ -90,17 +90,17 @@ namespace YTII.Droid.App
         {
             base.OnCreate(savedInstanceState);
 
-            GridLayout main;
+            LinearLayout main;
 
             if (GetScreenAspectRatio() > 1)
             {
                 SetContentView(Resource.Layout.MainLandscape);
-                main = FindViewById<GridLayout>(Resource.Id.mainLayout2);
+                main = FindViewById<LinearLayout>(Resource.Id.mainLayout2);
             }
             else
             {
                 SetContentView(Resource.Layout.Main);
-                main = FindViewById<GridLayout>(Resource.Id.mainLayout1);
+                main = FindViewById<LinearLayout>(Resource.Id.mainLayout1);
             }
 
             main.LayoutTransition?.SetDuration(AndroidAnimations.LayoutTransitionType.Appearing, 150);
@@ -128,7 +128,7 @@ namespace YTII.Droid.App
         /// </summary>
         protected override void OnPause()
         {
-            Square.Picasso.Picasso.With(BaseContext).PauseTag(ActivityName);
+            //Square.Picasso.Picasso.With(BaseContext).PauseTag(this);
             base.OnPause();
         }
 
@@ -137,7 +137,7 @@ namespace YTII.Droid.App
         /// </summary>
         protected override void OnResume()
         {
-            Square.Picasso.Picasso.With(BaseContext).ResumeTag(ActivityName);
+            //Square.Picasso.Picasso.With(BaseContext).ResumeTag(this);
             base.OnResume();
         }
 
@@ -186,6 +186,26 @@ namespace YTII.Droid.App
             }
         }
 
+        protected void LoadErrorThumbnail()
+        {
+            var imgHost = FindViewById<ImageView>(Resource.Id.imageView);
+
+            var prog = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
+            prog.Visibility = ViewStates.Invisible;
+
+            imgHost.Visibility = ViewStates.Visible;
+
+            Square.Picasso.Picasso.With(BaseContext)
+                                  .Load(Resource.Drawable.CantLoadVideo)
+                                  .Tag(this)
+                                  .NoFade()
+                                  .Fit()
+                                  .CenterCrop()
+                                  .Into(imgHost, PicassoOnSuccess, PicassoOnError);
+
+        }
+
+
         /// <summary>
         /// Loads the Video Thumbnail into the view's <see cref="ImageView"/> via <see cref="Square.Picasso.Picasso"/>, getting it from either the
         /// <see cref="LruCache"/> stored in the <see cref="RetainFragment"/> or from the supplied <paramref name="video"/> thumbnail URL.
@@ -193,15 +213,23 @@ namespace YTII.Droid.App
         /// <param name="video">The <see cref="IVideoModel"/> to load the thumbnail for</param>
         protected virtual void LoadVideoThumbnail(T video)
         {
-            var imgFrame = FindViewById<RelativeLayout>(Resource.Id.mediaFrame1);
+
+
+            var thumbnailUrl = GetThumbnailUrl(ref video);
+            if (thumbnailUrl == "https://i.imgur.com/Jn2grYW.png")
+            {
+                LoadErrorThumbnail();
+                return;
+            }
+
             var imgHost = FindViewById<ImageView>(Resource.Id.imageView);
             var cantLoadThumbnail = GetDrawable(Resource.Drawable.CantLoadVideo);
-
             string cacheKey = TypePrefix + video.VideoId;
 
             try
             {
-                if (TryGetCache(cacheKey) is Bitmap thumb)
+                Bitmap thumb = TryGetCache(cacheKey) as Bitmap;
+                if (thumb != null)
                 {
                     SetScreenSizeValues();
 
@@ -212,8 +240,8 @@ namespace YTII.Droid.App
                     imgHost.SetImageBitmap(thumb);
 
                     Square.Picasso.Picasso.With(BaseContext)
-                                          .Load(GetThumbnailUrl(ref video))
-                                          .Tag(ActivityName)
+                                          .Load(thumbnailUrl)
+                                          .Tag(this)
                                           .NoFade()
                                           .Placeholder(imgHost.Drawable)
                                           .Error(cantLoadThumbnail)
@@ -227,15 +255,11 @@ namespace YTII.Droid.App
                 {
                     try
                     {
-                        var thumbnailUrl = GetThumbnailUrl(ref video);
-
-                        Log.Debug("YTII.ThumbnailURL", thumbnailUrl);
-
                         imgHost.SetWillNotCacheDrawing(true);
 
                         Square.Picasso.Picasso.With(BaseContext)
                                               .Load(thumbnailUrl)
-                                              .Tag(ActivityName)
+                                              .Tag(this)
                                               .Error(cantLoadThumbnail)
                                               .NoFade()
                                               .Transform(new TrimBitmapHeightTransform())
@@ -243,13 +267,7 @@ namespace YTII.Droid.App
                                               .CenterCrop()
                                               .Into(imgHost, PicassoOnSuccess, PicassoOnError);
 
-                        Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", "Loaded Thumbnail into ImageView");
-
-                        // Store the returned thubmnail in the LruCache
-                        imgHost.SetWillNotCacheDrawing(false);
-                        imgHost.BuildDrawingCache(false);
-                        var bmc = imgHost.GetDrawingCache(false);
-                        retainedFragment.MRetainedCache.Put(cacheKey, Bitmap.CreateBitmap(bmc));
+                        Log.Info($"YTII.{nameof(LoadVideoThumbnail)}", $"Loading thumbnail from: {thumbnailUrl}");
                     }
                     catch (Exception ex)
                     {
@@ -296,16 +314,6 @@ namespace YTII.Droid.App
         {
             try
             {
-                var imgHost = FindViewById<ImageView>(Resource.Id.imageView);
-                imgHost.SetMaxHeight(ImgHeight);
-                imgHost.Visibility = ViewStates.Visible;
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"YTII.{nameof(PicassoOnSuccess)}.imgHost", ex.Message);
-            }
-            try
-            {
                 var spinner = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
                 spinner.Visibility = ViewStates.Invisible;
             }
@@ -313,10 +321,32 @@ namespace YTII.Droid.App
             {
                 Log.Error($"YTII.{nameof(PicassoOnSuccess)}.progressSpinner", ex.Message);
             }
+            try
+            {
+                var imgHost = FindViewById<ImageView>(Resource.Id.imageView);
+                imgHost.Visibility = ViewStates.Visible;
+
+                imgHost.SetMaxHeight(ImgHeight);
+
+
+                // Store the returned thubmnail in the LruCache
+                imgHost.SetWillNotCacheDrawing(false);
+                imgHost.BuildDrawingCache(false);
+                var bmc = imgHost.GetDrawingCache(false);
+
+                string cacheKey = TypePrefix + videoId;
+                retainedFragment.MRetainedCache.Put(cacheKey, Bitmap.CreateBitmap(bmc));
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"YTII.{nameof(PicassoOnSuccess)}.imgHost", ex.Message);
+            }
+
         }
 
         protected void PicassoOnError()
         {
+            Log.Error($"YTII.{nameof(PicassoOnError)}", "Unable to load thumbnail!");
             var spinner = FindViewById<ProgressBar>(Resource.Id.progressSpinner);
             spinner.Visibility = ViewStates.Gone;
         }
