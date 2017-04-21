@@ -133,6 +133,16 @@
     <EnableProguard>False</EnableProguard>
     <DebugSymbols>False</DebugSymbols>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release %28PROXY%29|AnyCPU'">
+    <OutputPath>bin\Release %28PROXY%29\</OutputPath>
+    <DefineConstants>TRACE;PROXY,RELEASE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>PdbOnly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Forms.2.3.3.193\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
@@ -251,7 +261,7 @@
     <AndroidResource Include="Resources\drawable\popup_background.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values-v21\theme.xml">
+    <AndroidResource Include="Resources\values-v22\theme.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

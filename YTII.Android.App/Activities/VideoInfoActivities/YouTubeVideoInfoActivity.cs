@@ -48,6 +48,9 @@ namespace YTII.Droid.App
         /// <returns>N/A</returns>
         protected override async Task LoadVideo()
         {
+            var sourceText = FindViewById<TextView>(Resource.Id.sourceText);
+            sourceText.Text = @"youtube.com";
+
             try
             {
                 videoId = GetVideoIdFromIntentDataString(Intent.DataString);

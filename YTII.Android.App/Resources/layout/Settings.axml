@@ -38,39 +38,39 @@
         android:layout_weight="0.25" />
     <TextView
         android:text="Preferred Thumbnail Quality:"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
         android:layout_marginBottom="5px"
-        android:layout_gravity="center"
+        android:layout_gravity="fill"
         android:textSize="18sp"
-        android:textStyle="bold" />
-    <GridLayout
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:gravity="center" />
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_columnWeight="1"
-            android:layout_column="0" />
+            android:layout_weight="1" />
         <Button xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/thumbnailQualityButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_column="1"
+            android:layout_weight="2.5"
             style="@style/SettingsButton"
             tools:text="High (default)"
             android:textAllCaps="false"
-            android:layout_columnWeight="1.5"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:lines="1"
+            android:marqueeRepeatLimit="marquee_forever" />
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_columnWeight="1"
-            android:layout_column="2" />
-    </GridLayout>
+            android:layout_weight="1" />
+    </LinearLayout>
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -97,7 +97,17 @@
         android:checked="true"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#CCdfdfdf"
+        android:textAllCaps="false"
+        android:thumbTextPadding="10sp"
+        android:buttonTint="#fff0f8ff"
+        android:trackTint="#ffffffff"
+        android:gravity="fill"
+        android:switchPadding="10sp"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:maxLines="1"
+        android:textSize="14sp" />
     <TextView
         android:text="@string/ReEnableLauncherInstructions"
         android:layout_width="wrap_content"
