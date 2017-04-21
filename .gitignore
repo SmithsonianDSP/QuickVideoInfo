@@ -259,24 +259,11 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/searchW.png
-/YouTube_Play.png
-/feature.png
-/com.jws.intentinterceptor.youtube.apk
-/com.google.android.youtube_12.05.53-120553170_minAPI16(x86)(nodpi)_apkmirror.com.apk
-/Capture2.PNG
-/Capture1.PNG
+
+*.apk
 /Icons
-/AlternateIcon1.1.pdn
-/AlternateIcon1.pdn
-/AlternateIcon1.png
-/AlternateIcon2.pdn
-/AlternateIcon2.png
 /Release Versions
-/YTII.Android.App/Resources/drawable/IconXL.png
-/YTII.APIs/API.Keys/Keys.Private.cs
 /.misc
 *.pdn
-/Components
 /YTII.Android.App/VideoInfoRequestor.ProxyDebug.cs
 /YTII.Android.App/VideoInfo/VideoInfoRequestor.ProxyDebug.cs
