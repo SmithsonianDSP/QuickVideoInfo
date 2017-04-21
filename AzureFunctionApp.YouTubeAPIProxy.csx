@@ -59,7 +59,6 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
 {
     appLog = log;
 
-
     IEnumerable<KeyValuePair<string, string>> parameters = req.GetQueryNameValuePairs().ToArray();
     var videoId = parameters.FirstOrDefault(i => i.Key.Equals("videoid")).Value;
     var thumbprint = parameters.FirstOrDefault(i => i.Key.Equals("thumbprint")).Value;
@@ -67,10 +66,9 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
     log.Info($"Request received for: {videoId}");
     log.Verbose("");
     log.Verbose($"Cache Status:");
-    log.Verbose($"\tCached Items: {resultCache.Count()}");
-    log.Verbose($"\tCache Hits: {cacheHits}");
-    log.Verbose($"\tCache Miss: {cacheMisses}");
-    log.Verbose("");
+    log.Verbose($"\tCached Items: {ResultCache.Count} / {MaxCacheSize}");
+    log.Verbose($"\t\tHits: {cacheHits}\t\tMisses: {cacheMisses}");
+    log.Verbose("---");
 
     if (!AuthorizedThumbs.Contains(thumbprint))
     {
@@ -121,11 +119,12 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
     }
 }
 
-
 #region Item Caches
 
+const int MaxCacheSize = 100;
+
 private static ConcurrentDictionary<string, string> _resultCache;
-private static ConcurrentDictionary<string, string> resultCache
+private static ConcurrentDictionary<string, string> ResultCache
 {
     get { return _resultCache ?? (_resultCache = new ConcurrentDictionary<string, string>()); }
     set { _resultCache = value; }
@@ -135,20 +134,22 @@ private static ConcurrentQueue<string> idCache = new ConcurrentQueue<string>();
 internal static void AddItemToCache(string videoId, string item)
 {
     appLog?.Info($"Adding video item to cache: {videoId}");
-    if (idCache.Count >= 100)
+
+    idCache.Enqueue(videoId);
+
+    while (idCache.Count > MaxCacheSize)
     {
         string idToCull;
         if (idCache.TryDequeue(out idToCull))
         {
             string outval;
-            resultCache.TryRemove(idToCull, out outval);
+            ResultCache.TryRemove(idToCull, out outval);
             appLog?.Info($"Dequeuing excess cache item: {idToCull}");
         }
-
     }
-    resultCache.TryAdd(videoId, item);
+    ResultCache.TryAdd(videoId, item);
     cacheMisses++;
-    appLog?.Info($"Total Cache Size: \t {resultCache.Count()}");
+    appLog?.Info($"Total Cache Size: \t {ResultCache.Count()}");
 }
 
 internal static string GetItemFromCache(string videoId)
@@ -160,12 +161,13 @@ internal static string GetItemFromCache(string videoId)
     idCache = new ConcurrentQueue<string>(newQueue.Except(new string[] { videoId }));
     idCache.Enqueue(videoId);
 
-    return resultCache[videoId];
+    return ResultCache[videoId];
 }
+
 
 internal static bool IsItemCached(string videoId)
 {
-    return resultCache.ContainsKey(videoId);
+    return ResultCache.ContainsKey(videoId);
 }
 
 static int cacheHits = 0;
