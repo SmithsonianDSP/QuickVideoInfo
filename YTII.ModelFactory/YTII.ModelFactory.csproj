@@ -48,7 +48,6 @@
     <Compile Include="Factories\StreamableVideoFactory.cs" />
     <Compile Include="Factories\YouTubeVideoFactory.cs" />
     <Compile Include="Models\IVideoModel.cs" />
-    <Compile Include="Models\DeserializedStreamableVideoModel.cs" />
     <Compile Include="Models\StreamableVideoModel.cs" />
     <Compile Include="Models\YouTubeVideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

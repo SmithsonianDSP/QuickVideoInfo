@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YTII.Android.App", "YTII.An
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YTII.ModelFactory", "YTII.ModelFactory\YTII.ModelFactory.csproj", "{2BBECA68-E57A-4163-AEDC-6A675457C788}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{BE67AFCF-61D4-43E5-9BC5-DC77AFD2FACF}"
+	ProjectSection(SolutionItems) = preProject
+		AzureFunctionApp.YouTubeAPIProxy.csx = AzureFunctionApp.YouTubeAPIProxy.csx
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

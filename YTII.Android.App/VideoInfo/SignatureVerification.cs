@@ -4,6 +4,9 @@ using Java.Security;
 
 namespace YTII.Droid.App
 {
+    /// <summary>
+    /// This utility class is used for getting the application's SHA1 signature fingerprint for authentication purposes
+    /// </summary>
     internal static class SignatureVerification
     {
         //ORIGINAL LINE: public static String getSignature(@NonNull PackageManager pm, @NonNull String packageName)
