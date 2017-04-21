@@ -47,18 +47,5 @@ namespace YTII.ModelFactory.Models
 
         public StreamableVideoModel() { }
 
-
-        public StreamableVideoModel(DeserializedStreamableVideoModel baseModel)
-        {
-            VideoId = baseModel.url.Substring(baseModel.url.LastIndexOf(".com/") + 5);
-            VideoFullUrl = "https://" + baseModel.url;
-            DefaultThumbnailUrl = "https:" + baseModel.thumbnail_url;
-            Title = baseModel.title ?? "[No Title]";
-            VideoDurationSeconds = baseModel.files.mp4.duration;
-            //VideoDuration = TimeSpan.FromSeconds((int)(baseModel.files.mp4?.duration ?? 0));
-        }
-
-
-
     }
 }
