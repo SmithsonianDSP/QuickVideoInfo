@@ -2,31 +2,31 @@
 
 - - -
 
-[**Get it now in the Google Play Store!**](https://play.google.com/store/apps/details?id=com.gmail.smithsoniandsp.quickvideoinfo)
+[**Get it now in the Google Play Store!**](https://play.google.com/store/apps/details?id=com.gmail.smithsoniandsp.quickvideoinfo&referrer=utm_source%3Dgithub%26utm_medium%3Dreadme)
 
 ![](GooglePlayStore.Assets/Feature2.png)
 
 - - -
 
- 
+Â 
 
 **Currently Supported Video Providers:**  
 * [YouTube](http://www.youtube.com) (individual videos)
 * [Streamable](http://streamable.com)
 
- 
+Â 
 
 - - - -
 
- 
+Â 
 
 * [See here for an up-to-date list of potential future features and improvements](https://github.com/SmithsonianDSP/QuickVideoInfo/issues?q=is%3Aopen+is%3Aissue+label%3Apotential_todo)
 
- 
+Â 
 
 - - - 
 
- 
+Â 
 
 License
 --------
