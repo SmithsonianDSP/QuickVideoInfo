@@ -100,7 +100,7 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
 
     try
     {
-        var httpClient = new HttpClient();
+        var httpClient = GetHttpClientInstance();
 
         var requestUrl = string.Format(videoDetailsQuery, videoId);
         var result = await httpClient.GetStringAsync(requestUrl);
@@ -179,5 +179,13 @@ static readonly string mediaType = "application/json";
 
 static readonly string baseApiUrl = "https://www.googleapis.com/youtube/v3/";
 static readonly string videoDetailsQuery = baseApiUrl + @"videos?fields=items(id,snippet(title,description,publishedAt,thumbnails),statistics,contentDetails/duration)&part=snippet,statistics,contentDetails&id={0}&key=" + ApiKey;
+
+
+
+// Note: Sharing HttpClient instances as per recommended in the Microsoft documents, below: 
+// https://github.com/mspnp/performance-optimization/blob/master/ImproperInstantiation/docs/ImproperInstantiation.md
+static HttpClient _httpClient;
+static HttpClient GetHttpClientInstance() => _httpClient ?? (_httpClient = new HttpClient());
+
 
 
