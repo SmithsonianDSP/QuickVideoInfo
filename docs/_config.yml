@@ -1,4 +1,4 @@
 theme: jekyll-theme-slate
 title: Quick Video Info
-description: Quickly see a video link's thumbnail and details *before* opening it!
+description: Quickly see a video link's thumbnail and details <i>before</i> opening it!
 show_downloads: true
