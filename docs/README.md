@@ -2,7 +2,7 @@
 
 - - -
 
-[**Get it now in the Google Play Store!**](https://play.google.com/store/apps/details?id=com.gmail.smithsoniandsp.quickvideoinfo&referrer=utm_source%3Dgithub%26utm_medium%3Dreadmedocs)
+## [**Get it now in the Google Play Store!**](https://play.google.com/store/apps/details?id=com.gmail.smithsoniandsp.quickvideoinfo&referrer=utm_source%3Dgithub%26utm_medium%3Dreadmedocs)
 
 ![](https://github.com/SmithsonianDSP/QuickVideoInfo/raw/master/GooglePlayStore.Assets/Feature2.png)
 
@@ -20,12 +20,17 @@
 
  
 
-* [See here for an up-to-date list of potential future features and improvements](https://github.com/SmithsonianDSP/QuickVideoInfo/issues?q=is%3Aopen+is%3Aissue+label%3Apotential_todo)
+[See here for an up-to-date list of potential future features and improvements](https://github.com/SmithsonianDSP/QuickVideoInfo/issues?q=is%3Aopen+is%3Aissue+label%3Apotential_todo)
 
  
 
 - - - 
 
+&nbsp;
+
+&nbsp;
+
+&nbsp;
  
 
 License
