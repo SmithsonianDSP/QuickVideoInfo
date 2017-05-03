@@ -1,30 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿#region file_header
+
+// QuickVideoInfo - YTII.Android.App - VideoInfoRequestor.cs
+// 
+// Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements.  
+// See the NOTICE file distributed with this work for additional information regarding copyright ownership.  
+// The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use 
+// this file except in compliance with the License.  You may obtain a copy of the License at
+// 
+//   http://www.apache.org/licenses/LICENSE-2.0
+//  
+// Unless required by applicable law or agreed to in writing, software distributed under the License is 
+// distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
+// or implied.  See the License for the specific language governing permissions and limitations under the License.
+//  
+
+#endregion
+
 using System.Text;
-using YTII.ModelFactory.Models;
-using YTII.ModelFactory.Factories;
-using System.Net.Http;
 using System.Threading.Tasks;
+using Android.Util;
+using Java.Lang;
+using YTII.ModelFactory.Factories;
+using YTII.ModelFactory.Models;
 
 namespace YTII.Droid.App
 {
-
     /// <summary>
-    /// This class is used for communicating with the external servers to request the details and information for a specified video.
+    ///     This class is used for communicating with the external servers to request the details and information for a
+    ///     specified video.
     /// </summary>
     internal static partial class VideoInfoRequestor
     {
-
-        /* FORK TODO:
+        /* FORK_TODO:
          * 
          * The following lines will need to uncommented and completed in order to implement this functionality. 
          * The actual values have not been included in the reposity for security purposes.
          * 
          * /// <summary>
-         * /// This is the byte-encoded proxy URL
+         * /// This is the byte-encoded YouTube proxy URL
          * /// </summary>
          * private readonly static byte[] aurl = new byte[];
+         * 
+         * /// <summary>
+         * /// This is the byte-encoded Vimeo proxy URL
+         * /// </summary>
+         * private readonly static byte[] vimeo_aurl = new byte[];
          * 
          * /// <summary>
          * /// This is the byte-encoded function key 
@@ -47,28 +67,41 @@ namespace YTII.Droid.App
          * 
          */
 
-        private static string FKey { get => Encoding.ASCII.GetString(fkey); }
-        private static string FUrl { get => Encoding.ASCII.GetString(aurl); }
+        /// <summary>
+        ///     The Function Key used to Authenticate with the Video Proxy Server
+        /// </summary>
+        static string FKey => Encoding.ASCII.GetString(fkey);
 
         /// <summary>
-        /// Local storage for the app's thumbprint so it does not need to be checked every time
+        ///     The URL For the YouTube Video Proxy Function
+        /// </summary>
+        static string YouTube_FUrl => Encoding.ASCII.GetString(aurl);
+
+        /// <summary>
+        ///     The URL for the Vimeo Proxy Function
+        /// </summary>
+        static string Vimeo_FUrl => Encoding.ASCII.GetString(vimeo_aurl);
+
+        /// <summary>
+        ///     Local storage for the app's thumbprint so it does not need to be checked every time
         /// </summary>
         internal static string Thumbprint { get; set; }
 
         /// <summary>
-        /// Local storage for the app's package name so it does not need to be checked every time 
+        ///     Local storage for the app's package name so it does not need to be checked every time
         /// </summary>
         internal static string PackageName { get; set; }
 
-
         /// <summary>
-        /// Returns a <see cref="YouTubeVideoModel"/> for the supplied <paramref name="videoID"/>
+        ///     Returns a <see cref="YouTubeVideoModel" /> for the supplied <paramref name="videoID" />
         /// </summary>
         /// <param name="videoID">The unique YouTube VideoID</param>
-        /// <returns>A <see cref="YouTubeVideoModel"/> representing the video for the associated <paramref name="videoID"/></returns>
+        /// <returns>
+        ///     A <see cref="YouTubeVideoModel" /> representing the video for the associated <paramref name="videoID" />
+        /// </returns>
         internal static async Task<YouTubeVideoModel> GetYouTubeVideoModel(string videoID)
         {
-            string requestString = string.Format(FUrl, FKey, videoID, Thumbprint);
+            var requestString = string.Format(YouTube_FUrl, FKey, videoID, Thumbprint);
 
             var httpClient = GetHttpClient();
 
@@ -79,13 +112,11 @@ namespace YTII.Droid.App
             return YouTubeVideoFactory.GetModelFromJson(json);
         }
 
-
-
         internal static async Task<StreamableVideoModel> GetStreamableVideoModel(string videoID)
         {
             try
             {
-                string requestString = $"https://api.streamable.com/videos/{videoID}";
+                var requestString = $"https://api.streamable.com/videos/{videoID}";
                 var httpClient = GetHttpClient();
 
                 var webResponse = await httpClient.GetAsync(requestString);
@@ -102,14 +133,31 @@ namespace YTII.Droid.App
 
                 return StreamableVideoFactory.GetModelFromJson(json);
             }
-            catch (Java.Lang.Exception ex)
+            catch (Exception ex)
             {
-                Android.Util.Log.Error("YTII." + nameof(GetStreamableVideoModel), ex.Message);
+                Log.Error("YTII." + nameof(GetStreamableVideoModel), ex.Message);
                 return StreamableVideoFactory.GetCannotLoadVideoModel(videoID);
             }
         }
+
+        /// <summary>
+        ///     Returns a <see cref="VimeoVideoModel" /> for the supplied <paramref name="videoId" />
+        /// </summary>
+        /// <param name="videoId">The unique Vimeo Video ID</param>
+        /// <returns>
+        ///     A <see cref="VimeoVideoModel" /> representing the video for the associated <paramref name="videoId" />
+        /// </returns>
+        internal static async Task<VimeoVideoModel> GetVimeoVideoModel(string videoId)
+        {
+            var requestString = string.Format(Vimeo_FUrl, videoId, FKey, Thumbprint);
+
+            var httpClient = GetHttpClient();
+
+            var webResponse = await httpClient.GetAsync(requestString);
+
+            var json = await webResponse.Content.ReadAsStringAsync();
+
+            return VimeoVideoFactory.GetVimeoVideoModelFromJson(json);
+        }
     }
-
-
-
 }

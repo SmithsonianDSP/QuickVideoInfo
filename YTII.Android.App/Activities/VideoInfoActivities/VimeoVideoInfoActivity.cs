@@ -1,6 +1,6 @@
 ﻿#region file_header
 
-// QuickVideoInfo - YTII.Android.App - StreamableVideoInfoActivity.cs
+// QuickVideoInfo - YTII.Android.App - VimeoVideoInfoActivity.cs
 // 
 // Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements.  
 // See the NOTICE file distributed with this work for additional information regarding copyright ownership.  
@@ -17,6 +17,7 @@
 #endregion
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -31,29 +32,29 @@ using Exception = Java.Lang.Exception;
 namespace YTII.Droid.App.Activities
 {
     [Activity(Label = "Quick Video Info", Theme = "@style/TranslucentActivity", MainLauncher = false, Icon = "@drawable/icon")]
-    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "*.streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "*.streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    public class StreamableVideoInfoActivity : BaseVideoInfoActivity<StreamableVideoModel>
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "*.vimeo.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "vimeo.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "vimeo.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "*.vimeo.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
+    public class VimeoVideoInfoActivity : BaseVideoInfoActivity<VimeoVideoModel>
     {
-        StreamableVideoModel vid;
+        VimeoVideoModel vid;
 
         /// <summary>
         ///     The name of the activity. Used for identifying it in log messages
         /// </summary>
-        protected override string ActivityName => nameof(StreamableVideoInfoActivity);
+        protected override string ActivityName => nameof(VimeoVideoInfoActivity);
 
         /// <summary>
         ///     This is a prefix used to distinguish the origin source of thumbnails (e.g., YT[videoID] for YouTube, ST[videoID]
         ///     for Streamable.com)
         /// </summary>
-        protected override string TypePrefix => "ST";
+        protected override string TypePrefix => "V";
 
         /// <summary>
         ///     The <see cref="Caches.VideoModelCache{T}" /> where the results of recently previewed video models are stored
         /// </summary>
-        protected override VideoModelCache<StreamableVideoModel> ModelCache => retainedFragment.StreamableVideoCache;
+        protected override VideoModelCache<VimeoVideoModel> ModelCache => retainedFragment.VimeoVideoCache;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -61,8 +62,10 @@ namespace YTII.Droid.App.Activities
 
             Log.Debug("YTII.StreamableIntentUrl", Intent.DataString);
             Log.Debug("YTII.StreamableIntentUrl", GetVideoIdFromIntentDataString(Intent.DataString));
-            // FIRST NEED TO CONFIRM THIS IS A STREAMABLE.COM VIDEO URL; ALL OTHERS REDIRECT TO BROWSER
-            if (GetVideoIdFromIntentDataString(Intent.DataString).Length > 5)
+
+            int videoId;
+            // FIRST NEED TO CONFIRM THIS IS A VIMEO.COM VIDEO URL; ALL OTHERS REDIRECT TO BROWSER
+            if (!int.TryParse(GetVideoIdFromIntentDataString(Intent.DataString), out videoId))
             {
                 SendUrlToBrowser(Intent.DataString);
                 FinishAfterTransition();
@@ -82,8 +85,9 @@ namespace YTII.Droid.App.Activities
         protected override async Task LoadVideo()
         {
             var sourceText = FindViewById<TextView>(Resource.Id.sourceText);
-            sourceText.Text = @"streamable.com";
+            sourceText.Text = @"Vimeo.com";
 
+            SetYouTubeAuthItems();
 
             try
             {
@@ -92,7 +96,7 @@ namespace YTII.Droid.App.Activities
                 if (ModelCache.IsCached(videoId))
                     vid = ModelCache.GetItem(videoId);
                 else
-                    vid = await VideoInfoRequestor.GetStreamableVideoModel(videoId).ConfigureAwait(true);
+                    vid = await VideoInfoRequestor.GetVimeoVideoModel(videoId).ConfigureAwait(true);
 
                 if (vid != null)
                 {
@@ -118,7 +122,7 @@ namespace YTII.Droid.App.Activities
         ///     Populates the activity controls with the details from the supplied <see cref="IVideoModel" />
         /// </summary>
         /// <param name="video">The <see cref="IVideoModel" /> to load the details into the layout for</param>
-        protected override void LoadVideoDetails(StreamableVideoModel video)
+        protected override void LoadVideoDetails(VimeoVideoModel video)
         {
             try
             {
@@ -142,13 +146,25 @@ namespace YTII.Droid.App.Activities
         }
 
         /// <summary>
+        ///     Attaches the App's thumbprint/signature for API authorization purposes
+        /// </summary>
+        protected void SetYouTubeAuthItems()
+        {
+            if (string.IsNullOrEmpty(VideoInfoRequestor.Thumbprint))
+                VideoInfoRequestor.Thumbprint = SignatureVerification.GetSignature(PackageManager, PackageName);
+
+            VideoInfoRequestor.PackageName = PackageName;
+        }
+
+
+        /// <summary>
         ///     Processes the intent data string (URL) and returns the video ID
         /// </summary>
         /// <param name="intentDataString">The <see cref="P:Android.Content.Intent.DataString" /> passed to the activity.</param>
         /// <returns>The Video ID used to identify the item to request information from the API for</returns>
         protected override string GetVideoIdFromIntentDataString(string intentDataString)
         {
-            return intentDataString.Substring(intentDataString.LastIndexOf(".com/") + 5).TrimEnd('/');
+            return intentDataString.Substring(intentDataString.LastIndexOf(".com/", StringComparison.InvariantCulture) + 5).TrimEnd('/');
         }
 
         /// <summary>
@@ -160,9 +176,17 @@ namespace YTII.Droid.App.Activities
         /// </remarks>
         /// <param name="vid">The <see cref="IVideoModel" /> whose thumbnail URL is desired</param>
         /// <returns>A URL of the thumbnail to load</returns>
-        protected override string GetThumbnailUrl(ref StreamableVideoModel vid)
+        protected override string GetThumbnailUrl(ref VimeoVideoModel vid)
         {
-            return vid.DefaultThumbnailUrl;
+            var matchLink = string.Empty;
+
+            if (UserSettings.ThumbnailQuality == 0) // Max Thumbnail Quality
+                matchLink = vid.Thumbnails.Sizes.OrderByDescending(p => p.Width).FirstOrDefault()?.Link;
+
+            else if (UserSettings.ThumbnailQuality == 4) // Lowest Thumbnail Quality
+                matchLink = vid.Thumbnails.Sizes.OrderBy(p => p.Width).FirstOrDefault()?.Link;
+
+            return string.IsNullOrEmpty(matchLink) ? vid.DefaultThumbnailUrl : matchLink;
         }
 
         /// <summary>

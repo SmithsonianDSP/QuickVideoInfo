@@ -1,16 +1,36 @@
-﻿using System;
+﻿#region file_header
+
+// QuickVideoInfo - YTII.Android.App - UserPreferencesActivity.cs
+// 
+// Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements.  
+// See the NOTICE file distributed with this work for additional information regarding copyright ownership.  
+// The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use 
+// this file except in compliance with the License.  You may obtain a copy of the License at
+// 
+//   http://www.apache.org/licenses/LICENSE-2.0
+//  
+// Unless required by applicable law or agreed to in writing, software distributed under the License is 
+// distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
+// or implied.  See the License for the specific language governing permissions and limitations under the License.
+//  
+
+#endregion
+
+using System;
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
-using Android.Content.PM;
 
 namespace YTII.Droid.App.Activities
 {
     [Activity(Label = ActivityName, Theme = "@style/SettingsTheme", MainLauncher = false)]
     public class UserPreferencesActivity : Activity
     {
-        const string ActivityName = "Quick Video Info Settings";
+        const string ActivityName = @"Quick Video Info Settings";
+
+        static readonly string[] thumbnailOptionText = { "Max. Res.", "High (default)", "Standard", "Medium", "Lowest" };
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -21,8 +41,6 @@ namespace YTII.Droid.App.Activities
             LoadUserSettings();
         }
 
-        static readonly string[] thumbnailOptionText = new[] { "Max. Res.", "High (default)", "Standard", "Medium", "Lowest" };
-
         protected void LoadUserSettings()
         {
             var iconToggle = FindViewById<Switch>(Resource.Id.toggleLauncherIcon);
@@ -32,7 +50,7 @@ namespace YTII.Droid.App.Activities
             thumbnailButton.Text = thumbnailOptionText[UserSettings.ThumbnailQuality];
         }
 
-        private void SetEventHandlers()
+        void SetEventHandlers()
         {
             var thumbnailQualityButton = FindViewById<Button>(Resource.Id.thumbnailQualityButton);
             thumbnailQualityButton.Click += ThumbnailQualityButton_Click;
@@ -41,7 +59,7 @@ namespace YTII.Droid.App.Activities
             iconToggle.CheckedChange += IconToggle_CheckedChange;
         }
 
-        private void ThumbnailQualityButton_Click(object sender, EventArgs e)
+        void ThumbnailQualityButton_Click(object sender, EventArgs e)
         {
             var thumbnailQualityButton = FindViewById<Button>(Resource.Id.thumbnailQualityButton);
             var menu = new PopupMenu(this, thumbnailQualityButton);
@@ -53,9 +71,9 @@ namespace YTII.Droid.App.Activities
             menu.Show();
         }
 
-        private void Menu_MenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
+        void Menu_MenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
         {
-            int i = 1;
+            var i = 1;
 
             switch (e.Item.ItemId)
             {
@@ -81,7 +99,7 @@ namespace YTII.Droid.App.Activities
             thumbnailButton.Text = thumbnailOptionText[i];
         }
 
-        private void IconToggle_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        void IconToggle_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
             if (e.IsChecked)
                 EnableLauncherIcon();
@@ -96,12 +114,11 @@ namespace YTII.Droid.App.Activities
             var componentToDisable = new ComponentName(Constants.PackageName, LauncherActivity.FullActivityName);
             PackageManager.SetComponentEnabledSetting(componentToDisable, ComponentEnabledState.Disabled, ComponentEnableOption.DontKillApp);
         }
+
         protected void EnableLauncherIcon()
         {
             var componentToEnable = new ComponentName(Constants.PackageName, LauncherActivity.FullActivityName);
             PackageManager.SetComponentEnabledSetting(componentToEnable, ComponentEnabledState.Enabled, ComponentEnableOption.DontKillApp);
         }
-
-
     }
 }

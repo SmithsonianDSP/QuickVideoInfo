@@ -1,27 +1,44 @@
-﻿using System;
+﻿#region file_header
+
+// QuickVideoInfo - YTII.Android.App - VideoModelCache.cs
+// 
+// Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements.  
+// See the NOTICE file distributed with this work for additional information regarding copyright ownership.  
+// The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use 
+// this file except in compliance with the License.  You may obtain a copy of the License at
+// 
+//   http://www.apache.org/licenses/LICENSE-2.0
+//  
+// Unless required by applicable law or agreed to in writing, software distributed under the License is 
+// distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
+// or implied.  See the License for the specific language governing permissions and limitations under the License.
+//  
+
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using YTII.ModelFactory.Models;
 using Android.Util;
+using YTII.ModelFactory.Models;
 
 namespace YTII.Droid.App.Caches
 {
     public class VideoModelCache<T> : IVideoModelCache<T>
         where T : IVideoModel
     {
-        static private Dictionary<string, T> _list = new Dictionary<string, T>();
+        const int MaxItems = 20;
 
-        static private Queue<string> _idOrderQueue = new Queue<string>(20);
+        static readonly Dictionary<string, T> CachedList = new Dictionary<string, T>();
 
-        private const int MaxItems = 20;
+        static readonly Queue<string> IdOrderQueue = new Queue<string>(20);
 
-        internal int ItemCount { get => _list.Count; }
 
-        private static int _cacheHits = 0;
-        internal int CacheHits { get => _cacheHits; private set => _cacheHits = value; }
+        internal int ItemCount => CachedList.Count;
 
-        private static int _cacheMisses = 0;
-        internal int CacheMisses { get => _cacheMisses; private set => _cacheMisses = value; }
+        internal int CacheHits { get; private set; }
+
+        internal int CacheMisses { get; private set; }
 
 
         public void Add(T item)
@@ -32,21 +49,21 @@ namespace YTII.Droid.App.Caches
                 return;
             }
 
-            if (_list.Count >= MaxItems)
-                _list.Remove(_idOrderQueue.Dequeue());
+            if (CachedList.Count >= MaxItems)
+                CachedList.Remove(IdOrderQueue.Dequeue());
 
-            if (!_idOrderQueue.Contains(item.VideoId))
-                _idOrderQueue.Enqueue(item.VideoId);
+            if (!IdOrderQueue.Contains(item.VideoId))
+                IdOrderQueue.Enqueue(item.VideoId);
 
-            if (!_list.ContainsKey(item.VideoId))
-                _list.Add(item.VideoId, item);
+            if (!CachedList.ContainsKey(item.VideoId))
+                CachedList.Add(item.VideoId, item);
 
             Log.Info($"YTII.{nameof(VideoModelCache<T>)}.{nameof(Add)}", $"Cache Item Added");
         }
 
         public bool IsCached(string videoId)
         {
-            var isCached = _list.ContainsKey(videoId);
+            var isCached = CachedList.ContainsKey(videoId);
 
             if (isCached)
                 CacheHits++;
@@ -58,18 +75,18 @@ namespace YTII.Droid.App.Caches
 
         public T GetItem(string videoId)
         {
-            if (!_list.ContainsKey(videoId))
+            if (!CachedList.ContainsKey(videoId))
                 return default(T);
 
             try
             {
-                var tempQueue = _idOrderQueue.Where(i => i != videoId).Reverse().ToList();
-                _idOrderQueue.Clear();
+                var tempQueue = IdOrderQueue.Where(i => i != videoId).Reverse().ToList();
+                IdOrderQueue.Clear();
 
                 foreach (var i in tempQueue)
-                    _idOrderQueue.Enqueue(i);
+                    IdOrderQueue.Enqueue(i);
 
-                _idOrderQueue.Enqueue(videoId);
+                IdOrderQueue.Enqueue(videoId);
             }
             catch (Exception ex)
             {
@@ -77,9 +94,7 @@ namespace YTII.Droid.App.Caches
             }
 
             Log.Info($"YTII.{nameof(VideoModelCache<T>)}.{nameof(GetItem)}", $"Found Cached Video Item");
-            return _list[videoId];
+            return CachedList[videoId];
         }
-
-
     }
 }

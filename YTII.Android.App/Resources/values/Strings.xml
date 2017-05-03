@@ -7,5 +7,10 @@
   <string name="SwitchNote">Note: After changing this setting, the effects may not appear until after rebooting or restarting the device\'s Launcher.</string>
 
   <string name="ReEnableLauncherInstructions">To re-enable the launcher icon, you can return to this screen by pressing the info circle button in the upper right corner of the preview window.</string>
+
+  <string name="creditsLine1">
+    <b>talklittle</b>: For the invaluable advice, suggestions, and feedback he\'s given me throughout the development process, as well as being the one who encouraged me to create this app after I had initially pitched him the idea.
+    And also for developing what\'s easily one of the best Android reddit apps, reddit is fun!
+  </string>
   
 </resources>

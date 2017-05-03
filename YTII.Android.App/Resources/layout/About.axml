@@ -75,7 +75,7 @@
             android:text="Credits"
             android:id="@+id/CreditsButton"
             android:enabled="true"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:textStyle="normal"
             android:typeface="normal"
             style="@style/SettingsButton" />

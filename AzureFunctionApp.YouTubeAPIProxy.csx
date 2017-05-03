@@ -20,6 +20,10 @@
  * 
  * I didn't put a lot of time into adding code comments/documentations, but it should be fairly straightforward.
  * 
+ * NOTE: This is currently out of sync with the actual Azure Function Apps currently running, as I decided to take
+ * a different approach that would allow for easier expansion for other services (e.g., Vimeo). 
+ * I will likely publish this other part as a seperate repository. 
+ * 
  */
 
 
