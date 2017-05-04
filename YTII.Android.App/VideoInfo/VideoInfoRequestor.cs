@@ -2,9 +2,7 @@
 
 // QuickVideoInfo - YTII.Android.App - VideoInfoRequestor.cs
 // 
-// Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements.  
-// See the NOTICE file distributed with this work for additional information regarding copyright ownership.  
-// The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use 
+// This file is licensed to you under the Apache License, Version 2.0 (the "License"); you may not use 
 // this file except in compliance with the License.  You may obtain a copy of the License at
 // 
 //   http://www.apache.org/licenses/LICENSE-2.0
@@ -37,12 +35,17 @@ namespace YTII.Droid.App
          * The actual values have not been included in the reposity for security purposes.
          * 
          * /// <summary>
-         * /// This is the byte-encoded YouTube proxy URL
+         * /// This is the byte-encoded YouTube proxy function URL
          * /// </summary>
-         * private readonly static byte[] aurl = new byte[];
+         * private readonly static byte[] youtubeVideo_aurl = new byte[];
          * 
          * /// <summary>
-         * /// This is the byte-encoded Vimeo proxy URL
+         * /// This is the byte-encoded YouTube Playlist proxy function URL
+         * /// </summary>
+         * private readonly static byte[] youtubePlaylist_aurl = new byte[];
+         * 
+         * /// <summary>
+         * /// This is the byte-encoded Vimeo proxy function URL
          * /// </summary>
          * private readonly static byte[] vimeo_aurl = new byte[];
          * 
@@ -75,7 +78,12 @@ namespace YTII.Droid.App
         /// <summary>
         ///     The URL For the YouTube Video Proxy Function
         /// </summary>
-        static string YouTube_FUrl => Encoding.ASCII.GetString(aurl);
+        static string YouTube_FUrl => Encoding.ASCII.GetString(youtubeVideo_aurl);
+
+        /// <summary>
+        ///     The URL For the YouTube Playlist Proxy Function
+        /// </summary>
+        static string YouTube_Playlist_FUrl => Encoding.ASCII.GetString(youtubePlaylist_aurl);
 
         /// <summary>
         ///     The URL for the Vimeo Proxy Function
@@ -101,7 +109,7 @@ namespace YTII.Droid.App
         /// </returns>
         internal static async Task<YouTubeVideoModel> GetYouTubeVideoModel(string videoID)
         {
-            var requestString = string.Format(YouTube_FUrl, FKey, videoID, Thumbprint);
+            var requestString = string.Format(YouTube_FUrl, videoID, FKey, Thumbprint);
 
             var httpClient = GetHttpClient();
 
@@ -112,6 +120,32 @@ namespace YTII.Droid.App
             return YouTubeVideoFactory.GetModelFromJson(json);
         }
 
+        /// <summary>
+        ///     Returns a <see cref="GetYouTubePlaylistModel" /> for the supplied <paramref name="playlistId" />
+        /// </summary>
+        /// <param name="playlistId">The unique YouTube playlist ID</param>
+        /// <returns>
+        ///     A <see cref="YouTubePlaylistModel" /> representing the playlist for the associated <paramref name="playlistId" />
+        /// </returns>
+        internal static async Task<YouTubePlaylistModel> GetYouTubePlaylistModel(string playlistId)
+        {
+            var requestString = string.Format(YouTube_Playlist_FUrl, playlistId, FKey, Thumbprint);
+
+            var httpClient = GetHttpClient();
+
+            var webResponse = await httpClient.GetAsync(requestString);
+            var json = await webResponse.Content.ReadAsStringAsync();
+
+            return YouTubeVideoFactory.GetPlaylistModelFromJson(json);
+        }
+
+        /// <summary>
+        ///     Returns the <see cref="StreamableVideoModel" /> for the supplied <paramref name="videoID" />
+        /// </summary>
+        /// <param name="videoID">The unique Streamable video ID</param>
+        /// <returns>
+        ///     A <see cref="StreamableVideoModel" /> representing the video for the associated <paramref name="videoID" />
+        /// </returns>
         internal static async Task<StreamableVideoModel> GetStreamableVideoModel(string videoID)
         {
             try

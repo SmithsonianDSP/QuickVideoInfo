@@ -7,6 +7,11 @@
 		<activity android:name=".YouTubeVideoInfoActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" />
 		<activity android:name=".StreamableVideoInfoActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" />
 		<activity android:name=".VimeoVideoInfoActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" />
+	  <activity android:name=".BasePlaylistActivity"
+	            android:excludeFromRecents="true"
+	            android:autoRemoveFromRecents="true"
+	            android:configChanges="orientation|screenSize"
+	            android:theme="@style/TranslucentActivity" />
 		<activity android:name=".UserPreferencesActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" theme="@style/SettingsTheme">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

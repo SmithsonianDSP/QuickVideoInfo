@@ -60,6 +60,7 @@
     <Compile Include="Models\IVideoModel.cs" />
     <Compile Include="Models\StreamableVideoModel.cs" />
     <Compile Include="Models\VimeoVideoModel.cs" />
+    <Compile Include="Models\YouTubePlaylistModel.cs" />
     <Compile Include="Models\YouTubeVideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VideoModelExtensions.cs" />

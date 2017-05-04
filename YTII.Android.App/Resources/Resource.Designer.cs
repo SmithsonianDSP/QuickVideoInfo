@@ -2413,6 +2413,9 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f07007f
 			public const int closeButton = 2131165311;
 			
+			// aapt resource value: 0x7f0700c4
+			public const int closePlaylistButton = 2131165380;
+			
 			// aapt resource value: 0x7f07001f
 			public const int collapseActionView = 2131165215;
 			
@@ -2461,14 +2464,14 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f0700bf
 			public const int dislikeLabelItem = 2131165375;
 			
-			// aapt resource value: 0x7f0700c4
-			public const int divider1 = 2131165380;
+			// aapt resource value: 0x7f0700c8
+			public const int divider1 = 2131165384;
+			
+			// aapt resource value: 0x7f0700ca
+			public const int divider3 = 2131165386;
 			
 			// aapt resource value: 0x7f0700c6
-			public const int divider3 = 2131165382;
-			
-			// aapt resource value: 0x7f0700c2
-			public const int divider4 = 2131165378;
+			public const int divider4 = 2131165382;
 			
 			// aapt resource value: 0x7f07005c
 			public const int edit_query = 2131165276;
@@ -2575,8 +2578,8 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070041
 			public const int list_item = 2131165249;
 			
-			// aapt resource value: 0x7f0700c1
-			public const int lvExp = 2131165377;
+			// aapt resource value: 0x7f0700c2
+			public const int lvExp = 2131165378;
 			
 			// aapt resource value: 0x7f070075
 			public const int mainLayout1 = 2131165301;
@@ -2686,6 +2689,9 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f07000c
 			public const int normal = 2131165196;
 			
+			// aapt resource value: 0x7f0700c5
+			public const int openPlaylistButton = 2131165381;
+			
 			// aapt resource value: 0x7f070028
 			public const int parallax = 2131165224;
 			
@@ -2695,11 +2701,17 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070029
 			public const int pin = 2131165225;
 			
+			// aapt resource value: 0x7f0700c3
+			public const int playlistButtonsGrid = 2131165379;
+			
 			// aapt resource value: 0x7f0700b2
 			public const int playlistHeader_Duration = 2131165362;
 			
 			// aapt resource value: 0x7f0700b1
 			public const int playlistHeader_Title = 2131165361;
+			
+			// aapt resource value: 0x7f0700c1
+			public const int playlistTitle = 2131165377;
 			
 			// aapt resource value: 0x7f07007b
 			public const int progressSpinner = 2131165307;
@@ -2845,23 +2857,23 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070078
 			public const int textView1 = 2131165304;
 			
-			// aapt resource value: 0x7f0700c3
-			public const int thumbnailQualityButton = 2131165379;
+			// aapt resource value: 0x7f0700c7
+			public const int thumbnailQualityButton = 2131165383;
 			
-			// aapt resource value: 0x7f0700c8
-			public const int thumbnail_high = 2131165384;
+			// aapt resource value: 0x7f0700cc
+			public const int thumbnail_high = 2131165388;
+			
+			// aapt resource value: 0x7f0700cf
+			public const int thumbnail_lowest = 2131165391;
 			
 			// aapt resource value: 0x7f0700cb
-			public const int thumbnail_lowest = 2131165387;
+			public const int thumbnail_max = 2131165387;
 			
-			// aapt resource value: 0x7f0700c7
-			public const int thumbnail_max = 2131165383;
+			// aapt resource value: 0x7f0700cd
+			public const int thumbnail_medium = 2131165389;
 			
-			// aapt resource value: 0x7f0700c9
-			public const int thumbnail_medium = 2131165385;
-			
-			// aapt resource value: 0x7f0700ca
-			public const int thumbnail_standard = 2131165386;
+			// aapt resource value: 0x7f0700ce
+			public const int thumbnail_standard = 2131165390;
 			
 			// aapt resource value: 0x7f0700aa
 			public const int time = 2131165354;
@@ -2872,8 +2884,8 @@ namespace YTII.Droid.App
 			// aapt resource value: 0x7f070048
 			public const int title_template = 2131165256;
 			
-			// aapt resource value: 0x7f0700c5
-			public const int toggleLauncherIcon = 2131165381;
+			// aapt resource value: 0x7f0700c9
+			public const int toggleLauncherIcon = 2131165385;
 			
 			// aapt resource value: 0x7f070032
 			public const int top = 2131165234;
@@ -3173,22 +3185,19 @@ namespace YTII.Droid.App
 			public const int playlist_portrait = 2130903097;
 			
 			// aapt resource value: 0x7f03003a
-			public const int playlist_videodetails_item = 2130903098;
+			public const int select_dialog_item_material = 2130903098;
 			
 			// aapt resource value: 0x7f03003b
-			public const int select_dialog_item_material = 2130903099;
+			public const int select_dialog_multichoice_material = 2130903099;
 			
 			// aapt resource value: 0x7f03003c
-			public const int select_dialog_multichoice_material = 2130903100;
+			public const int select_dialog_singlechoice_material = 2130903100;
 			
 			// aapt resource value: 0x7f03003d
-			public const int select_dialog_singlechoice_material = 2130903101;
+			public const int Settings = 2130903101;
 			
 			// aapt resource value: 0x7f03003e
-			public const int Settings = 2130903102;
-			
-			// aapt resource value: 0x7f03003f
-			public const int support_simple_spinner_dropdown_item = 2130903103;
+			public const int support_simple_spinner_dropdown_item = 2130903102;
 			
 			static Layout()
 			{

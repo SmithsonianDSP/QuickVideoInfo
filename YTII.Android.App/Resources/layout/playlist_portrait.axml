@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/theme_custom_background"
+    android:animateLayoutChanges="false"
+    android:theme="@style/TranslucentActivity">
+    <TextView
+        android:id="@+id/playlistTitle"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+      android:textStyle="bold"
+      android:textAlignment="center"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:textSize="24dp"
+      android:layout_marginTop="5dp"
+      android:layout_marginBottom="5dp"
+        android:text="Loading Playlist..." />
+    <ExpandableListView
+        android:id="@+id/lvExp"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/playlistButtonsGrid"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:alignmentMode="alignBounds"
+        android:columnOrderPreserved="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0.0dp"
+        android:elevation="50px"
+        android:layout_marginRight="5sp"
+        android:layout_marginLeft="5sp"
+        android:background="#99000000">
+        <Button
+            android:text="Close Window"
+            android:id="@+id/closePlaylistButton"
+            android:textStyle="normal"
+            android:typeface="sans"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_marginLeft="15px"
+            style="@style/SettingsButton"
+            android:layout_gravity="fill_horizontal"
+            android:layout_column="0"
+            android:layout_columnWeight="0.5"
+            android:alpha="1" />
+        <Button
+            android:text="Open Playlist"
+            android:id="@+id/openPlaylistButton"
+            android:textStyle="normal"
+            android:typeface="sans"
+            android:textAllCaps="false"
+            android:enabled="true"
+            android:layout_width="0dp"
+            android:layout_marginRight="15px"
+            style="@style/SettingsButton"
+            android:layout_gravity="fill_horizontal"
+            android:layout_column="1"
+            android:layout_columnWeight="0.5"
+            android:alpha="1" />
+    </GridLayout>
+</LinearLayout>
