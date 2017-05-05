@@ -59,5 +59,9 @@ namespace YTII.ModelFactory
             }
             return videoDurationString;
         }
+
+        const string CantLoadThumbnailBaseUrl = @"Jn2grYW";
+
+        public static string CantLoadThumbnailImageUrl { get; } = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png";
     }
 }

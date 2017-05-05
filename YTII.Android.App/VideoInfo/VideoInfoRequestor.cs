@@ -109,7 +109,7 @@ namespace YTII.Droid.App
         /// </returns>
         internal static async Task<YouTubeVideoModel> GetYouTubeVideoModel(string videoID)
         {
-            var requestString = string.Format(YouTube_FUrl, videoID, FKey, Thumbprint);
+            var requestString = string.Format(YouTube_FUrl, videoID, FKey, Thumbprint) + "&guid=" + UserSettings.UserGuid;
 
             var httpClient = GetHttpClient();
 
@@ -129,7 +129,7 @@ namespace YTII.Droid.App
         /// </returns>
         internal static async Task<YouTubePlaylistModel> GetYouTubePlaylistModel(string playlistId)
         {
-            var requestString = string.Format(YouTube_Playlist_FUrl, playlistId, FKey, Thumbprint);
+            var requestString = string.Format(YouTube_Playlist_FUrl, playlistId, FKey, Thumbprint) + "&guid=" + UserSettings.UserGuid;
 
             var httpClient = GetHttpClient();
 
@@ -183,7 +183,7 @@ namespace YTII.Droid.App
         /// </returns>
         internal static async Task<VimeoVideoModel> GetVimeoVideoModel(string videoId)
         {
-            var requestString = string.Format(Vimeo_FUrl, videoId, FKey, Thumbprint);
+            var requestString = string.Format(Vimeo_FUrl, videoId, FKey, Thumbprint) + "&guid=" + UserSettings.UserGuid;
 
             var httpClient = GetHttpClient();
 

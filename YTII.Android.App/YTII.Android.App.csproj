@@ -24,14 +24,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <BundleAssemblies>False</BundleAssemblies>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
     <Debugger>.Net (Xamarin)</Debugger>
@@ -43,7 +43,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
-    <DebugSymbols>False</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE;RELEASE</DefineConstants>
@@ -201,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\AboutActivity.cs" />
+    <Compile Include="Activities\CreditsActivity.cs" />
     <Compile Include="Activities\VideoInfoActivities\BasePlaylistActivity.cs" />
     <Compile Include="Activities\VideoInfoActivities\BaseVideoInfoActivity.cs" />
     <Compile Include="Activities\LauncherActivity.cs" />
@@ -211,7 +212,6 @@
     <Compile Include="Adaptors\PlaylistExpandableListAdaptor.cs" />
     <Compile Include="Caches\IVideoModelCache.cs" />
     <Compile Include="Caches\VideoModelCache.cs" />
-    <Compile Include="Fragments\ListVideoPreviewFragment.cs" />
     <Compile Include="Transforms\TrimBitmapHeightTransform.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

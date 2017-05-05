@@ -13,6 +13,7 @@
 **Currently Supported Video Providers:**  
 * [YouTube](http://www.youtube.com) (individual videos)
 * [Streamable](http://streamable.com)
+* [Vimeo](http://www.vimeo.com)
 
  
 

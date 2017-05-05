@@ -50,6 +50,8 @@ namespace YTII.Droid.App.Activities
 
         protected override async void OnPostCreate(Bundle savedInstanceState)
         {
+            base.OnPostCreate(savedInstanceState);
+
             await LoadVideoItems();
 
             _listAdapter = new PlaylistExpandableListAdaptor(BaseContext, _videosList) { ImgMaxHeight = ImgHeight };

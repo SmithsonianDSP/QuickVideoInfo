@@ -24,29 +24,40 @@ namespace YTII.ModelFactory.Factories
 {
     public static class VimeoVideoFactory
     {
-        const string CantLoadThumbnailBaseUrl = @"Jn2grYW";
-
         public static VimeoVideoModel GetVimeoVideoModelFromJson(string json)
         {
             try
             {
+                if (json == "\"Not Found\"")
+                    return GetErrorLoadingVideoModel("Video Not Found");
+
                 return JsonConvert.DeserializeObject<VimeoVideoModel>(json);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return GetErrorLoadingVideoModel();
+                return GetErrorLoadingVideoModel(ex.Message);
             }
         }
 
 
-        public static VimeoVideoModel GetErrorLoadingVideoModel()
+        public static VimeoVideoModel GetErrorLoadingVideoModel(string errorMessage = "There was a problem loading video info")
         {
             return new VimeoVideoModel
             {
-                Title = "There was a problem loading video info",
-                Description = "There was a problem loading video info",
-                Thumbnails = { Active = true, Sizes = new List<VimeoVideoModel.Pictures.Size> { new VimeoVideoModel.Pictures.Size { Link = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png" } } },
+                Title = errorMessage,
+                Description = errorMessage,
+                Thumbnails = new VimeoVideoModel.Pictures
+                {
+                    Active = true,
+                    Sizes = new List<VimeoVideoModel.Pictures.Size>
+                                        {
+                                            new VimeoVideoModel.Pictures.Size
+                                            {
+                                                Link = VideoModelExtensions.CantLoadThumbnailImageUrl
+                                            }
+                                        }
+                },
                 VideoStats = new VimeoVideoModel.Stats { Plays = 0 },
                 CreatedTime = DateTime.Today,
                 IsErrorModel = true

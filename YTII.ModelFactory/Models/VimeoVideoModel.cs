@@ -18,9 +18,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using YTII.ModelFactory.Properties;
 
 namespace YTII.ModelFactory.Models
 {
+    [Preserve(AllMembers = true)]
     public class VimeoVideoModel : IVideoModel
     {
         [JsonProperty("uri")]
@@ -66,7 +68,13 @@ namespace YTII.ModelFactory.Models
         [JsonIgnore]
         public string VideoId
         {
-            get => VideoFullUrl.Substring(VideoFullUrl.LastIndexOf(".com/", StringComparison.OrdinalIgnoreCase) + 5).TrimEnd('/');
+            get
+            {
+                if (IsErrorModel || string.IsNullOrEmpty(VideoFullUrl))
+                    return "-1";
+
+                return VideoFullUrl.Substring(VideoFullUrl.LastIndexOf(".com/", StringComparison.OrdinalIgnoreCase) + 5).TrimEnd('/');
+            }
             set { }
         }
 
@@ -75,14 +83,21 @@ namespace YTII.ModelFactory.Models
         {
             get
             {
-                return Thumbnails.Sizes.OrderBy(p => p.Width)
-                                 .SkipWhile((p, i) => i < Thumbnails.Sizes.Count / 2)
-                                 .FirstOrDefault()
-                                 ?
-                                 .Link ?? Thumbnails.Sizes.FirstOrDefault()?.Link;
+                var thumb = Thumbnails?.Sizes?
+                                       .Where(t => !string.IsNullOrEmpty(t.Link))
+                                       .OrderBy(p => p.Width)
+                                       .ToArray();
+
+                // Skip While index < max index && index <= midpoint index
+                var t1 = thumb?.SkipWhile((p, i) => (i < (thumb.Length - 1)) && i <= (thumb.Length / 2)).FirstOrDefault();
+                var t2 = thumb?.FirstOrDefault();
+                return t1?.Link ?? t2?.Link ?? FallbackThumbnailUrl;
             }
             set { }
         }
+
+        const string FallbackThumbnailUrl = @"http://i.imgur.com/WsK3BA8.png";
+
 
         [JsonIgnore]
         public TimeSpan? VideoDuration
@@ -92,30 +107,9 @@ namespace YTII.ModelFactory.Models
         }
 
         [JsonIgnore]
-        public string VideoDurationString
-        {
-            get
-            {
-                var videoDurationString = (VideoDuration ?? TimeSpan.FromMinutes(0)).ToString().TrimStart('0', ':');
-                switch (videoDurationString.Length)
-                {
-                    case 0:
-                        videoDurationString = "0:00";
-                        break;
-                    case 1:
-                        videoDurationString = "0:0" + videoDurationString;
-                        break;
-                    case 2:
-                        videoDurationString = "0:" + videoDurationString;
-                        break;
-                    case 3:
-                        videoDurationString = "0" + videoDurationString;
-                        break;
-                }
-                return videoDurationString;
-            }
-        }
+        public string VideoDurationString => VideoDuration.PrettyTimeSpanString();
 
+        [Preserve(AllMembers = true)]
         public class Pictures
         {
             [JsonProperty("uri")]
@@ -133,6 +127,7 @@ namespace YTII.ModelFactory.Models
             [JsonProperty("resource_key")]
             public string ResourceKey { get; set; }
 
+            [Preserve(AllMembers = true)]
             public class Size
             {
                 [JsonProperty("width")]
@@ -149,6 +144,7 @@ namespace YTII.ModelFactory.Models
             }
         }
 
+        [Preserve(AllMembers = true)]
         public class Stats
         {
             [JsonProperty("plays")]

@@ -19,12 +19,12 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using YTII.ModelFactory.Models;
+using YTII.ModelFactory;
 
 namespace YTII.ModelFactory.Factories
 {
     public static class YouTubeVideoFactory
     {
-        static readonly string CantLoadThumbnailBaseUrl = @"Jn2grYW";
 
         public static YouTubePlaylistModel GetPlaylistModelFromJson(string jsonPayload)
         {
@@ -111,11 +111,11 @@ namespace YTII.ModelFactory.Factories
                 Description = "This video is no longer available",
                 PublishedAt = DateTime.Today,
 
-                MaxResThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
-                StandardThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
-                HighThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
-                MediumThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
-                DefaultThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
+                MaxResThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
+                StandardThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
+                HighThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
+                MediumThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
+                DefaultThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
 
                 ViewCount = 0,
                 LikeCount = 0,
@@ -127,20 +127,20 @@ namespace YTII.ModelFactory.Factories
             };
         }
 
-        public static YouTubeVideoModel GetErrorLoadingVideoModel()
+        public static YouTubeVideoModel GetErrorLoadingVideoModel(string errorMessage = "There was a problem loading video info")
         {
             return new YouTubeVideoModel
             {
                 VideoId = "-1",
-                Title = "There was a problem loading video info",
-                Description = "There was a problem loading video info",
+                Title = errorMessage,
+                Description = errorMessage,
                 PublishedAt = DateTime.Today,
 
-                MaxResThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
-                StandardThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
-                HighThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
-                MediumThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
-                DefaultThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
+                MaxResThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
+                StandardThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
+                HighThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
+                MediumThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
+                DefaultThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
 
                 ViewCount = 0,
                 LikeCount = 0,

@@ -18,6 +18,7 @@
 
 using System.Reflection;
 using System.Resources;
+using YTII.ModelFactory.Properties;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -32,6 +33,8 @@ using System.Resources;
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
 
+
+[assembly: Preserve(AllMembers = true)]
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version

@@ -23,8 +23,6 @@ namespace YTII.ModelFactory.Factories
 {
     public static class StreamableVideoFactory
     {
-        static readonly string CantLoadThumbnailBaseUrl = @"Jn2grYW";
-
         public static StreamableVideoModel GetModelFromJson(string payload)
         {
             try
@@ -49,13 +47,13 @@ namespace YTII.ModelFactory.Factories
             }
         }
 
-        public static StreamableVideoModel GetCannotLoadVideoModel(string videoId = "")
+        public static StreamableVideoModel GetCannotLoadVideoModel(string videoId = "", string errorMessage = "Unable to Load Video")
         {
             return new StreamableVideoModel
             {
                 IsErrorModel = true,
-                Title = "Unable to Load Video",
-                DefaultThumbnailUrl = $"http://i.imgur.com/{CantLoadThumbnailBaseUrl}.png",
+                Title = errorMessage,
+                DefaultThumbnailUrl = VideoModelExtensions.CantLoadThumbnailImageUrl,
                 VideoFullUrl = $"http://www.streamable.com/videos/{videoId}"
             };
         }

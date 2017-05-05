@@ -18,6 +18,7 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using Java.Lang;
 using YTII.Droid.App.Activities;
@@ -49,13 +50,25 @@ namespace YTII.Droid.App
             prefsButton.Click += PrefsButton_Click;
 
             var creditsButton = FindViewById<Button>(Resource.Id.CreditsButton);
+
+#if RELEASE
             creditsButton.Click += CreditsButton_Click;
+#else
+            creditsButton.Click += CreditsButton_Testing;
+#endif
         }
 
         void CreditsButton_Click(object sender, EventArgs e)
         {
-            StartActivityForResult(new Intent(this, typeof(BasePlaylistActivity)), 0);
+            StartActivityForResult(new Intent(this, typeof(CreditsActivity)), 0);
         }
+#if DEBUG
+        void CreditsButton_Testing(object sender, EventArgs e)
+        {
+            StartActivityForResult(new Intent(this, typeof(CreditsActivity)), 0);
+            //StartActivityForResult(new Intent(this, typeof(BasePlaylistActivity)), 0);
+        }
+#endif  
 
         void PrefsButton_Click(object sender, EventArgs e)
         {

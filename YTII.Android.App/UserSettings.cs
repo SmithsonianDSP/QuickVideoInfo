@@ -16,6 +16,7 @@
 
 #endregion
 
+using System;
 using Android.App;
 using Android.Content;
 
@@ -25,6 +26,7 @@ namespace YTII.Droid.App
     {
         const string LauncherIconVisibleSettingKey = @"IsLaunchIconEnabled";
         const string ThumbnailQualitySettingKey = @"ThumbnailQuality";
+        const string UserGuidSettingKey = @"UserGuid";
 
         static ISharedPreferences _preferences;
         internal static ISharedPreferences Preferences => _preferences ?? (_preferences = Application.Context.GetSharedPreferences(Constants.PackageName, FileCreationMode.Private));
@@ -32,6 +34,8 @@ namespace YTII.Droid.App
         internal static bool IsLauncherIconShown => Preferences.GetBoolean(LauncherIconVisibleSettingKey, true);
 
         internal static int ThumbnailQuality => Preferences.GetInt(ThumbnailQualitySettingKey, 1);
+
+        internal static string UserGuid => Preferences.GetString(UserGuidSettingKey, SetAndGetUserGuid());
 
         internal static void SetLauncherIconVisible(bool value)
         {
@@ -46,5 +50,20 @@ namespace YTII.Droid.App
             prefsEdit.PutInt(ThumbnailQualitySettingKey, value);
             prefsEdit.Commit();
         }
+
+        internal static string SetAndGetUserGuid()
+        {
+#if RELEASE
+            var newGuidString = Guid.NewGuid().ToString();
+#else
+            var newGuidString = new Guid().ToString();
+#endif 
+            var prefsEdit = Preferences.Edit();
+            prefsEdit.PutString(UserGuidSettingKey, newGuidString);
+            prefsEdit.Commit();
+
+            return newGuidString;
+        }
+
     }
 }

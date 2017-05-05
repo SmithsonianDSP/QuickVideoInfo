@@ -34,6 +34,8 @@ namespace YTII.Droid.App.Activities
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "vimeo.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "vimeo.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "*.vimeo.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "player.vimeo.com", DataPathPrefix = "video/", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
+    [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "player.vimeo.com", DataPathPrefix = "video/", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     public class VimeoVideoInfoActivity : BaseVideoInfoActivity<VimeoVideoModel>
     {
         VimeoVideoModel vid;
@@ -58,12 +60,12 @@ namespace YTII.Droid.App.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            Log.Debug("YTII.StreamableIntentUrl", Intent.DataString);
-            Log.Debug("YTII.StreamableIntentUrl", GetVideoIdFromIntentDataString(Intent.DataString));
+            Log.Debug("YTII.VimeoIntentUrl", Intent.DataString);
+            Log.Debug("YTII.VimeoIntentUrl", GetVideoIdFromIntentDataString(Intent.DataString));
 
-            int videoId;
+            int videoIdAsInt;
             // FIRST NEED TO CONFIRM THIS IS A VIMEO.COM VIDEO URL; ALL OTHERS REDIRECT TO BROWSER
-            if (!int.TryParse(GetVideoIdFromIntentDataString(Intent.DataString), out videoId))
+            if (!int.TryParse(GetVideoIdFromIntentDataString(Intent.DataString), out videoIdAsInt))
             {
                 SendUrlToBrowser(Intent.DataString);
                 FinishAfterTransition();
@@ -162,7 +164,10 @@ namespace YTII.Droid.App.Activities
         /// <returns>The Video ID used to identify the item to request information from the API for</returns>
         protected override string GetVideoIdFromIntentDataString(string intentDataString)
         {
-            return intentDataString.Substring(intentDataString.LastIndexOf(".com/", StringComparison.InvariantCulture) + 5).TrimEnd('/');
+            if (intentDataString.Contains("/video/"))
+                return intentDataString.Substring(intentDataString.LastIndexOf("video/", StringComparison.InvariantCulture) + 6).TrimEnd('/');
+            else
+                return intentDataString.Substring(intentDataString.LastIndexOf(".com/", StringComparison.InvariantCulture) + 5).TrimEnd('/');
         }
 
         /// <summary>
@@ -176,15 +181,29 @@ namespace YTII.Droid.App.Activities
         /// <returns>A URL of the thumbnail to load</returns>
         protected override string GetThumbnailUrl(ref VimeoVideoModel vid)
         {
-            var matchLink = string.Empty;
+            Log.Debug("Vimeo.GetThumbnail", "Start!");
+            Log.Debug("Vimeo.GetThumbnail", $"Thumbnail Sizes Count: {vid.Thumbnails.Sizes.Count}");
+
+            var thumb = vid.Thumbnails?.Sizes?
+                                       .Where(t => !string.IsNullOrEmpty(t.Link))
+                                       .OrderBy(p => p.Width)
+                                       .ToArray();
+
+            Log.Debug("Vimeo.GetThumbnail", $"thumbs Count: {thumb.Length}");
+
+            // Skip While index < max index && index <= midpoint index
+            var t1 = thumb?.SkipWhile((p, i) => (i < (thumb.Length - 1)) && i <= (thumb.Length / 2)).FirstOrDefault();
+            var t2 = thumb?.FirstOrDefault();
+
+            var matchLink = t1?.Link ?? t2?.Link ?? vid.DefaultThumbnailUrl;
 
             if (UserSettings.ThumbnailQuality == 0) // Max Thumbnail Quality
-                matchLink = vid.Thumbnails.Sizes.OrderByDescending(p => p.Width).FirstOrDefault()?.Link;
+                matchLink = vid.Thumbnails.Sizes.OrderByDescending(p => p.Width).FirstOrDefault()?.Link ?? matchLink;
 
             else if (UserSettings.ThumbnailQuality == 4) // Lowest Thumbnail Quality
-                matchLink = vid.Thumbnails.Sizes.OrderBy(p => p.Width).FirstOrDefault()?.Link;
+                matchLink = vid.Thumbnails.Sizes.OrderBy(p => p.Width).FirstOrDefault()?.Link ?? matchLink;
 
-            return string.IsNullOrEmpty(matchLink) ? vid.DefaultThumbnailUrl : matchLink;
+            return matchLink;
         }
 
         /// <summary>

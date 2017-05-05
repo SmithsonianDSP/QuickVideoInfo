@@ -203,7 +203,7 @@ namespace YTII.Droid.App
 
                     Picasso.With(BaseContext)
                            .Load(thumbnailUrl)
-                           .Tag(this)
+                           .Tag(ActivityName)
                            .NoFade()
                            .Placeholder(imgHost.Drawable)
                            .Error(cantLoadThumbnail)
@@ -221,7 +221,7 @@ namespace YTII.Droid.App
 
                         Picasso.With(BaseContext)
                                .Load(thumbnailUrl)
-                               .Tag(this)
+                               .Tag(ActivityName)
                                .Error(cantLoadThumbnail)
                                .NoFade()
                                .Transform(new TrimBitmapHeightTransform())
