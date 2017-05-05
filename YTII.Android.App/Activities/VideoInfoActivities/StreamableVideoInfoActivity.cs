@@ -146,7 +146,13 @@ namespace YTII.Droid.App.Activities
         /// <returns>The Video ID used to identify the item to request information from the API for</returns>
         protected override string GetVideoIdFromIntentDataString(string intentDataString)
         {
-            return intentDataString.Substring(intentDataString.LastIndexOf(".com/") + 5).TrimEnd('/');
+            if (!intentDataString.Contains("/s/"))
+                return intentDataString.Substring(intentDataString.LastIndexOf(".com/", StringComparison.InvariantCultureIgnoreCase) + 5).TrimEnd('/');
+
+            var startIndex = intentDataString.LastIndexOf("/s/", StringComparison.InvariantCultureIgnoreCase) + 3;
+            var endIndex = intentDataString.TrimEnd('/').LastIndexOf("/", StringComparison.InvariantCultureIgnoreCase);
+            return intentDataString.Substring(startIndex, endIndex - startIndex);
+
         }
 
         /// <summary>

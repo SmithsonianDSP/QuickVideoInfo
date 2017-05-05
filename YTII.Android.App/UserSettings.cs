@@ -35,12 +35,13 @@ namespace YTII.Droid.App
 
         internal static int ThumbnailQuality => Preferences.GetInt(ThumbnailQualitySettingKey, 1);
 
-        internal static string UserGuid => Preferences.GetString(UserGuidSettingKey, SetAndGetUserGuid());
+        internal static string UserGuid => SetAndGetUserGuid();
 
         internal static void SetLauncherIconVisible(bool value)
         {
             var prefsEdit = Preferences.Edit();
             prefsEdit.PutBoolean(LauncherIconVisibleSettingKey, value);
+            prefsEdit.Apply();
             prefsEdit.Commit();
         }
 
@@ -48,21 +49,25 @@ namespace YTII.Droid.App
         {
             var prefsEdit = Preferences.Edit();
             prefsEdit.PutInt(ThumbnailQualitySettingKey, value);
+            prefsEdit.Apply();
             prefsEdit.Commit();
         }
 
         internal static string SetAndGetUserGuid()
         {
-#if RELEASE
-            var newGuidString = Guid.NewGuid().ToString();
-#else
-            var newGuidString = new Guid().ToString();
-#endif 
-            var prefsEdit = Preferences.Edit();
-            prefsEdit.PutString(UserGuidSettingKey, newGuidString);
+            var userGuid = Preferences.GetString(UserGuidSettingKey, string.Empty);
+
+            if (!string.IsNullOrEmpty(userGuid))
+                return userGuid;
+
+
+            userGuid = Guid.NewGuid().ToString();
+            var prefsEdit = Application.Context.GetSharedPreferences(Constants.PackageName, FileCreationMode.Private).Edit();
+            prefsEdit.PutString(UserGuidSettingKey, userGuid);
+            prefsEdit.Apply();
             prefsEdit.Commit();
 
-            return newGuidString;
+            return userGuid;
         }
 
     }
