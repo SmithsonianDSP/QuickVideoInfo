@@ -7,39 +7,39 @@
   
   <string name="info_sourceLabel">Quelle:</string>
   <string name="info_viewsLabel">Ansichten:</string>
-  <string name="info_likesLabel">Vorlieben:</string>
-  <string name="info_dislikesLabel">Abneigungen:</string>
+  <string name="info_likesLabel">Likes:</string>
+  <string name="info_dislikesLabel">Dislikes:</string>
 
   <string name="about_instructionsHeader">Anleitung:</string>
   <string name="about_preferencesButton">Einstellungen</string>
 
   <string name="quality_max">Höchsten</string>
-  <string name="quality_high">Hoch (Standard)</string>
-  <string name="quality_standard">Standard</string>
-  <string name="quality_medium">Medium</string>
-  <string name="quality_lowest">Niedrigste</string>
+  <string name="quality_high">Hoch (Default)</string>
+  <string name="quality_standard">Norm</string>
+  <string name="quality_medium">Mittel</string>
+  <string name="quality_lowest">Niedrig</string>
 
-  <string name="settings_qualityLabel">Bevorzugte Miniaturansicht Qualität:</string>
+  <string name="settings_qualityLabel">Bevorzugte Miniaturansicht-Qualität:</string>
 
   <string name="settings_header">Benutzereinstellungen</string>
 
-  <string name="NoVideoTitle">[Ohne Titel]</string>
+  <string name="NoVideoTitle">[ Ohne Titel ]</string>
 
-  <string name="about_CreditsButton">Kredite &amp; Danke</string>
+  <string name="about_CreditsButton">Impressum &amp; Danke</string>
   
-<string name="about_instructions">Um diese app nutzen zu können, müssen Sie es als Standard-app für unterstützte Links gesetzt. \n\n Nach der ersten Installation dieses, das nächste Mal einen unterstützten Link zu öffnen, sollte Android fordert Sie, welche Anwendung Sie den Link mit öffnen möchten. \n\n Diese app (Quick Video-Info) aus der Liste auswählen, und wählen Sie dann die Option "Immer". \n\n Wenn diese Einstellung muss zurückgesetzt werden, gelangen Sie in die Android-Einstellungen unter Anwendungen finden diese app und wählen Sie die Option "Öffnen in dieser app" unter der "Offenen unterstützt Links" Einstellung. \n</string>
+  <string name="about_instructions">Um diese App nutzen zu können, müssen Sie sie als Standard-App für unterstützte Links einsetzen. \n\n Nach der Installation wenn Sie das nächste Mal einen unterstützten Link öffnen, sollte Ihr Android Sie anfordern, auszuwählen mit welcher Anwendung Sie den Link öffnen möchten. \n\n Wählen Sie zuerst die App (Quick Video-Info) aus der Liste und dann die Option \"Immer\". \n\n Um die Einstellung zurück zu setzen, suchen Sie die App in der Anwendungsliste und wählen Sie die Option \"Öffnen in dieser App\" unter der \"Öffnen unterstützte Links\"-Einstellung. \n</string>
 
-  <string name="settings_launcherToggleSwitch">Zeigen Sie App-Icon in Launcher?</string>
+  <string name="settings_launcherToggleSwitch">App-Icon in Launcher Anzeigen?</string>
 
-  <string name="settings_switchNote">Hinweis: Nach dem Ändern dieser Einstellung, die Auswirkungen nicht erscheinen erst nach einem Neustart oder einen Neustart des Geräts Launcher.</string>
+  <string name="settings_switchNote">Hinweis: Falls die Einstellung nicht direkt effektiv ist, starten Sie das Launcher oder Gerät neu.</string>
 
-  <string name="settings_reEnableLauncherInstructions">Um das Launcher-Icon wieder zu aktivieren, können Sie zu diesem Bildschirm zurückkehren, mit der Taste Info Kreis in der oberen rechten Ecke des Vorschaufensters.</string>
+  <string name="settings_reEnableLauncherInstructions">Um das Launcher-Icon wieder zu aktivieren, können Sie mit der Info-Kreis Button im oberen Rechten des Vorschaufensters zu diesem Bildschirm zurückkehren.</string>
 
-  <string name="credits_talklittle_desc">Für wertvolle Ratschläge, Anregungen und Rückmeldungen, die er mir während des Entwicklungsprozesses gegeben ist abgesehen davon, dass die, die mich ermutigt, diese app zu erstellen, nachdem ich ihn anfangs die Idee vorgestellt hatte.    
-Und auch für die Entwicklung, was leicht ist eines der besten Android Reddit apps, Reddit macht Spaß!</string>
+  <string name="credits_talklittle_desc">Für die wertvolle Ratschläge, Anregungen und Rückmeldungen, die er mir während des Entwicklungsprozesses gab und weil er mich ermutigte, diese app zu erstellen, nachdem ich ihn die Idee vorgestellt hatte.    
+Und auch für die Entwicklung eines der besten Android reddit apps, \"reddit is fun\"!</string>
 
-  <string name="credits_vimeodotnet_desc">Den Authentifizierungsprozess für Vimeo war eine Herausforderung, aber es war letztlich Saeedafshari der VimeoDotNet3 Code auf GitHub, die mir geholfen herauszufinden, wie Sie es tun!</string>
+  <string name="credits_vimeodotnet_desc">Den Authentifizierungsprozess für Vimeo war eine Herausforderung, aber es war letztendlich Saeedafsharis VimeoDotNet3 Code auf GitHub, die mir geholfen hat, herauszufinden was zu tun war!</string>
 
-  <string name="credits_dlew_desc">Es war der Einsatz einer transluzenten Tätigkeit in dlew app, die hat mich inspiriert, Quick Video-Info, wohl wissend, dass es möglich war, ein Fenster anzeigen, ohne die Benutzer von ihrer aktuellen app herausziehen zu erstellen.
+  <string name="credits_dlew_desc">Es war der Einsatz einer transluzenten Tätigkeit in dlew App, die mich inspirierte, Quick Video-Info zu erstellen. Ich sah, dass es möglich war, ein Fenster anzuzeigen ohne die Benutzer von ihrer aktuellen App herausziehen!
   </string>
 </resources>
