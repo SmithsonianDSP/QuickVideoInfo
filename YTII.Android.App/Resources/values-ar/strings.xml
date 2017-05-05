@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ <string name="info_sourceLabel">المصدر:</string>
+<string name="info_placeholderTitle">تحميل معلومات الفيديو...</string>
+<string name="info_closeButtonText">قم بإغلاق النافذة</string>
+<string name="info_openButtonText">فيديو مفتوح</string>
+<string name="info_viewsLabel">طرق عرض:</string>
+<string name="info_likesLabel">يحب:</string>
+<string name="info_dislikesLabel">يكره:</string>
+<string name="about_instructionsHeader">التعليمات:</string>
+<string name="about_preferencesButton">تفضيلات</string>
+<string name="quality_max">أعلى</string>
+<string name="quality_high">عالية (افتراضي)</string>
+<string name="quality_standard">القياسية</string>
+<string name="quality_medium">متوسطة</string>
+<string name="quality_lowest">أدنى</string>
+<string name="settings_qualityLabel">ويفضل نوعية الصورة المصغرة:</string>
+<string name="settings_header">تفضيلات المستخدم</string>
+<string name="NoVideoTitle">[لا العنوان]</string>
+<string name="about_CreditsButton">شكرا &amp; ائتمانات</string>
+<string name="prefs_activityTitle">إعدادات التفضيلات</string>
+<string name="about_instructions">من أجل استخدام هذا التطبيق، سوف تحتاج إلى وضعه في التطبيق الافتراضي للارتباطات المعتمدة. \n\n بعد تثبيت الأول هذا، في المرة التالية التي تقوم بفتح ارتباط معتمدة، يجب أن يطالبك الروبوت أطلب من التطبيق الذي تريد فتح الارتباط مع. \n\n حدد هذا التطبيق (معلومات الفيديو سريعة) من القائمة، ثم اختر الخيار "دوماً". \n\n إذا كان هذا الإعداد من أي وقت مضى بحاجة إلى إعادة تعيين، يمكنك الذهاب إلى "إعدادات الروبوت"، ضمن التطبيقات، تجد هذا التطبيق، واختر الخيار "فتح في هذا التطبيق" قيد الإعداد "يؤيد فتح الارتباطات". \n</string>
+<string name="settings_launcherToggleSwitch">إظهار رمز التطبيق في المشغل؟</string>
+<string name="settings_switchNote">ملاحظة: بعد تغيير هذا الإعداد، الآثار قد لا تظهر حتى بعد إعادة تشغيل أو إعادة تشغيل المشغل للجهاز.</string>
+<string name="settings_reEnableLauncherInstructions">لإعادة تمكين رمز المشغل، يمكنك العودة إلى هذه الشاشة بالضغط على زر دائرة المعلومات في الركن الأيمن العلوي من إطار المعاينة.</string>
+<string name="credits_talklittle_desc">للمشورة لا تقدر بثمن، واقتراحات، وردود الفعل أعطى لي في جميع مراحل عملية التنمية، فضلا عن كونه أحد الذي شجعني على إنشاء هذا التطبيق بعد أنا قد نصبت له في البداية الفكرة.    وأيضا لوضع ما بسهولة واحدة من أفضل تطبيقات الروبوت صديق، صديق متعة!</string>
+<string name="credits_vimeodotnet_desc">الحصول على عملية المصادقة تعمل على Vimeo كان تحديا، ولكنه كان في نهاية المطاف VimeoDotNet3 سايدافشاري للتعليمات البرمجية على GitHub التي ساعدتني معرفة كيفية القيام بذلك!</string>
+<string name="credits_dlew_desc">كان استخدام نشاط شفافة في التطبيق في دليو التي أوحت لي لإنشاء "معلومات الفيديو سريعة"، مع العلم أنه من الممكن أن تظهر نافذة دون سحب المستخدمين من على التطبيق الحالي.</string>
+
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="info_sourceLabel">資料來源︰</string>
+<string name="info_placeholderTitle">正在載入視頻資訊...</string>
+<string name="info_closeButtonText">關閉視窗</string>
+<string name="info_openButtonText">打開視頻</string>
+<string name="info_viewsLabel">視圖：</string>
+<string name="info_likesLabel">喜歡︰</string>
+<string name="info_dislikesLabel">不是喜歡︰</string>
+<string name="about_instructionsHeader">說明︰</string>
+<string name="about_preferencesButton">首選項</string>
+<string name="quality_max">最高</string>
+<string name="quality_high">高 （預設）</string>
+<string name="quality_standard">標準</string>
+<string name="quality_medium">介質</string>
+<string name="quality_lowest">最低</string>
+<string name="settings_qualityLabel">首選的縮略圖品質︰</string>
+<string name="settings_header">使用者首選項</string>
+<string name="NoVideoTitle">[無標題]</string>
+<string name="about_CreditsButton">學分 &amp; 謝謝</string>
+<string name="prefs_activityTitle">首選項和設置</string>
+<string name="about_instructions">要使用此應用程式，你將需要將其設置為預設的應用程式支援連結。\n\n 第一次安裝下, 一次你打開一個受支援的連結後，安卓系統應提示您問你想要打開的連結與哪個應用的程式。\n\n 從清單中，選擇這個程式 （快速視頻資訊），然後選擇"始終"選項。\n\n 如果此設置需要重置，你可以去到 Android 的設置，根據應用程式，找到這個應用程式，並選擇"在此應用程式中打開"選項下的"公開支援連結"設置。\n</string>
+<string name="settings_launcherToggleSwitch">在啟動器中顯示應用程式的圖示？</string>
+<string name="settings_switchNote">注︰ 更改此設置後, 效果可能不顯示重新開機或重新開機設備的啟動程式後。</string>
+<string name="settings_reEnableLauncherInstructions">要重新啟用啟動器圖示，可以在右上角的預覽視窗中按資訊圓按鈕返回到此螢幕。</string>
+<string name="credits_talklittle_desc">提供寶貴的意見、 建議，和他給了我整個發展過程的回饋，以及正在一個那些鼓勵我創建這個應用程式之後這個想法是把最初了他。   同時也要發展什麼無疑最好的安卓 reddit 應用程式之一，reddit 是樂趣 ！</string>
+<string name="credits_vimeodotnet_desc">身份驗證進程為 Vimeo 工作是一項挑戰，但它最終是 saeedafshari 的 VimeoDotNet3 代碼在 GitHub 幫我弄清楚如何做它 ！</string>
+<string name="credits_dlew_desc">它是活動的半透明，激發了我創建快速的視頻資訊，知道那活動的個可以無需拔除使用者從他們當前的應用程式顯示一個視窗的 dlew 的應用程式中使用。</string>
+
+</resources>

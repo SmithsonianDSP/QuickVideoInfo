@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="info_sourceLabel">Fuente:</string>
+<string name="info_placeholderTitle">Cargando información de vídeo...</string>
+<string name="info_closeButtonText">Cerrar ventana</string>
+<string name="info_openButtonText">Video abierto</string>
+<string name="info_viewsLabel">Vistas:</string>
+<string name="info_likesLabel">Le gusta:</string>
+<string name="info_dislikesLabel">No le gusta:</string>
+<string name="about_instructionsHeader">Instrucciones:</string>
+<string name="about_preferencesButton">Preferencias</string>
+<string name="quality_max">Más alto</string>
+<string name="quality_high">Alta (por defecto)</string>
+<string name="quality_standard">Estándar</string>
+<string name="quality_medium">Medio</string>
+<string name="quality_lowest">Más bajo</string>
+<string name="settings_qualityLabel">Recomendado: calidad de miniatura:</string>
+<string name="settings_header">Preferencias de usuario</string>
+<string name="NoVideoTitle">[Sin título]</string>
+<string name="about_CreditsButton">Gracias y créditos</string>
+<string name="prefs_activityTitle">Preferencias &amp; opciones</string>
+<string name="about_instructions">Para poder utilizar esta aplicación, necesita como la aplicación predeterminada para enlaces compatibles. \n\n después de la primera instalación, la próxima vez que abra un enlace soportado, Android debe incitar a que la aplicación que desea abrir el enlace con. \n\n Seleccione esta aplicación (Quick Info del Video) de la lista, luego elija la opción "Siempre". \n\n si este ajuste nunca necesita restablecerse, puede ir a la configuración de Android, en aplicaciones, encontrar esta aplicación y elija la opción "Abrir en esta aplicación" en la posición de "Abierto apoyado enlaces". \n</string>
+<string name="settings_launcherToggleSwitch">¿Mostrar icono de app Launcher?</string>
+<string name="settings_switchNote">Nota: Después de cambiar esta configuración, los efectos pueden no aparecer hasta después de reiniciar o reiniciar lanzador el dispositivo.</string>
+<string name="settings_reEnableLauncherInstructions">Para volver a activar el icono de lanzador, puede volver a esta pantalla pulsando el botón círculo en la esquina superior derecha de la ventana de vista previa.</string>
+<string name="credits_talklittle_desc">El invaluable asesoramiento, sugerencias y comentarios que me es dado en todo el proceso de desarrollo, además de ser el que me animó a crear esta aplicación después de que inicialmente había lanzado él la idea.    Y también para el desarrollo de lo que es fácilmente una de las mejores aplicaciones Android compartir, compartir es divertido!</string>
+<string name="credits_vimeodotnet_desc">El proceso de autenticación de Vimeo fue un desafío, pero finalmente fue VimeoDotNet3 de saeedafshari código en GitHub que me ayudó a encontrar la manera de hacerlo!</string>
+<string name="credits_dlew_desc">Fue el uso de una actividad transparente en la aplicación de dlew que me inspiro a crear la información de vídeo rápido, sabiendo que era posible mostrar una ventana sin sacar los usuarios de su aplicación actual.</string>
+
+
+</resources>

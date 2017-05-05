@@ -131,7 +131,7 @@ namespace YTII.Droid.App.Activities
                 if (video.Title != string.Empty)
                     videoTitle.Text = video.Title;
                 else
-                    videoTitle.Text = "[ No Title ]";
+                    videoTitle.Text = Resources.GetString(Resource.String.NoVideoTitle);
 
                 var videoDuration = FindViewById<TextView>(Resource.Id.videoDuration);
                 videoDuration.Text = video.VideoDurationString;

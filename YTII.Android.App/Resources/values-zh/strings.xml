@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="info_sourceLabel">资料来源︰</string>
+<string name="info_placeholderTitle">正在加载视频信息...</string>
+<string name="info_closeButtonText">关闭窗口</string>
+<string name="info_openButtonText">打开视频</string>
+<string name="info_viewsLabel">视图：</string>
+<string name="info_likesLabel">喜欢︰</string>
+<string name="info_dislikesLabel">不是喜欢︰</string>
+<string name="about_instructionsHeader">说明︰</string>
+<string name="about_preferencesButton">首选项</string>
+<string name="quality_max">最高</string>
+<string name="quality_high">高 （默认）</string>
+<string name="quality_standard">标准</string>
+<string name="quality_medium">介质</string>
+<string name="quality_lowest">最低</string>
+<string name="settings_qualityLabel">首选的缩略图质量︰</string>
+<string name="settings_header">用户首选项</string>
+<string name="NoVideoTitle">[无标题]</string>
+<string name="about_CreditsButton">学分 &amp; 谢谢</string>
+<string name="prefs_activityTitle">首选项和设置</string>
+<string name="about_instructions">要使用此应用程序，你将需要将其设置为默认的应用程序支持链接。\n\n 第一次安装下, 一次你打开一个受支持的链接后，安卓系统应提示您问你想要打开的链接与哪个应用的程序。\n\n 从列表中，选择这个程序 （快速视频信息），然后选择"始终"选项。\n\n 如果此设置需要重置，你可以去到 Android 的设置，根据应用程序，找到这个应用程序，并选择"在此应用程序中打开"选项下的"公开支持链接"设置。\n</string>
+<string name="settings_launcherToggleSwitch">在启动器中显示应用程序的图标？</string>
+<string name="settings_switchNote">注︰ 更改此设置后, 效果可能不显示重新启动或重新启动设备的启动程序后。</string>
+<string name="settings_reEnableLauncherInstructions">要重新启用启动器图标，可以在右上角的预览窗口中按信息圆按钮返回到此屏幕。</string>
+<string name="credits_talklittle_desc">提供宝贵的意见、 建议，和他给了我整个发展过程的反馈，以及正在一个那些鼓励我创建这个应用程序之后这个想法是把最初了他。   同时也要发展什么无疑最好的安卓 reddit 应用程序之一，reddit 是乐趣 ！</string>
+<string name="credits_vimeodotnet_desc">身份验证进程为 Vimeo 工作是一项挑战，但它最终是 saeedafshari 的 VimeoDotNet3 代码在 GitHub 帮我弄清楚如何做它 ！</string>
+<string name="credits_dlew_desc">它是活动的半透明，激发了我创建快速的视频信息，知道那活动的个可以无需拔除用户从他们当前的应用程序显示一个窗口的 dlew 的应用程序中使用。</string>
+
+</resources>

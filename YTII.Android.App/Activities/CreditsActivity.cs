@@ -14,21 +14,27 @@
 
 #endregion
 
+using System;
 using Android.App;
+using Android.Content;
+using Android.Content.Res;
 using Android.OS;
 using Java.Lang;
 
 namespace YTII.Droid.App.Activities
 {
-    [Activity(Label = "", MainLauncher = false, Icon = "@drawable/icon", Theme = "@style/SettingsTheme")]
+    [Activity(Label = "Credits", MainLauncher = false, Icon = "@drawable/icon", Theme = "@style/SettingsTheme")]
     public class CreditsActivity : Activity
     {
         internal const string FullActivityName = Constants.PackageName + @".CreditsActivity";
+        internal string ActivityLabel => Resources.GetString(Resource.String.about_CreditsButton);
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Credits);
+            Title = ActivityLabel;
         }
 
         protected override void OnDestroy()

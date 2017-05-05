@@ -1,24 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="Instructions">In order to use this app, you will need to set it as the default app for supported links.\n\nAfter first installing this, the next time you open a supported link, Android should prompt you to ask which application you want to open the link with.\n\nSelect this app (\"Quick Video Info\") from the list, then choose the \"Always\" option.\n\nIf this setting ever needs to be reset, you can go into the Android Settings, under Applications, find this app, and choose the \"Open in this app\" option under the \"Open supported links\" setting.\n</string>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-  <string name="LauncherToggleSwitch">Show Icon for App in Launcher?</string>
-  
-  <string name="SwitchNote">Note: After changing this setting, the effects may not appear until after rebooting or restarting the device\'s Launcher.</string>
 
-  <string name="ReEnableLauncherInstructions">To re-enable the launcher icon, you can return to this screen by pressing the info circle button in the upper right corner of the preview window.</string>
+  <string name="info_sourceLabel">Source:</string>
+  <string name="info_placeholderTitle">Loading Video Information...</string>
+  <string name="info_closeButtonText">Close Window</string>
+  <string name="info_openButtonText">Open Video</string>
+  <string name="info_viewsLabel">Views:</string>
+  <string name="info_likesLabel">Likes:</string>
+  <string name="info_dislikesLabel">Dislikes:</string>
 
-  <string name="credits_talklittle_name">talklittle</string>
-  <string name="credits_talklittle_desc">For the invaluable advice, suggestions, and feedback he\'s given me throughout the development process, as well as being the one who encouraged me to create this app after I had initially pitched him the idea.
-    And also for developing what\'s easily one of the best Android reddit apps, reddit is fun!
+  <string name="about_instructionsHeader">Instructions:</string>
+  <string name="about_preferencesButton">Preferences</string>
+  <string name="about_CreditsButton">Credits &amp; Thanks</string>
+
+  <string name="prefs_activityTitle">Preferences &amp; Settings</string>
+
+  <string name="quality_max">Highest</string>
+  <string name="quality_high">High (Default)</string>
+  <string name="quality_standard">Standard</string>
+  <string name="quality_medium">Medium</string>
+  <string name="quality_lowest">Lowest</string>
+
+  <string name="settings_qualityLabel">Preferred Thumbnail Quality:</string>
+  <string name="settings_header">User Preferences</string>
+
+  <string name="NoVideoTitle">[ No Title ]</string>
+
+  <string name="about_instructions">In order to use this app, you will need to set it as the default app for supported links.\n\nAfter first installing this, the next time you open a supported link, Android should prompt you to ask which application you want to open the link with.\n\nSelect this app (\"Quick Video Info\") from the list, then choose the \"Always\" option.\n\nIf this setting ever needs to be reset, you can go into the Android Settings, under Applications, find this app, and choose the \"Open in this app\" option under the \"Open supported links\" setting.\n</string>
+
+  <string name="settings_launcherToggleSwitch">Show Icon for App in Launcher?</string>
+  <string name="settings_switchNote">Note: After changing this setting, the effects may not appear until after rebooting or restarting the device\'s Launcher.</string>
+  <string name="settings_reEnableLauncherInstructions">To re-enable the launcher icon, you can return to this screen by pressing the info circle button in the upper right corner of the preview window.</string>
+
+  <string name="credits_talklittle_name">
+    <xliff:g id="talklittle_name">talklittle</xliff:g>
   </string>
-  <string name="credits_talklittle_link">http://www.talklittle.com/reddit-is-fun/</string>
   
-  <string name="credits_vimeodotnet_name">saeedafshari\'s VimeoDotNet3 Library</string>
-  <string name="credits_vimeodotnet_desc">Getting the authentication process working for Vimeo was a challenge, but it was ultimately saeedafshari\'s VimeoDotNet3 code on GitHub that helped me figure out how to do it!</string>
-  <string name="credits_vimeodotnet_link">https://github.com/saeedafshari/VimeoDotNet3</string>
+  <string name="credits_talklittle_desc">
+    For the invaluable advice, suggestions, and feedback he\'s given me throughout the development process, as well as being the one who encouraged me to create this app after I had initially pitched him the idea.
+    And also for developing what\'s easily one of the best Android reddit apps, <xliff:g id="talklittle_appname">reddit is fun</xliff:g>!
+  </string>
+  
+  <string name="credits_talklittle_link">
+    <xliff:g id="talklittle_link">http://www.talklittle.com/reddit-is-fun/</xliff:g>
+  </string>
 
-    <string name="credits_dlew_name">dlew\'s GfyCat Player Android app</string>
+  <string name="credits_vimeodotnet_name">
+    <xliff:g id="vimeolib_name">saeedafshari\'s VimeoDotNet3</xliff:g> Library
+  </string>
+  
+  <string name="credits_vimeodotnet_desc">Getting the authentication process working for Vimeo was a challenge, but it was ultimately <xliff:g id="vimeolib_name">saeedafshari\'s VimeoDotNet3</xliff:g> code on GitHub that helped me figure out how to do it!</string>
+  <string name="credits_vimeodotnet_link">
+    <xliff:g id="vimeolib_link">https://github.com/saeedafshari/VimeoDotNet3</xliff:g>
+    </string>
+
+  <string name="credits_dlew_name">
+    <xliff:g id="dlew_name">dlew\'s GfyCat</xliff:g> Player Android app</string>
   <string name="credits_dlew_desc">It was the use of a translucent activity in dlew\'s app that inspired me to create Quick Video Info, knowing that it was possible to show a window without pulling users out from their current app.</string>
-  <string name="credits_dlew_link">https://github.com/dlew/android-gfycat/</string>
+  <string name="credits_dlew_link">
+    <xliff:g id="dlew_link">
+      https://github.com/dlew/android-gfycat/
+    </xliff:g>
+  </string>
 </resources>

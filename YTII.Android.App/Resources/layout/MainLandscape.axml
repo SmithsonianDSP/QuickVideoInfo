@@ -47,7 +47,7 @@
             android:layout_marginTop="-4sp"
             android:elevation="25dp" />
         <TextView
-            android:text="Loading Video Information..."
+            android:text="@string/info_placeholderTitle"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
             android:alpha="0.8"
             android:elegantTextHeight="true"
             android:ellipsize="none"
-            android:text="Source:"
+            android:text="@string/info_sourceLabel"
             android:paddingLeft="2dp"
             android:paddingTop="1dp"
             android:shadowDx="10"
@@ -216,7 +216,7 @@
         android:layout_marginTop="0sp"
         android:paddingTop="0sp">
         <Button
-            android:text="Close Window"
+            android:text="@string/info_closeButtonText"
             android:id="@+id/closeButton"
             android:layout_width="0dp"
             android:layout_marginLeft="15px"
@@ -226,7 +226,7 @@
             android:layout_columnWeight="0.5"
             android:alpha="1" />
         <Button
-            android:text="Open Video"
+            android:text="@string/info_openButtonText"
             android:id="@+id/button1"
             android:textStyle="normal"
             android:typeface="sans"
@@ -266,7 +266,7 @@
             android:layout_column="0"
             android:layout_columnWeight="1" />
         <TextView
-            android:text="Views:"
+            android:text="@string/info_viewsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/viewLabel"
@@ -294,7 +294,7 @@
             android:layout_column="3"
             android:layout_columnWeight="1" />
         <TextView
-            android:text="Likes:"
+            android:text="@string/info_likesLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/likesLabel"
@@ -322,7 +322,7 @@
             android:layout_column="6"
             android:layout_columnWeight="1" />
         <TextView
-            android:text="Dislikes:"
+            android:text="@string/info_dislikesLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dislikeLabel"

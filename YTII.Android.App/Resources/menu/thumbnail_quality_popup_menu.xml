@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+  
   <item android:id="@+id/thumbnail_max"
-        android:title="Max. Res." />
+        android:title="@string/quality_max" />
   
   <item android:id="@+id/thumbnail_high"
-        android:title="High (default)" />
-  
-  <item android:id="@+id/thumbnail_medium"
-        android:title="Medium" />
-  
+        android:title="@string/quality_high" />
+
   <item android:id="@+id/thumbnail_standard"
-        android:title="Standard" />
-  
+        android:title="@string/quality_standard" />
+
+  <item android:id="@+id/thumbnail_medium"
+        android:title="@string/quality_medium" />
+ 
   <item android:id="@+id/thumbnail_lowest"
-        android:title="Lowest" />
+        android:title="@string/quality_lowest" />
 </menu>

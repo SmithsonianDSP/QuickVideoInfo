@@ -12,7 +12,7 @@
     android:clipChildren="false"
     style="@style/SettingsTheme">
     <TextView
-        android:text="User Preferences"
+        android:text="@string/settings_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
@@ -37,7 +37,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.25" />
     <TextView
-        android:text="Preferred Thumbnail Quality:"
+        android:text="@string/settings_qualityLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/toggleLauncherIcon"
-        android:text="@string/LauncherToggleSwitch"
+        android:text="@string/settings_launcherToggleSwitch"
         android:checked="true"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"
@@ -109,14 +109,14 @@
         android:maxLines="1"
         android:textSize="14sp" />
     <TextView
-        android:text="@string/ReEnableLauncherInstructions"
+        android:text="@string/settings_reEnableLauncherInstructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15px"
         android:layout_marginLeft="7px"
         android:layout_gravity="center_horizontal" />
     <TextView
-        android:text="@string/SwitchNote"
+        android:text="@string/settings_switchNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"

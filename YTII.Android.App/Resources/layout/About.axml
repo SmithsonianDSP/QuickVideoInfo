@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:text="Instructions:"
+                android:text="@string/about_instructionsHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -41,7 +41,7 @@
                 android:layout_marginBottom="5dp"
                 android:typeface="serif" />
             <TextView
-                android:text="@string/Instructions"
+                android:text="@string/about_instructions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -63,7 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Preferences"
+            android:text="@string/about_preferencesButton"
             android:textStyle="bold"
             android:id="@+id/SettingsButton"
             android:typeface="normal"
@@ -72,7 +72,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Credits"
+            android:text="@string/about_CreditsButton"
             android:id="@+id/CreditsButton"
             android:enabled="true"
             android:visibility="visible"

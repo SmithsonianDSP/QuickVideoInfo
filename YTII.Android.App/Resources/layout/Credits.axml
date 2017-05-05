@@ -30,7 +30,8 @@
             android:textSize="24dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="15dp"
-            android:typeface="serif" />
+            android:typeface="serif"
+            android:visibility="gone" />
         <TextView
             android:text="@string/credits_talklittle_name"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -38,7 +39,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView3"
             android:gravity="center"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginTop="10sp" />
         <TextView
             android:text="@string/credits_talklittle_link"
             android:textAppearance="?android:attr/textAppearanceSmall"

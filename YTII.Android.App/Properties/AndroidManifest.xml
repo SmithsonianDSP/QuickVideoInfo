@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gmail.smithsoniandsp.quickvideoinfo" android:versionName="1.4.1" android:installLocation="auto" android:versionCode="201705041">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gmail.smithsoniandsp.quickvideoinfo" android:versionName="1.4.3" android:installLocation="auto" android:versionCode="201705051">
 	<uses-sdk android:minSdkVersion="16" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<!--android:theme="@android:style/Theme.Translucent" -->
@@ -15,9 +15,6 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".AboutActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" theme="@style/SettingsTheme" />
-	  <activity android:name=".CreditsActivity"
-	            android:excludeFromRecents="true"
-	            android:autoRemoveFromRecents="true"
-	            theme="@style/SettingsTheme" />
+		<activity android:name=".CreditsActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" theme="@style/SettingsTheme" />
 	</application>
 </manifest>

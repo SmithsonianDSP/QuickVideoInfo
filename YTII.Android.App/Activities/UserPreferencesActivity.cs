@@ -15,6 +15,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -28,15 +29,22 @@ namespace YTII.Droid.App.Activities
     {
         const string ActivityName = @"Quick Video Info Settings";
 
-        static readonly string[] thumbnailOptionText = { "Max. Res.", "High (default)", "Standard", "Medium", "Lowest" };
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Settings);
 
+            Title = Resources.GetString(Resource.String.prefs_activityTitle);
+
             SetEventHandlers();
             LoadUserSettings();
+        }
+
+        protected override void OnPostCreate(Bundle savedInstanceState)
+        {
+            base.OnPostCreate(savedInstanceState);
+
+
         }
 
         protected void LoadUserSettings()
@@ -44,8 +52,7 @@ namespace YTII.Droid.App.Activities
             var iconToggle = FindViewById<Switch>(Resource.Id.toggleLauncherIcon);
             iconToggle.Checked = UserSettings.IsLauncherIconShown;
 
-            var thumbnailButton = FindViewById<Button>(Resource.Id.thumbnailQualityButton);
-            thumbnailButton.Text = thumbnailOptionText[UserSettings.ThumbnailQuality];
+            SetMenuItemText(UserSettings.ThumbnailQuality);
         }
 
         void SetEventHandlers()
@@ -92,10 +99,33 @@ namespace YTII.Droid.App.Activities
                     break;
             }
 
+            SetMenuItemText(i);
             UserSettings.SetThumbnailQuality(i);
-            var thumbnailButton = FindViewById<Button>(Resource.Id.thumbnailQualityButton);
-            thumbnailButton.Text = thumbnailOptionText[i];
         }
+
+        void SetMenuItemText(int value)
+        {
+            var thumbnailButton = FindViewById<Button>(Resource.Id.thumbnailQualityButton);
+            switch (value)
+            {
+                case 0:
+                    thumbnailButton.SetText(Resource.String.quality_max);
+                    break;
+                case 1:
+                    thumbnailButton.SetText(Resource.String.quality_high);
+                    break;
+                case 2:
+                    thumbnailButton.SetText(Resource.String.quality_standard);
+                    break;
+                case 3:
+                    thumbnailButton.SetText(Resource.String.quality_medium);
+                    break;
+                case 4:
+                    thumbnailButton.SetText(Resource.String.quality_lowest);
+                    break;
+            }
+        }
+
 
         void IconToggle_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {

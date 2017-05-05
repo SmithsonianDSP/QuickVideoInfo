@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="info_sourceLabel">Source :</string>
+<string name="info_placeholderTitle">Chargement des informations vidéo...</string>
+<string name="info_closeButtonText">Fermer la fenêtre</string>
+<string name="info_openButtonText">Open Video</string>
+<string name="info_viewsLabel">Affichage :</string>
+<string name="info_likesLabel">Aime :</string>
+<string name="info_dislikesLabel">N’aime pas :</string>
+<string name="about_instructionsHeader">Mode d’emploi :</string>
+<string name="about_preferencesButton">Préférences</string>
+<string name="quality_max">Plus haut</string>
+<string name="quality_high">Haute (par défaut)</string>
+<string name="quality_standard">Norme</string>
+<string name="quality_medium">Médium</string>
+<string name="quality_lowest">Le plus bas</string>
+<string name="settings_qualityLabel">Qualité miniature préférée :</string>
+<string name="settings_header">Préférences de l’utilisateur</string>
+<string name="NoVideoTitle">[Sans titre]</string>
+<string name="about_CreditsButton">Crédits &amp; Merci</string>
+<string name="prefs_activityTitle">Paramètres et préférences</string>
+<string name="about_instructions">Pour pouvoir utiliser cette application, vous devrez définir comme l’application par défaut pour les liaisons prises en charge. \n\n après la première installation de ce, la prochaine fois que vous ouvrez un lien pris en charge, Android devrait inciter à vous demander quelle application vous souhaitez ouvrir le lien avec. \n\n sélectionnez ce soft (vidéo infos) dans la liste, puis choisissez l’option « Always ». \n\n Si ce paramètre doit toujours être réinitialisé, vous pouvez aller dans les paramètres d’Android, sous Applications, trouver ce soft et choisissez l’option « Ouvrir dans ce soft » avec le paramètre « Open pris en charge de liens ». \n</string>
+<string name="settings_launcherToggleSwitch">Afficher l’icône de l’app dans Launcher ?</string>
+<string name="settings_switchNote">Remarque : Après avoir modifié ce paramètre, les effets peuvent ne pas apparaître qu’après la réinitialisation ou redémarrage lanceur de l’appareil au.</string>
+<string name="settings_reEnableLauncherInstructions">Pour réactiver l’icône du lanceur, vous pouvez retourner à l’écran en appuyant sur la touche cercle info dans le coin supérieur droit de la fenêtre d’aperçu.</string>
+<string name="credits_talklittle_desc">Pour les précieux conseils, suggestions et commentaires, il m’est donné tout au long du processus de développement, tout en étant celui qui m’a encouragé à créer cette application après que j’avais initialement lui lancé l’idée.    Et aussi pour le développement de ce qui est facilement une des meilleures applications Android reddit, reddit est amusant !</string>
+<string name="credits_vimeodotnet_desc">Obtenir le processus d’authentification de Vimeo a été un défi, mais il a finalement été VimeoDotNet3 de saeedafshari code sur GitHub qui m’a aidé à comprendre comment le faire !</string>
+<string name="credits_dlew_desc">C’est l’utilisation d’une activité translucide dans app de dlew qui m’a inspiré pour créer rapide vidéo Info, sachant qu’il était possible d’afficher une fenêtre sans en tirant les utilisateurs de son application actuelle.</string>
+</resources>
