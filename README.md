@@ -4,6 +4,12 @@
 
 [**Get it now in the Google Play Store!**](https://play.google.com/store/apps/details?id=com.gmail.smithsoniandsp.quickvideoinfo&referrer=utm_source%3Dgithub%26utm_medium%3Dreadme)
 
+- - - 
+
+### **Help wanted with translations and localizations!** [See here for more info!](https://github.com/SmithsonianDSP/QuickVideoInfo/issues/9)
+
+- - - 
+
 ![](GooglePlayStore.Assets/Feature2.png)
 
 - - -

@@ -4,6 +4,10 @@
 
 - - -
 
+### **Help wanted with translations and localizations!** [See here for more info!](https://github.com/SmithsonianDSP/QuickVideoInfo/issues/9)
+
+- - - 
+
 ![](https://github.com/SmithsonianDSP/QuickVideoInfo/raw/master/GooglePlayStore.Assets/Feature2.png)
 
 - - -
@@ -13,7 +17,7 @@
 **Currently Supported Video Providers:**  
 * [YouTube](http://www.youtube.com) (individual videos)
 * [Streamable](http://streamable.com)
-
+* [Vimeo](http://www.vimeo.com)
  
 
 - - - -

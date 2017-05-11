@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string name="info_sourceLabel">स्रोत:</string>
-<string name="info_placeholderTitle">वीडियो जानकारी लोड हो रहा है...</string>
+<string name="info_placeholderTitle">वीडियो जानकारी लोड हो रही है...</string>
 <string name="info_closeButtonText">विंडो को बंद करें</string>
 <string name="info_openButtonText">खुला वीडियो</string>
-<string name="info_viewsLabel">विचारों:</string>
+<string name="info_viewsLabel">दृश्य:</string>
 <string name="info_likesLabel">पसंद:</string>
 <string name="info_dislikesLabel">नापसंद:</string>
-<string name="about_instructionsHeader">निर्देश:</string>
+<string name="about_instructionsHeader">अनुदेश:</string>
 <string name="about_preferencesButton">वरीयताएँ</string>
 <string name="quality_max">उच्चतम</string>
 <string name="quality_high">उच्च (डिफ़ॉल्ट)</string>
