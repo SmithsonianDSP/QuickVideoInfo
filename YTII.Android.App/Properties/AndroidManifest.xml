@@ -1,20 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gmail.smithsoniandsp.quickvideoinfo" android:versionName="1.4.5" android:installLocation="auto" android:versionCode="201705053">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gmail.smithsoniandsp.quickvideoinfo" android:versionName="1.4.6" android:installLocation="auto" android:versionCode="201705150">
 	<uses-sdk android:minSdkVersion="16" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<!--android:theme="@android:style/Theme.Translucent" -->
 	<application android:label="Quick Video Info" android:excludeFromRecents="true" android:icon="@drawable/Icon" android:allowBackup="true">
-		<activity android:name=".YouTubeVideoInfoActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" />
-		<activity android:name=".StreamableVideoInfoActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" />
-		<activity android:name=".VimeoVideoInfoActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" />
-		<activity android:name=".BasePlaylistActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" />
-		<activity android:name=".UserPreferencesActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" theme="@style/SettingsTheme">
+		<meta-data android:name="android.max_aspect" android:value="2.1" />
+		<activity android:name=".YouTubeVideoInfoActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" android:resizeableActivity="true" />
+		<activity android:name=".StreamableVideoInfoActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" android:resizeableActivity="true" />
+		<activity android:name=".VimeoVideoInfoActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" android:resizeableActivity="true" />
+		<activity android:name=".BasePlaylistActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" android:configChanges="orientation|screenSize" android:theme="@style/TranslucentActivity" android:resizeableActivity="true" />
+		<activity android:name=".UserPreferencesActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" theme="@style/SettingsTheme" android:resizeableActivity="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.PREFERENCE" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".AboutActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" theme="@style/SettingsTheme" />
-		<activity android:name=".CreditsActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" theme="@style/SettingsTheme" />
+		<activity android:name=".AboutActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" theme="@style/SettingsTheme" android:resizeableActivity="true" />
+		<activity android:name=".CreditsActivity" android:excludeFromRecents="true" android:autoRemoveFromRecents="true" theme="@style/SettingsTheme" android:resizeableActivity="true" />
 	</application>
 </manifest>

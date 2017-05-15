@@ -29,7 +29,7 @@ using Exception = Java.Lang.Exception;
 
 namespace YTII.Droid.App.Activities
 {
-    [Activity(Label = "Quick Video Info", Theme = "@style/TranslucentActivity", MainLauncher = false, Icon = "@drawable/icon")]
+    [Activity(Label = "Quick Video Info", Theme = "@style/TranslucentActivity", MainLauncher = false, Icon = "@drawable/icon", ResizeableActivity = true)]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "*.vimeo.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "vimeo.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "vimeo.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
@@ -49,7 +49,7 @@ namespace YTII.Droid.App.Activities
         ///     This is a prefix used to distinguish the origin source of thumbnails (e.g., YT[videoID] for YouTube, ST[videoID]
         ///     for Streamable.com)
         /// </summary>
-        protected override string TypePrefix => "V";
+        protected override string TypePrefix => @"V";
 
         /// <summary>
         ///     The <see cref="Caches.VideoModelCache{T}" /> where the results of recently previewed video models are stored
@@ -164,10 +164,10 @@ namespace YTII.Droid.App.Activities
         /// <returns>The Video ID used to identify the item to request information from the API for</returns>
         protected override string GetVideoIdFromIntentDataString(string intentDataString)
         {
-            if (intentDataString.Contains("/video/"))
-                return intentDataString.Substring(intentDataString.LastIndexOf("video/", StringComparison.InvariantCulture) + 6).TrimEnd('/');
+            if (intentDataString.Contains(@"/video/"))
+                return intentDataString.Substring(intentDataString.LastIndexOf(@"video/", StringComparison.InvariantCulture) + 6).TrimEnd('/');
             else
-                return intentDataString.Substring(intentDataString.LastIndexOf(".com/", StringComparison.InvariantCulture) + 5).TrimEnd('/');
+                return intentDataString.Substring(intentDataString.LastIndexOf(@".com/", StringComparison.InvariantCulture) + 5).TrimEnd('/');
         }
 
         /// <summary>
@@ -181,15 +181,10 @@ namespace YTII.Droid.App.Activities
         /// <returns>A URL of the thumbnail to load</returns>
         protected override string GetThumbnailUrl(ref VimeoVideoModel vid)
         {
-            Log.Debug("Vimeo.GetThumbnail", "Start!");
-            Log.Debug("Vimeo.GetThumbnail", $"Thumbnail Sizes Count: {vid.Thumbnails.Sizes.Count}");
-
             var thumb = vid.Thumbnails?.Sizes?
                                        .Where(t => !string.IsNullOrEmpty(t.Link))
                                        .OrderBy(p => p.Width)
                                        .ToArray();
-
-            Log.Debug("Vimeo.GetThumbnail", $"thumbs Count: {thumb.Length}");
 
             // Skip While index < max index && index <= midpoint index
             var t1 = thumb?.SkipWhile((p, i) => (i < (thumb.Length - 1)) && i <= (thumb.Length / 2)).FirstOrDefault();
@@ -198,10 +193,10 @@ namespace YTII.Droid.App.Activities
             var matchLink = t1?.Link ?? t2?.Link ?? vid.DefaultThumbnailUrl;
 
             if (UserSettings.ThumbnailQuality == 0) // Max Thumbnail Quality
-                matchLink = vid.Thumbnails.Sizes.OrderByDescending(p => p.Width).FirstOrDefault()?.Link ?? matchLink;
+                matchLink = vid.Thumbnails?.Sizes?.OrderByDescending(p => p.Width).FirstOrDefault()?.Link ?? matchLink;
 
             else if (UserSettings.ThumbnailQuality == 4) // Lowest Thumbnail Quality
-                matchLink = vid.Thumbnails.Sizes.OrderBy(p => p.Width).FirstOrDefault()?.Link ?? matchLink;
+                matchLink = vid.Thumbnails?.Sizes?.OrderBy(p => p.Width).FirstOrDefault()?.Link ?? matchLink;
 
             return matchLink;
         }

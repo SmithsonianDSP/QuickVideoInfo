@@ -65,7 +65,9 @@
         android:background="#99000000"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
-        android:layout_gravity="fill_vertical">
+        android:layout_gravity="fill_vertical"
+        android:paddingLeft="5sp"
+        android:paddingRight="5sp">
         <ImageView xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/imageView"
             android:layout_width="match_parent"

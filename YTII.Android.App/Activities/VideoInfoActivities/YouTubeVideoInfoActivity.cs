@@ -28,7 +28,7 @@ using Uri = Android.Net.Uri;
 
 namespace YTII.Droid.App
 {
-    [Activity(Label = "Quick Video Info", Theme = "@style/TranslucentActivity", MainLauncher = false, Icon = "@drawable/icon")]
+    [Activity(Label = "Quick Video Info", Theme = "@style/TranslucentActivity", MainLauncher = false, Icon = "@drawable/icon", ResizeableActivity = true)]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "youtu.be", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "youtu.be", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "*.youtube.com", DataPathPrefix = "/watch", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]

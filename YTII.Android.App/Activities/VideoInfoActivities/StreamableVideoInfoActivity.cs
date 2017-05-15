@@ -28,7 +28,7 @@ using Exception = Java.Lang.Exception;
 
 namespace YTII.Droid.App.Activities
 {
-    [Activity(Label = "Quick Video Info", Theme = "@style/TranslucentActivity", MainLauncher = false, Icon = "@drawable/icon")]
+    [Activity(Label = "Quick Video Info", Theme = "@style/TranslucentActivity", MainLauncher = false, Icon = "@drawable/icon", ResizeableActivity = true)]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "*.streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "http", DataHost = "streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "streamable.com", DataPathPrefix = "", Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
@@ -46,7 +46,7 @@ namespace YTII.Droid.App.Activities
         ///     This is a prefix used to distinguish the origin source of thumbnails (e.g., YT[videoID] for YouTube, ST[videoID]
         ///     for Streamable.com)
         /// </summary>
-        protected override string TypePrefix => "ST";
+        protected override string TypePrefix => @"ST";
 
         /// <summary>
         ///     The <see cref="Caches.VideoModelCache{T}" /> where the results of recently previewed video models are stored
@@ -146,11 +146,11 @@ namespace YTII.Droid.App.Activities
         /// <returns>The Video ID used to identify the item to request information from the API for</returns>
         protected override string GetVideoIdFromIntentDataString(string intentDataString)
         {
-            if (!intentDataString.Contains("/s/"))
-                return intentDataString.Substring(intentDataString.LastIndexOf(".com/", StringComparison.InvariantCultureIgnoreCase) + 5).TrimEnd('/');
+            if (!intentDataString.Contains(@"/s/"))
+                return intentDataString.Substring(intentDataString.LastIndexOf(@".com/", StringComparison.InvariantCultureIgnoreCase) + 5).TrimEnd('/');
 
-            var startIndex = intentDataString.LastIndexOf("/s/", StringComparison.InvariantCultureIgnoreCase) + 3;
-            var endIndex = intentDataString.TrimEnd('/').LastIndexOf("/", StringComparison.InvariantCultureIgnoreCase);
+            var startIndex = intentDataString.LastIndexOf(@"/s/", StringComparison.InvariantCultureIgnoreCase) + 3;
+            var endIndex = intentDataString.TrimEnd('/').LastIndexOf(@"/", StringComparison.InvariantCultureIgnoreCase);
             return intentDataString.Substring(startIndex, endIndex - startIndex);
 
         }
