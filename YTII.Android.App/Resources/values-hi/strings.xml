@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
 <string name="info_sourceLabel">स्रोत:</string>
 <string name="info_placeholderTitle">वीडियो जानकारी लोड हो रही है...</string>
-<string name="info_closeButtonText">विंडो को बंद करें</string>
-<string name="info_openButtonText">खुला वीडियो</string>
-<string name="info_viewsLabel">दृश्य:</string>
-<string name="info_likesLabel">पसंद:</string>
-<string name="info_dislikesLabel">नापसंद:</string>
+<string name="info_closeButtonText">विंडो बंद करें</string>
+<string name="info_openButtonText">वीडियो खोलें</string>
+<string name="info_viewsLabel">दृश्य:</string>  
+<string name="info_likesLabel">पसंद:</string>   
+<string name="info_dislikesLabel">नापसंद:</string>  
+
 <string name="about_instructionsHeader">अनुदेश:</string>
-<string name="about_preferencesButton">वरीयताएँ</string>
-<string name="quality_max">उच्चतम</string>
+<string name="about_preferencesButton">तरजीह</string> //
+<string name="about_CreditsButton">क्रेडिट &amp; धन्यवाद</string>
+
+<string name="prefs_activityTitle">प्राथमिकताएं &amp; सेटिंग्स</string>
+
+<string name="quality_max">उच्चतम</string> 
 <string name="quality_high">उच्च (डिफ़ॉल्ट)</string>
-<string name="quality_standard">मानक</string>
+<string name="quality_standard">सामान्य</string>
 <string name="quality_medium">मध्यम</string>
 <string name="quality_lowest">सबसे कम</string>
-<string name="settings_qualityLabel">वरीय थंबनेल की गुणवत्ता:</string>
-<string name="settings_header">उपयोगकर्ता की प्राथमिकताएँ</string>
+  
+<string name="settings_qualityLabel">पसंदीदा थंबनेल की गुणवत्ता:</string>
+<string name="settings_header">उपयोगकर्ता की प्राथमिकताएं</string>
+  
 <string name="NoVideoTitle">[कोई शीर्षक नहीं]</string>
-<string name="about_CreditsButton">क्रेडिट &amp; धन्यवाद</string>
-<string name="prefs_activityTitle">प्राथमिकताएँ &amp; सेटिंग्स</string>
-<string name="about_instructions">इस app का उपयोग करने के लिए, आप इसे समर्थित लिंक्स के लिए डिफ़ॉल्ट अनुप्रयोग के रूप में सेट करने के लिए की आवश्यकता होगी। \n\n पहली यह, अगली बार जब आप एक समर्थित लिंक खोलें स्थापित करने के बाद, आप जो अनुप्रयोग आप लिंक के साथ खोलना चाहते हैं पूछने के लिए Android तुरंत जाना चाहिए। \n\n इस app (त्वरित वीडियो जानकारी) सूची से का चयन करें, तो "हमेशा" विकल्प का चयन करें। \n\n, यह सेटिंग रीसेट करने के लिए कभी की आवश्यकता है तो आप इस app Android सेटिंग्स, अनुप्रयोगों, के अंतर्गत में ढूँढें, और "ओपन लिंक समर्थित" सेटिंग के अंतर्गत \'इस एप्लिकेशन में खोलें\' विकल्प चुनें जा सकते हैं। \n</string>
-<string name="settings_launcherToggleSwitch">अनुप्रयोग के लिए चिह्न दिखाएँ लॉन्चर में?</string>
-<string name="settings_switchNote">नोट: इस सेटिंग को परिवर्तित करने के बाद, प्रभाव जब तक कि रिबूट या डिवाइस की लांचर को पुनरारंभ करने के बाद प्रकट नहीं हो सकता।</string>
-<string name="settings_reEnableLauncherInstructions">लॉन्चर चिह्न को पुन: सक्षम करने के लिए, आप इस स्क्रीन करने के लिए पूर्वावलोकन विंडो के ऊपरी दाएँ कोने में जानकारी सर्कल बटन का उपयोग करके वापस कर सकते हैं।</string>
-<string name="credits_talklittle_desc">अमूल्य सलाह, सुझाव, और वह मुझे इस विकास प्रक्रिया के दौरान दिया है प्रतिक्रिया के लिए, एक जा रहा है और साथ ही जो मुझे बाद मैं शुरू में विचार उसे खड़ा किया था इस app बनाने के लिए प्रोत्साहित किया।    और भी क्या आसानी से सबसे अच्छा Android reddit apps में से एक है के विकास के लिए, reddit मज़ा है!</string>
-<string name="credits_vimeodotnet_desc">प्रमाणीकरण प्रक्रिया के लिए Vimeo काम कर रही एक चुनौती थी, लेकिन यह अंततः saeedafshari के VimeoDotNet3 में मदद मिली मुझे GitHub पर कोड कैसे यह करने के लिए बाहर आंकड़ा था!</string>
-<string name="credits_dlew_desc">यह त्वरित वीडियो जानकारी, जानते हुए भी कि यह उपयोगकर्ताओं को अपने मौजूदा एप्लिकेशन से बाहर खींच के बिना एक विंडो दिखाएँ करने के लिए संभव था बनाने के लिए मुझे प्रेरित किया dlew के अनुप्रयोग में एक पारदर्शी गतिविधि का उपयोग किया गया था।</string>
 
+<string name="about_instructions">इस app का उपयोग करने के लिए, आपको इसे समर्थित लिंक्स के लिए डिफ़ॉल्ट app के रूप में सेट करने की आवश्यकता होगी। \n\n इसे इंस्टॉल करने के बाद, अगली बार जब आप एक समर्थित लिंक खोलें, Android तुरंत आपसे पूछेगा की आप किस app द्वारा लिंक खोलना चाहेंगे। \n\n इस app को चुने (त्वरित वीडियो जानकारी) सूची से "हमेशा" विकल्प का चयन करें। \n\n यदि यह सेटिंग को रीसेट करने की आवश्यकता हो तो आप Android सेटिंग्स द्वारा, Applications के अंतर्गत में इस app को ढूँढें, और "समर्थित लिंक खोले" सेटिंग के अंतर्गत \'इस एप्लिकेशन को खोलें\' विकल्प चुनें। \n</string>
 
+<string name="settings_launcherToggleSwitch">लॉन्चर में application का चिह्न दिखाएँ</string>
+<string name="settings_switchNote">नोट: इस सेटिंग को परिवर्तित करने के बाद, रिबूट या डिवाइस की लांचर को पुनरारंभ करने से पहले प्रभाव प्रकट नहीं हो सकता।</string>
+<string name="settings_reEnableLauncherInstructions">लॉन्चर चिह्न को पुन: सक्षम करने के लिए, आप इस स्क्रीन पर लौटने के लिए पूर्वावलोकन विंडो के ऊपरी दाएँ कोने में सर्कल जानकारी बटन का उपयोग करें।</string>  
+
+<string name="credits_talklittle_desc">अमूल्य सलाह, सुझाव, और प्रतिक्रिया जो उन्होंहे मुझे इस विकास प्रक्रिया के दौरान दी है, और साथ ही मुझे इस app बनाने के लिए प्रोत्साहित किया जब यह विचार उन्हें प्रस्तुत किया था। एवं आसानी से सबसे उत्तम Android reddit apps में से एक के विकास के लिए, reddit मनोरंजक है!</string>
+
+<string name="credits_vimeodotnet_desc">प्रमाणीकरण प्रक्रिया के लिए Vimeo एक चुनौती थी, लेकिन यह अंततः saeedafshari के VimeoDotNet3 के GitHub पर कोड द्वारा मुझे यह करने में मदद मिली!</string>
+ 
+<string name="credits_dlew_desc">dlew के app में एक पारदर्शी गतिविधि का उपयोग किया गया था जिससे मुझे Quick Video Info बनाने के लिए प्रेरणा मिली, यह जानते हुए भी कि यह उपयोगकर्ताओं को अपने मौजूदा एप्लिकेशन से बाहर खीचें बिना एक विंडो दिखाना संभव था।</string>
+   
 </resources>
